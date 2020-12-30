@@ -1,13 +1,13 @@
-package ru.punkoff.testforeveryone.ui.home
+package ru.punkoff.testforeveryone.ui.rate_us
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class RateUsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "This is rate us Fragment"
     }
     val text: LiveData<String> = _text
 }
