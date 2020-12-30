@@ -3,23 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_all_tests">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="ru.punkoff.testforeveryone.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_all_tests"
+        android:name="ru.punkoff.testforeveryone.ui.all_tests.AllTestsFragment"
+        android:label="@string/menu_all_tests"
+        tools:layout="@layout/fragment_all_tests" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="ru.punkoff.testforeveryone.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_your_tests"
+        android:name="ru.punkoff.testforeveryone.ui.your_tests.YourTestsFragment"
+        android:label="@string/menu_your_tests"
+        tools:layout="@layout/fragment_your_tests" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="ru.punkoff.testforeveryone.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_results"
+        android:name="ru.punkoff.testforeveryone.ui.your_results.YourResultsFragment"
+        android:label="@string/menu_your_results"
+        tools:layout="@layout/fragment_results" />
+
+    <fragment
+        android:id="@+id/nav_creator"
+        android:name="ru.punkoff.testforeveryone.ui.creator.CreatorFragment"
+        android:label="@string/menu_create_new_test"
+        tools:layout="@layout/fragment_creator" />
+
+    <fragment
+        android:id="@+id/nav_notifications"
+        android:name="ru.punkoff.testforeveryone.ui.notifications.NotificationsFragment"
+        android:label="@string/menu_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="ru.punkoff.testforeveryone.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/nav_rate_us"
+        android:name="ru.punkoff.testforeveryone.ui.rate_us.RateUsFragment"
+        android:label="@string/menu_rate_us"
+        tools:layout="@layout/fragment_rate" />
 </navigation>
