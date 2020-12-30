@@ -1,31 +1,56 @@
 package ru.punkoff.testforeveryone.ui.all_tests
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import ru.punkoff.testforeveryone.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import ru.punkoff.testforeveryone.databinding.FragmentAllTestsBinding
+import ru.punkoff.testforeveryone.ui.adapter.TestsAdapter
 
 class AllTestsFragment : Fragment() {
 
     private lateinit var allTestsViewModel: AllTestsViewModel
 
+    private val adapter = TestsAdapter()
+
+    private var _binding: FragmentAllTestsBinding? = null
+    private val binding: FragmentAllTestsBinding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        _binding = FragmentAllTestsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         allTestsViewModel =
             ViewModelProvider(this).get(AllTestsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_all_tests, container, false)
-        val textView: TextView = root.findViewById(R.id.text_all_tests)
-        allTestsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        adapter.attachListener {
+            Toast.makeText(context, it.title, Toast.LENGTH_SHORT).show()
+        }
+
+        with(binding) {
+            listTests.adapter = adapter
+            listTests.layoutManager = LinearLayoutManager(context)
+        }
+
+        allTestsViewModel.observeViewState().observe(viewLifecycleOwner) {
+            when (it) {
+                is TestsViewState.Value -> {
+                    adapter.submitList(it.tests)
+                    Log.d(javaClass.simpleName, it.tests.toString())
+                }
+
+                TestsViewState.EMPTY -> Unit
+            }
+        }
     }
 }
