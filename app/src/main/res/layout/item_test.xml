@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/card_view_margin"
+    android:layout_marginTop="@dimen/card_view_margin"
+    android:layout_marginEnd="@dimen/card_view_margin"
+    android:layout_marginBottom="@dimen/card_view_margin"
+    app:cardBackgroundColor="@color/color_green"
+    app:cardCornerRadius="@dimen/card_view_radius">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/title_margin"
+            android:layout_marginTop="@dimen/title_margin"
+            android:layout_marginEnd="@dimen/title_margin"
+            tools:text="@string/perceptive_title" />
+
+        <TextView
+            android:id="@+id/body"
+            style="@style/TextAppearance.AppCompat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/body_margin"
+            tools:text="@string/perceptive_body" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/play_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/play_btn_margin"
+            android:text="@string/play"
+            app:backgroundTint="@color/button_color" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

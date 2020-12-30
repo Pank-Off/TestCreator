@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Test for everyone</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="app_name" translatable="false">Test for everyone</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="action_settings" translatable="false">Settings</string>
 
     <string name="menu_all_tests">All Tests</string>
     <string name="menu_your_tests">Your Tests</string>
@@ -14,4 +14,7 @@
     <string name="menu_notifications">Notifications</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_rate_us">Rate Us</string>
+    <string name="play">Play!</string>
+    <string name="perceptive_title">How perceptive are you?</string>
+    <string name="perceptive_body">Check how much you understand someone</string>
 </resources>
