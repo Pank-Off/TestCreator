@@ -33,7 +33,12 @@ class CreatorFragment : Fragment() {
         with(binding) {
             nextBtn.setOnClickListener {
                 //  navigateToNextStep()
-                Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
+                creatorViewModel.saveTest(
+                    textInputTitle.text.toString(),
+                    textInputDescription.text.toString()
+                )
+
+                Toast.makeText(context, "Success Save", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -41,4 +46,5 @@ class CreatorFragment : Fragment() {
     private fun navigateToNextStep() {
         (requireActivity() as MainActivity).navigateToNextStep()
     }
+
 }
