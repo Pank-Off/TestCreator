@@ -48,7 +48,6 @@ class AllTestsFragment : Fragment() {
                     adapter.submitList(it.tests)
                     Log.d(javaClass.simpleName, it.tests.toString())
                 }
-
                 TestsViewState.EMPTY -> Unit
             }
         }

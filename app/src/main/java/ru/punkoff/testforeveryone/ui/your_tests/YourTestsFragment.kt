@@ -8,7 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
+import ru.punkoff.testforeveryone.MainActivity
 import ru.punkoff.testforeveryone.R
+import ru.punkoff.testforeveryone.model.Test
+import ru.punkoff.testforeveryone.ui.creator.CreatorFragment
 
 class YourTestsFragment : Fragment() {
 
@@ -22,10 +27,15 @@ class YourTestsFragment : Fragment() {
         yourTestsViewModel =
             ViewModelProvider(this).get(YourTestsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_your_tests, container, false)
-        val textView: TextView = root.findViewById(R.id.text_your_tests)
-        yourTestsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        val fab: FloatingActionButton = root.findViewById(R.id.fab)
+        fab.setOnClickListener {
+            navigateTo(null)
+        }
+
         return root
+    }
+
+    private fun navigateTo(test: Test?) {
+        (requireActivity() as MainActivity).navigateTo(test)
     }
 }

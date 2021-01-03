@@ -4,41 +4,41 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ru.punkoff.testforeveryone.MainActivity
+import ru.punkoff.testforeveryone.R
+import ru.punkoff.testforeveryone.databinding.FragmentCreateQuestionsBinding
 import ru.punkoff.testforeveryone.databinding.FragmentCreatorBinding
 
-class CreatorFragment : Fragment() {
+class CreateQuestionsFragment : Fragment() {
 
-    private lateinit var creatorViewModel: CreatorViewModel
+    private lateinit var createQuestionsViewModel: CreateQuestionsViewModel
 
-    private var _binding: FragmentCreatorBinding? = null
-    private val binding: FragmentCreatorBinding get() = _binding!!
+    private var _binding: FragmentCreateQuestionsBinding? = null
+    private val binding: FragmentCreateQuestionsBinding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCreatorBinding.inflate(inflater, container, false)
+        _binding = FragmentCreateQuestionsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        creatorViewModel =
-            ViewModelProvider(this).get(CreatorViewModel::class.java)
+        createQuestionsViewModel =
+            ViewModelProvider(this).get(CreateQuestionsViewModel::class.java)
 
         with(binding) {
             nextBtn.setOnClickListener {
-                //  navigateToNextStep()
-                Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
+                navigateToNextStepResult()
             }
         }
     }
 
-    private fun navigateToNextStep() {
-        (requireActivity() as MainActivity).navigateToNextStep()
+    private fun navigateToNextStepResult() {
+        (requireActivity() as MainActivity).navigateToNextStepResult()
     }
 }

@@ -6,8 +6,4 @@ import androidx.lifecycle.ViewModel
 
 class YourTestsViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is your tests Fragment"
-    }
-    val text: LiveData<String> = _text
 }

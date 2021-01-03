@@ -12,4 +12,7 @@
     <dimen name="title_margin">8dp</dimen>
     <dimen name="body_margin">8dp</dimen>
     <dimen name="play_btn_margin">8dp</dimen>
+    <dimen name="title_creator_size">24sp</dimen>
+    <dimen name="textFieldMargin">8dp</dimen>
+    <dimen name="margin_button">8dp</dimen>
 </resources>

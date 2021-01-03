@@ -17,4 +17,20 @@
     <string name="play">Play!</string>
     <string name="perceptive_title">How perceptive are you?</string>
     <string name="perceptive_body">Check how much you understand someone</string>
+
+    <!--Perceptive Test-->
+    <string name="question_one">1. Do you think that to get to know a person better, you need to:</string>
+    <string name="answer_one">A. Watch him do his job.</string>
+    <string name="answer_two">B. To be with him in a stressful situation.</string>
+    <string name="answer_three">C. Drink with him, and then he will "open" in all its glory.</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="next">Next</string>
+    <string name="question">Question</string>
+    <string name="add_question">Add question</string>
+    <string name="previous">Previous</string>
+    <string name="your_question">Your question</string>
+    <string name="answer_choice">Answer choice</string>
+    <string name="save_test">Save test</string>
+    <string name="add_results">Add results</string>
 </resources>
