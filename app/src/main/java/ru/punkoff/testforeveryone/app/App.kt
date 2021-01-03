@@ -9,7 +9,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-
         appDatabase = generateAppDataBase()
     }
 
@@ -19,7 +18,7 @@ class App : Application() {
             AppDatabase::class.java,
             "room_database"
         )
-            // .allowMainThreadQueries()  //только для тестирования
+            //.allowMainThreadQueries()  //только для тестирования
             .build()
     }
 

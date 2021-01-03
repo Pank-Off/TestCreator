@@ -10,11 +10,10 @@ class LocalDatabase : DatabaseProvider {
 
     private var testDao: TestDao = App.getAppDatabase().testDao()
 
-    override fun observeTests(): List<TestEntity> = getTests()
+    override suspend fun observeTests(): List<TestEntity> =
+        withContext(Dispatchers.IO) { testDao.getTests() }
 
-    override suspend fun saveTest(test: TestEntity) {
+    override suspend fun saveTest(test: TestEntity) =
         withContext(Dispatchers.IO) { testDao.insert(test) }
-    }
 
-    private fun getTests() = testDao.getTests()
 }

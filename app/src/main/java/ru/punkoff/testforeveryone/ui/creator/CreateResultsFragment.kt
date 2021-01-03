@@ -8,9 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ru.punkoff.testforeveryone.MainActivity
-import ru.punkoff.testforeveryone.databinding.FragmentCreateQuestionsBinding
 import ru.punkoff.testforeveryone.databinding.FragmentCreateResultsBinding
-import ru.punkoff.testforeveryone.databinding.FragmentResultsBinding
 
 class CreateResultsFragment : Fragment() {
     private lateinit var createResultsViewModel: CreateResultsViewModel
@@ -33,9 +31,15 @@ class CreateResultsFragment : Fragment() {
 
         with(binding) {
             saveBtn.setOnClickListener {
+                createResultsViewModel.saveTest()
                 Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
+                navigateToYourTests()
             }
         }
+
     }
 
+    private fun navigateToYourTests() {
+        (requireActivity() as MainActivity).navigateToYourTests()
+    }
 }

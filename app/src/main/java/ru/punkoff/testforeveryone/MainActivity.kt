@@ -70,4 +70,7 @@ class MainActivity : AppCompatActivity() {
         navController.navigate(R.id.nav_create_results)
     }
 
+    fun navigateToYourTests() {
+        navController.navigate(R.id.nav_your_tests)
+    }
 }

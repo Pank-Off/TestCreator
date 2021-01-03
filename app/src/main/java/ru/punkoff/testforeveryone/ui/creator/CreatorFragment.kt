@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ru.punkoff.testforeveryone.MainActivity
@@ -32,13 +31,11 @@ class CreatorFragment : Fragment() {
 
         with(binding) {
             nextBtn.setOnClickListener {
-                //  navigateToNextStep()
-                creatorViewModel.saveTest(
+                creatorViewModel.createTest(
                     textInputTitle.text.toString(),
                     textInputDescription.text.toString()
                 )
-
-                Toast.makeText(context, "Success Save", Toast.LENGTH_SHORT).show()
+                navigateToNextStep()
             }
         }
     }
