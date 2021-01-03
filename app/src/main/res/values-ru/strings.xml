@@ -13,4 +13,10 @@
     <string name="play">Пройти!</string>
     <string name="perceptive_title">Насколько вы проницательны?</string>
     <string name="perceptive_body">Проверьте, насколько вы понимаете кого-то</string>
+
+    <!--Perceptive Test-->
+    <string name="question_one">1. Считаете ли вы, что для того, чтобы лучше узнать человека, вам нужно:</string>
+    <string name="answer_one">A. Смотреть, как он делает свою работу.</string>
+    <string name="answer_two">B. Быть с ним в стрессовой ситуации.</string>
+    <string name="answer_three">C. Выпить с ним, и тогда он "раскроется" во всей красе</string>
 </resources>

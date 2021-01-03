@@ -15,7 +15,11 @@
         android:id="@+id/nav_your_tests"
         android:name="ru.punkoff.testforeveryone.ui.your_tests.YourTestsFragment"
         android:label="@string/menu_your_tests"
-        tools:layout="@layout/fragment_your_tests" />
+        tools:layout="@layout/fragment_your_tests" >
+        <action
+            android:id="@+id/action_nav_your_tests_to_nav_creator3"
+            app:destination="@id/nav_creator" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_results"
@@ -27,7 +31,11 @@
         android:id="@+id/nav_creator"
         android:name="ru.punkoff.testforeveryone.ui.creator.CreatorFragment"
         android:label="@string/menu_create_new_test"
-        tools:layout="@layout/fragment_creator" />
+        tools:layout="@layout/fragment_creator" >
+        <action
+            android:id="@+id/action_nav_creator_to_nav_create_questions"
+            app:destination="@id/nav_create_questions" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_notifications"
@@ -46,4 +54,20 @@
         android:name="ru.punkoff.testforeveryone.ui.rate_us.RateUsFragment"
         android:label="@string/menu_rate_us"
         tools:layout="@layout/fragment_rate" />
+
+    <fragment
+        android:id="@+id/nav_create_questions"
+        android:name="ru.punkoff.testforeveryone.ui.creator.CreateQuestionsFragment"
+        android:label="@string/menu_create_new_test"
+        tools:layout="@layout/fragment_create_questions" >
+        <action
+            android:id="@+id/action_nav_create_questions_to_nav_create_results"
+            app:destination="@id/nav_create_results" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_create_results"
+        android:name="ru.punkoff.testforeveryone.ui.creator.CreateResultsFragment"
+        android:label="@string/menu_create_new_test"
+        tools:layout="@layout/fragment_create_results" />
 </navigation>

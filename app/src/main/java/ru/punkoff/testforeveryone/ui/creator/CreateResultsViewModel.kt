@@ -5,12 +5,14 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.punkoff.testforeveryone.data.Repository
 import ru.punkoff.testforeveryone.data.local.LocalDatabase
-import ru.punkoff.testforeveryone.data.local.room.TestEntity
 
-class CreatorViewModel : ViewModel() {
+class CreateResultsViewModel : ViewModel() {
 
-    fun createTest(title: String, description: String) {
-        Repository.createTest(title, description)
+    private val databaseHelper = LocalDatabase()
+
+    fun saveTest() {
+        viewModelScope.launch {
+            databaseHelper.saveTest(Repository.test)
+        }
     }
-
 }

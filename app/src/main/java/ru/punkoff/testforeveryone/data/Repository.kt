@@ -1,8 +1,11 @@
 package ru.punkoff.testforeveryone.data
 
+import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.model.Test
 
 object Repository {
+    var test = TestEntity("", "")
+
     val tests = listOf(
         Test(
             "TITLE 1",
@@ -26,4 +29,7 @@ object Repository {
         )
     )
 
+    fun createTest(title: String, body: String) {
+        test = TestEntity(title, body)
+    }
 }
