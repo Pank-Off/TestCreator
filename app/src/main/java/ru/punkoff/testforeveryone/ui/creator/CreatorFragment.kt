@@ -31,11 +31,20 @@ class CreatorFragment : Fragment() {
 
         with(binding) {
             nextBtn.setOnClickListener {
-                creatorViewModel.createTest(
-                    textInputTitle.text.toString(),
-                    textInputDescription.text.toString()
-                )
-                navigateToNextStep()
+                if (textInputTitle.text.toString() != "" && textInputDescription.text.toString() != "") {
+                    creatorViewModel.createTest(
+                        textInputTitle.text.toString(),
+                        textInputDescription.text.toString()
+                    )
+                    navigateToNextStep()
+                } else {
+                    if (textInputTitle.text.toString() == "") {
+                        textInputTitle.error = "Input Title"
+                    }
+                    if (textInputDescription.text.toString() == "") {
+                        textInputDescription.error = "Input Description"
+                    }
+                }
             }
         }
     }

@@ -33,4 +33,7 @@
     <string name="answer_choice">Answer choice</string>
     <string name="save_test">Save test</string>
     <string name="add_results">Add results</string>
+    <string name="result_for_the_sum_of_points">Result for the sum of points:</string>
+    <string name="to">to</string>
+    <string name="from">from</string>
 </resources>
