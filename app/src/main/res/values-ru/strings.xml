@@ -19,4 +19,17 @@
     <string name="answer_one">A. Смотреть, как он делает свою работу.</string>
     <string name="answer_two">B. Быть с ним в стрессовой ситуации.</string>
     <string name="answer_three">C. Выпить с ним, и тогда он "раскроется" во всей красе</string>
+    <string name="title">Заголовок</string>
+    <string name="description">Описание</string>
+    <string name="next">Далее</string>
+    <string name="question">Вопрос</string>
+    <string name="add_question">Добавить вопрос</string>
+    <string name="previous">Назад</string>
+    <string name="your_question">Ваш вопрос</string>
+    <string name="answer_choice">Добавить ответ</string>
+    <string name="save_test">Сохранить</string>
+    <string name="add_results">Добавить результаты</string>
+    <string name="result_for_the_sum_of_points">Результат для суммы баллов:</string>
+    <string name="to">От</string>
+    <string name="from">До</string>
 </resources>

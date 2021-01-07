@@ -1,4 +1,4 @@
-package ru.punkoff.testforeveryone.ui.creator
+package ru.punkoff.testforeveryone.ui.creator.questions
 
 import androidx.lifecycle.ViewModel
 

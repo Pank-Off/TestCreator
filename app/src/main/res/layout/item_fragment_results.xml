@@ -1,68 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <TextView
+        android:id="@+id/from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/result_for_the_sum_of_points"
+        android:textSize="16sp"
+        android:layout_margin="@dimen/textFieldMargin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldQuestion"
+        android:id="@+id/textFieldFrom"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="@dimen/textFieldMargin"
+        android:hint="@string/from"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/from">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:inputType="number"
+            android:maxLength="4" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textFieldTo"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="@dimen/textFieldMargin"
+        android:hint="@string/to"
+        app:layout_constraintStart_toEndOf="@id/textFieldFrom"
+        app:layout_constraintTop_toBottomOf="@id/from">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:inputType="number"
+            android:maxLength="4" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textFieldTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/textFieldMargin"
-        android:hint="@string/your_question"
+        android:hint="@string/title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/textFieldFrom">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldAnswerOne"
+        android:id="@+id/textFieldDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/textFieldMargin"
-        android:hint="@string/answer_choice"
+        android:hint="@string/description"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldQuestion">
+        app:layout_constraintTop_toBottomOf="@+id/textFieldTitle">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldAnswerTwo"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/textFieldMargin"
-        android:hint="@string/answer_choice"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldAnswerOne">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldAnswerThree"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/textFieldMargin"
-        android:hint="@string/answer_choice"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldAnswerTwo">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/textFieldDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>

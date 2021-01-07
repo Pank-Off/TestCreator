@@ -17,6 +17,7 @@
     <color name="color_red">#ff8a80</color>
     <color name="color_violet">#e1bee7</color>
     <color name="color_pink">#f8bbd0</color>
+    <color name="color_float_btn">#009688</color>
 
     <color name="color_main_background">#F7E2E2</color>
     <color name="button_color">#FF9300</color>
