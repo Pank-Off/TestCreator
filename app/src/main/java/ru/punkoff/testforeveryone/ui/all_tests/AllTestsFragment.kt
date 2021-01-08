@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.punkoff.testforeveryone.databinding.FragmentAllTestsBinding
 import ru.punkoff.testforeveryone.ui.adapter.TestsAdapter
@@ -33,8 +34,12 @@ class AllTestsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         allTestsViewModel =
             ViewModelProvider(this).get(AllTestsViewModel::class.java)
-        adapter.attachListener {
-            Toast.makeText(context, it.title, Toast.LENGTH_SHORT).show()
+        adapter.attachListener { test ->
+            Toast.makeText(
+                context,
+                test.toString(),
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
         with(binding) {

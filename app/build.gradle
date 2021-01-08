@@ -13,6 +13,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
+
         applicationId "ru.punkoff.testforeveryone"
         minSdkVersion 21
         targetSdkVersion 30
@@ -66,7 +67,11 @@ dependencies {
 
     //room
     implementation 'androidx.room:room-runtime:2.2.6'
+    kapt "android.arch.persistence.room:compiler:1.1.1"
     kapt "androidx.room:room-compiler:2.2.6"
     implementation 'androidx.room:room-rxjava2:2.2.6'
     implementation "androidx.room:room-ktx:2.2.6"
+
+    //GSON
+    implementation 'com.google.code.gson:gson:2.8.6'
 }

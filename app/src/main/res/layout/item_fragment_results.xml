@@ -8,9 +8,9 @@
         android:id="@+id/from"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/textFieldMargin"
         android:text="@string/result_for_the_sum_of_points"
         android:textSize="16sp"
-        android:layout_margin="@dimen/textFieldMargin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,6 +24,7 @@
         app:layout_constraintTop_toBottomOf="@id/from">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textEditTextFrom"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:inputType="number"
@@ -41,6 +42,7 @@
         app:layout_constraintTop_toBottomOf="@id/from">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textEditTextTo"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:inputType="number"

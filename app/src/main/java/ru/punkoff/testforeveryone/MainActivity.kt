@@ -12,7 +12,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
-import ru.punkoff.testforeveryone.model.Test
+import ru.punkoff.testforeveryone.data.local.room.TestEntity
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun navigateTo(test: Test?) {
+    fun navigateTo(test: TestEntity?) {
         if (test == null) {
             navController.navigate(R.id.nav_creator)
         }

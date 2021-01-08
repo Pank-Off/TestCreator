@@ -1,35 +1,61 @@
 package ru.punkoff.testforeveryone.data
 
+import android.util.Log
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
-import ru.punkoff.testforeveryone.model.Test
+import ru.punkoff.testforeveryone.model.Question
+import ru.punkoff.testforeveryone.model.Result
 
 object Repository {
-    var test = TestEntity("", "")
+    var test = TestEntity(0, "", "", emptyList(), emptyList())
 
     val tests = listOf(
-        Test(
+        TestEntity(
+            0,
             "TITLE 1",
-            "BODY"
+            "BODY",
+            emptyList(), emptyList()
         ),
-        Test(
+        TestEntity(
+            0,
             "TITLE 2",
-            "BODY"
+            "BODY",
+            emptyList(), emptyList()
         ),
-        Test(
+        TestEntity(
+            0,
             "TITLE 3",
-            "BODY"
+            "BODY",
+            emptyList(), emptyList()
         ),
-        Test(
+        TestEntity(
+            0,
             "TITLE 4",
-            "BODY"
+            "BODY",
+            emptyList(), emptyList()
         ),
-        Test(
+        TestEntity(
+            0,
             "TITLE 5",
-            "BODY"
+            "BODY",
+            emptyList(), emptyList()
         )
     )
 
     fun createTest(title: String, body: String) {
-        test = TestEntity(title, body)
+        test = TestEntity(0, title, body, emptyList(), emptyList())
+    }
+
+    fun setQuestions(questions: List<Question>) {
+        test.questions = questions
+        Log.d(javaClass.simpleName, test.toString())
+    }
+
+    fun setResults(results: List<Result>) {
+        test.results = results
+        Log.d(javaClass.simpleName, test.toString())
+    }
+
+    fun createNewTest() {
+        test = TestEntity(0, "", "", emptyList(), emptyList())
     }
 }
