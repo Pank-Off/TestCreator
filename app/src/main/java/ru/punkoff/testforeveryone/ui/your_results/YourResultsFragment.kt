@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import ru.punkoff.testforeveryone.R
 
@@ -23,7 +22,7 @@ class YourResultsFragment : Fragment() {
             ViewModelProvider(this).get(YourResultsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_results, container, false)
         val textView: TextView = root.findViewById(R.id.text_results)
-        yourResultsViewModel.text.observe(viewLifecycleOwner, Observer {
+        yourResultsViewModel.text.observe(viewLifecycleOwner, {
             textView.text = it
         })
         return root

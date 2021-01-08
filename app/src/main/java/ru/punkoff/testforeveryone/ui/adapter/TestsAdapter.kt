@@ -7,21 +7,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import ru.punkoff.testforeveryone.data.local.room.TestEntity
+import ru.punkoff.testforeveryone.data.local.room.mapToColor
 import ru.punkoff.testforeveryone.databinding.ItemTestBinding
-import ru.punkoff.testforeveryone.model.Test
-import ru.punkoff.testforeveryone.model.mapToColor
 
-val DIFF_UTIL: DiffUtil.ItemCallback<Test> = object : DiffUtil.ItemCallback<Test>() {
-    override fun areItemsTheSame(oldItem: Test, newItem: Test): Boolean {
+val DIFF_UTIL: DiffUtil.ItemCallback<TestEntity> = object : DiffUtil.ItemCallback<TestEntity>() {
+    override fun areItemsTheSame(oldItem: TestEntity, newItem: TestEntity): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Test, newItem: Test): Boolean {
+    override fun areContentsTheSame(oldItem: TestEntity, newItem: TestEntity): Boolean {
         return true
     }
 }
 
-class TestsAdapter : ListAdapter<Test, TestsAdapter.TestsViewHolder>(DIFF_UTIL) {
+class TestsAdapter : ListAdapter<TestEntity, TestsAdapter.TestsViewHolder>(DIFF_UTIL) {
 
     private lateinit var listener: Listener
 
@@ -46,9 +46,9 @@ class TestsAdapter : ListAdapter<Test, TestsAdapter.TestsViewHolder>(DIFF_UTIL) 
         private val clickListener: View.OnClickListener = View.OnClickListener {
             listener.onClick(currentTest)
         }
-        private lateinit var currentTest: Test
+        private lateinit var currentTest: TestEntity
 
-        fun bind(item: Test) {
+        fun bind(item: TestEntity) {
             currentTest = item
             Log.d(javaClass.simpleName, currentTest.toString())
             with(binding) {

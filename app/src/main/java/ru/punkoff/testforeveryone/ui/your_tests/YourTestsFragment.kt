@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.punkoff.testforeveryone.MainActivity
+import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.databinding.FragmentYourTestsBinding
-import ru.punkoff.testforeveryone.model.Test
 import ru.punkoff.testforeveryone.ui.adapter.TestsAdapter
 import ru.punkoff.testforeveryone.ui.all_tests.TestsViewState
 
@@ -38,7 +38,7 @@ class YourTestsFragment : Fragment() {
         yourTestsViewModel =
             ViewModelProvider(this).get(YourTestsViewModel::class.java)
         adapter.attachListener {
-            Toast.makeText(context, it.title, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
         }
 
         with(binding) {
@@ -52,6 +52,7 @@ class YourTestsFragment : Fragment() {
         yourTestsViewModel.observeViewState().observe(viewLifecycleOwner) {
             when (it) {
                 is TestsViewState.Value -> {
+                    Log.d(javaClass.simpleName, "observe: $it")
                     adapter.submitList(it.tests)
                     Log.d(javaClass.simpleName, it.tests.toString())
                 }
@@ -60,7 +61,7 @@ class YourTestsFragment : Fragment() {
         }
     }
 
-    private fun navigateTo(test: Test?) {
+    private fun navigateTo(test: TestEntity?) {
         (requireActivity() as MainActivity).navigateTo(test)
     }
 }

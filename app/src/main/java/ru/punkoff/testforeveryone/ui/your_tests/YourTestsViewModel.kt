@@ -5,9 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.punkoff.testforeveryone.data.Repository
 import ru.punkoff.testforeveryone.data.local.LocalDatabase
-import ru.punkoff.testforeveryone.model.Test
+import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.ui.all_tests.TestsViewState
 
 class YourTestsViewModel : ViewModel() {
@@ -17,9 +16,18 @@ class YourTestsViewModel : ViewModel() {
     init {
         viewModelScope.launch {
             val testsFromDatabase = databaseHelper.observeTests()
-            val tests = ArrayList<Test>()
+            val tests = ArrayList<TestEntity>()
             for (test in testsFromDatabase) {
-                tests.add(Test(test.title, test.body))
+                tests.add(
+                    TestEntity(
+                        0,
+                        test.title,
+                        test.body,
+                        test.questions,
+                        test.results,
+                        test.color
+                    )
+                )
             }
             mainLiveData.value = TestsViewState.Value(tests)
         }
