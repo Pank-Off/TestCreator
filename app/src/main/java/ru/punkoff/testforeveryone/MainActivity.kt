@@ -1,6 +1,7 @@
 package ru.punkoff.testforeveryone
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -12,7 +13,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
-import ru.punkoff.testforeveryone.data.local.room.TestEntity
+import ru.punkoff.testforeveryone.ui.your_tests.pass_test.TestFragment
+import ru.punkoff.testforeveryone.ui.your_tests.pass_test.TestFragment.Companion.EXTRA_TEST
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,10 +58,17 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun navigateTo(test: TestEntity?) {
-        if (test == null) {
+    fun navigateTo(testFragment: TestFragment?) {
+        Log.d(javaClass.simpleName, "navigateTo: ${testFragment?.arguments}")
+        if (testFragment?.arguments?.get(EXTRA_TEST) == null) {
             navController.navigate(R.id.nav_creator)
         }
+
+        if (testFragment?.arguments?.get(EXTRA_TEST) != null) {
+            navController.navigate(R.id.nav_pass, testFragment.arguments)
+        }
+
+
     }
 
     fun navigateToNextStep() {

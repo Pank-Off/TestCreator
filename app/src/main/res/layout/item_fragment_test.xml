@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:paddingEnd="@dimen/padding_end_text_questions"
+        android:layout_margin="@dimen/text_question_margin"
+        android:layout_marginEnd="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Question" />
+
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/radioBtn_One"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/text_question_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question" />
+
+    <TextView
+        android:id="@+id/text_answer_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/padding_end_text_questions"
+        android:layout_marginTop="@dimen/margin_top_answer"
+        app:layout_constraintStart_toEndOf="@+id/radioBtn_One"
+        app:layout_constraintTop_toBottomOf="@+id/question"
+        tools:text="Answer one" />
+
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/radioBtn_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/text_question_margin"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioBtn_One" />
+
+    <TextView
+        android:id="@+id/text_answer_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/padding_end_text_questions"
+        android:layout_marginTop="@dimen/margin_top_answer"
+        app:layout_constraintStart_toEndOf="@+id/radioBtn_two"
+        app:layout_constraintTop_toBottomOf="@+id/radioBtn_One"
+        tools:text="Answer one" />
+
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/radioBtn_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/text_question_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioBtn_two" />
+
+    <TextView
+        android:id="@+id/text_answer_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/padding_end_text_questions"
+        android:layout_marginTop="@dimen/margin_top_answer"
+        app:layout_constraintStart_toEndOf="@+id/radioBtn_three"
+        app:layout_constraintTop_toBottomOf="@+id/radioBtn_two"
+        tools:text="Answer one" />
+</androidx.constraintlayout.widget.ConstraintLayout>
