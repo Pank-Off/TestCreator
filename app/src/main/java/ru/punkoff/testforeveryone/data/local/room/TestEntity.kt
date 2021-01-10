@@ -1,15 +1,17 @@
 package ru.punkoff.testforeveryone.data.local.room
 
 import android.content.Context
+import android.os.Parcelable
 import androidx.core.content.ContextCompat
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.model.Question
 import ru.punkoff.testforeveryone.model.Result
 
 @Entity(tableName = "table_tests")
-
+@Parcelize
 data class TestEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
@@ -18,7 +20,7 @@ data class TestEntity(
     var questions: List<Question>,
     var results: List<Result>,
     var color: Color = Color.values().toList().shuffled().first(),
-)
+) : Parcelable
 
 enum class Color {
     WHITE,

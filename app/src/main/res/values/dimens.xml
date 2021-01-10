@@ -15,4 +15,7 @@
     <dimen name="title_creator_size">24sp</dimen>
     <dimen name="textFieldMargin">8dp</dimen>
     <dimen name="margin_button">8dp</dimen>
+    <dimen name="text_question_margin">8sp</dimen>
+    <dimen name="margin_top_answer">12dp</dimen>
+    <dimen name="padding_end_text_questions">64dp</dimen>
 </resources>

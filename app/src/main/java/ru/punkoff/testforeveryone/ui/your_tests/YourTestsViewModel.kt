@@ -29,6 +29,7 @@ class YourTestsViewModel : ViewModel() {
                     )
                 )
             }
+            tests.reverse()
             mainLiveData.value = TestsViewState.Value(tests)
         }
     }

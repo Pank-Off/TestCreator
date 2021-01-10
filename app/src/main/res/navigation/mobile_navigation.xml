@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_nav_your_tests_to_nav_creator3"
             app:destination="@id/nav_creator" />
+        <action
+            android:id="@+id/action_nav_your_tests_to_nav_pass"
+            app:destination="@id/nav_pass" />
     </fragment>
 
     <fragment
@@ -70,4 +73,10 @@
         android:name="ru.punkoff.testforeveryone.ui.creator.results.CreateResultsFragment"
         android:label="@string/menu_create_new_test"
         tools:layout="@layout/fragment_create_results" />
+
+    <fragment
+        android:id="@+id/nav_pass"
+        android:name="ru.punkoff.testforeveryone.ui.your_tests.pass_test.TestFragment"
+        android:label="@string/menu_your_tests"
+        tools:layout="@layout/fragment_test" />
 </navigation>

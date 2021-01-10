@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,9 +13,9 @@ import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.databinding.FragmentYourTestsBinding
 import ru.punkoff.testforeveryone.ui.adapter.TestsAdapter
 import ru.punkoff.testforeveryone.ui.all_tests.TestsViewState
+import ru.punkoff.testforeveryone.ui.your_tests.pass_test.TestFragment
 
 class YourTestsFragment : Fragment() {
-
 
     private lateinit var yourTestsViewModel: YourTestsViewModel
     private val adapter = TestsAdapter()
@@ -38,7 +37,8 @@ class YourTestsFragment : Fragment() {
         yourTestsViewModel =
             ViewModelProvider(this).get(YourTestsViewModel::class.java)
         adapter.attachListener {
-            Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+            //  Toast.makeText(context,it.toString(),Toast.LENGTH_LONG).show()
+            navigateTo(it)
         }
 
         with(binding) {
@@ -62,6 +62,6 @@ class YourTestsFragment : Fragment() {
     }
 
     private fun navigateTo(test: TestEntity?) {
-        (requireActivity() as MainActivity).navigateTo(test)
+        (requireActivity() as MainActivity).navigateTo(TestFragment.create(test))
     }
 }
