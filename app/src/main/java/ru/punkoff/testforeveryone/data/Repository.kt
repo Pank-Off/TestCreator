@@ -9,7 +9,7 @@ import ru.punkoff.testforeveryone.model.Result
 object Repository {
     var test = TestEntity(0, "", "", emptyList(), emptyList(), 0)
 
-    private var result = ResultEntity(0, "", "", 0, 0)
+    var result = ResultEntity(0, "", "", 0, 0)
     val tests = listOf(
         TestEntity(
             0,
@@ -71,11 +71,8 @@ object Repository {
         test = TestEntity(0, "", "", emptyList(), emptyList(), 0)
     }
 
-    fun createResult(title: String, body: String) {
-        result = ResultEntity(0, title, body, 0, 0)
+    fun createResult(title: String, body: String, maxScore: Int, score: Int) {
+        result = ResultEntity(0, title, body, maxScore, score)
     }
 
-    fun setScore(scoreList: List<Int?>) {
-        //  test.maxScore = scoreList
-    }
 }

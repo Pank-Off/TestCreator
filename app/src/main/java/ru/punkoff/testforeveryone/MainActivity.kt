@@ -13,8 +13,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
-import ru.punkoff.testforeveryone.ui.your_tests.pass_test.TestFragment
-import ru.punkoff.testforeveryone.ui.your_tests.pass_test.TestFragment.Companion.EXTRA_TEST
+import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment
+import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment.Companion.EXTRA_TEST
 
 class MainActivity : AppCompatActivity() {
 
@@ -67,8 +67,6 @@ class MainActivity : AppCompatActivity() {
         if (testFragment?.arguments?.get(EXTRA_TEST) != null) {
             navController.navigate(R.id.nav_pass, testFragment.arguments)
         }
-
-
     }
 
     fun navigateToNextStep() {
@@ -81,5 +79,13 @@ class MainActivity : AppCompatActivity() {
 
     fun navigateToYourTests() {
         navController.navigate(R.id.nav_your_tests)
+    }
+
+    fun navigateToShowResultFragment() {
+        navController.navigate(R.id.nav_show_result)
+    }
+
+    fun navigateToYourResults() {
+        navController.navigate(R.id.nav_results)
     }
 }

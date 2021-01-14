@@ -1,4 +1,4 @@
-package ru.punkoff.testforeveryone.ui.your_tests.pass_test
+package ru.punkoff.testforeveryone.ui.your_tests.play_test.test
 
 import android.os.Bundle
 import android.util.Log
@@ -9,9 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.punkoff.testforeveryone.MainActivity
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.databinding.FragmentTestBinding
-import ru.punkoff.testforeveryone.ui.your_tests.pass_test.adapter.TestAdapter
+import ru.punkoff.testforeveryone.ui.your_tests.play_test.adapter.TestAdapter
 
 class TestFragment : Fragment() {
 
@@ -59,9 +60,10 @@ class TestFragment : Fragment() {
                     score += it.value
                 }
 
-                testViewModel.createResult(test, score)
+                test?.let { it1 -> testViewModel.createResult(it1, score) }
                 Log.d(javaClass.simpleName, "Score: $score ")
-
+                //testViewModel.saveResult()
+                navigateToShowResultFragment()
             }
         }
 
@@ -69,11 +71,10 @@ class TestFragment : Fragment() {
             Log.d(javaClass.simpleName, "questions: ${it?.questions}")
             adapter.submitList(it?.questions)
         }
-
     }
 
     private fun navigateToShowResultFragment() {
-
+        (requireActivity() as MainActivity).navigateToShowResultFragment()
     }
 
     companion object {

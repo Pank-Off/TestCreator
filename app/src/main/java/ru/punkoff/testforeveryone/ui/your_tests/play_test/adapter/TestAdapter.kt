@@ -1,4 +1,4 @@
-package ru.punkoff.testforeveryone.ui.your_tests.pass_test.adapter
+package ru.punkoff.testforeveryone.ui.your_tests.play_test.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

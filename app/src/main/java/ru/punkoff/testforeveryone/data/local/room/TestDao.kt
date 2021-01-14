@@ -12,4 +12,10 @@ interface TestDao {
 
     @Query("SELECT * FROM table_tests")
     fun getTests(): List<TestEntity>
+
+    @Insert
+    fun insert(result: ResultEntity)
+
+    @Query("SELECT * FROM table_results")
+    fun getResults():List<ResultEntity>
 }

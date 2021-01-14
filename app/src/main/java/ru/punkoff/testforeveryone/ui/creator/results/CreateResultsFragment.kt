@@ -51,8 +51,10 @@ class CreateResultsFragment : Fragment() {
                     val frag =
                         childFragmentManager.findFragmentByTag("FragResult $i") as ResultsFragment
                     val textFromEditTextTo = frag.view?.textEditTextTo?.text.toString()
+                    val score =
+                        if (textFromEditTextTo == "") 0 else textFromEditTextTo.toInt()
                     val maxScore = Repository.test.maxScore
-                    if (textFromEditTextTo.toInt() > maxScore) {
+                    if (score > maxScore) {
                         Snackbar.make(
                             it,
                             "Your score is limited maxScore (${maxScore})",
