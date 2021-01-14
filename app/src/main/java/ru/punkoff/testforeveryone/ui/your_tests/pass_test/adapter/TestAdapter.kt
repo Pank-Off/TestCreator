@@ -1,8 +1,10 @@
 package ru.punkoff.testforeveryone.ui.your_tests.pass_test.adapter
 
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -52,12 +54,6 @@ class TestAdapter : ListAdapter<Question, TestAdapter.TestViewHolder>(DIFF_UTIL)
 
         private lateinit var keys: List<String>
 
-        init {
-            with(binding) {
-
-            }
-        }
-
         fun bind(item: Question, position: Int) {
             keys = item.answers.map { it.key }
 
@@ -66,11 +62,11 @@ class TestAdapter : ListAdapter<Question, TestAdapter.TestViewHolder>(DIFF_UTIL)
                 when (keys.size) {
                     1 -> {
                         textAnswerOne.text = "A. ${keys[0]}"
-                        radioBtnTwo.isVisible = false
-                        radioBtnThree.isVisible = false
+                        radioBtnTwo.visibility = RadioButton.GONE
+                        radioBtnThree.visibility = RadioButton.GONE
                     }
                     2 -> {
-                        radioBtnThree.isVisible = false
+                        radioBtnThree.visibility = RadioButton.GONE
                         textAnswerOne.text = "A. ${keys[0]}"
                         textAnswerTwo.text = "B. ${keys[1]}"
                     }

@@ -9,11 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.item_fragment_test.*
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.databinding.FragmentTestBinding
-import ru.punkoff.testforeveryone.ui.all_tests.TestsViewState
-import ru.punkoff.testforeveryone.ui.your_tests.YourTestsViewModel
 import ru.punkoff.testforeveryone.ui.your_tests.pass_test.adapter.TestAdapter
 
 class TestFragment : Fragment() {
@@ -48,6 +45,7 @@ class TestFragment : Fragment() {
 
         Log.d(javaClass.simpleName, "Test + $test")
         adapter.attachListener { score, position ->
+            Log.d(javaClass.simpleName, "Score: $score position $position")
             testViewModel.refreshScore(score?.toInt(), position)
         }
         with(binding) {

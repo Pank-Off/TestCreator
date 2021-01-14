@@ -52,7 +52,7 @@
         android:layout_marginTop="@dimen/margin_top_answer"
         app:layout_constraintStart_toEndOf="@+id/radioBtn_two"
         app:layout_constraintTop_toBottomOf="@+id/radioBtn_One"
-        tools:text="Answer one" />
+        tools:text="Answer Two" />
 
     <com.google.android.material.radiobutton.MaterialRadioButton
         android:id="@+id/radioBtn_three"
@@ -70,5 +70,5 @@
         android:layout_marginTop="@dimen/margin_top_answer"
         app:layout_constraintStart_toEndOf="@+id/radioBtn_three"
         app:layout_constraintTop_toBottomOf="@+id/radioBtn_two"
-        tools:text="Answer one" />
+        tools:text="Answer Three" />
 </androidx.constraintlayout.widget.ConstraintLayout>
