@@ -12,7 +12,6 @@ import ru.punkoff.testforeveryone.data.local.room.TestEntity
 
 class TestViewModel(val test: TestEntity?) : ViewModel() {
 
-    private val databaseHelper = LocalDatabase()
     private val mScore: MutableLiveData<HashMap<String, Int>> = MutableLiveData()
     private val testLiveData = MutableLiveData<TestEntity?>()
 
@@ -31,18 +30,16 @@ class TestViewModel(val test: TestEntity?) : ViewModel() {
     fun createResult(test: TestEntity, score: Int) {
         test.results.forEach {
             if (score >= it.from.toInt() && score <= it.to.toInt()) {
-                Repository.createResult(it.title, it.description, test.maxScore, score)
+                Repository.createResult(
+                    testTitle = test.title,
+                    it.title,
+                    it.description,
+                    test.maxScore,
+                    score
+                )
             }
         }
     }
 
-    fun saveResult() {
-        viewModelScope.launch {
-            databaseHelper.saveResult(Repository.result)
-            Log.d(javaClass.simpleName, Repository.result.toString())
-        }
-    }
-
     fun getScore(): LiveData<HashMap<String, Int>> = mScore
-
 }

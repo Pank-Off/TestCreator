@@ -54,15 +54,12 @@ class TestFragment : Fragment() {
             questionList.layoutManager = LinearLayoutManager(context)
             titleView.text = test?.title
             showResultBtn.setOnClickListener {
-                //Log.d(javaClass.simpleName,"button click")
                 var score = 0
                 testViewModel.getScore().value?.forEach {
                     score += it.value
                 }
-
                 test?.let { it1 -> testViewModel.createResult(it1, score) }
                 Log.d(javaClass.simpleName, "Score: $score ")
-                //testViewModel.saveResult()
                 navigateToShowResultFragment()
             }
         }
@@ -74,7 +71,7 @@ class TestFragment : Fragment() {
     }
 
     private fun navigateToShowResultFragment() {
-        (requireActivity() as MainActivity).navigateToShowResultFragment()
+        (requireActivity() as MainActivity).navigateToShowResultFragment(null)
     }
 
     companion object {

@@ -25,7 +25,6 @@ class CreateQuestionsViewModel : ViewModel() {
         hashMap[frag.view?.textEditTextAnswerThree?.text.toString()] =
             if (frag.view?.textEditTextRateThree?.text.toString() == "") "0" else frag.view?.textEditTextRateThree?.text.toString()
 
-
         if (hashMap.containsKey("")) {
             hashMap.remove("")
         }

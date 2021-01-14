@@ -23,20 +23,10 @@ data class TestEntity(
     var color: Color = Color.values().toList().shuffled().first(),
 ) : Parcelable
 
-enum class Color {
-    WHITE,
-    YELLOW,
-    GREEN,
-    BLUE,
-    RED,
-    VIOLET,
-    PINK
-}
 
 fun Color.mapToColor(context: Context): Int {
 
     val id = when (this) {
-
         Color.WHITE -> R.color.color_white
         Color.YELLOW -> R.color.color_yellow
         Color.GREEN -> R.color.color_green

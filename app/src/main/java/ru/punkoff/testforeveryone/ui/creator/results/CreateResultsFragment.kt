@@ -32,14 +32,12 @@ class CreateResultsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Log.d(javaClass.simpleName, "Pochemu ${Repository.test}")
         createResultsViewModel =
             ViewModelProvider(this).get(CreateResultsViewModel::class.java)
 
         with(binding) {
             addResultsBtn.setOnClickListener {
                 val fragment = ResultsFragment()
-
                 count = childFragmentManager.fragments.size + 1
                 Log.d(javaClass.simpleName, "count $count")
                 childFragmentManager.beginTransaction()

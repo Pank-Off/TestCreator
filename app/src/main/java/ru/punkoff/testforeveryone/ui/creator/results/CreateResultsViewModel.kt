@@ -18,7 +18,6 @@ class CreateResultsViewModel : ViewModel() {
     fun saveTest() {
         viewModelScope.launch {
             databaseHelper.saveTest(Repository.test)
-            //   Log.d(javaClass.simpleName, Repository.test.toString())
         }
     }
 

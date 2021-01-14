@@ -10,6 +10,7 @@ import kotlinx.android.parcel.Parcelize
 data class ResultEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
+    val testTitle: String,
     val title: String,
     val body: String,
     val maxScore: Int,

@@ -37,7 +37,6 @@ class YourTestsFragment : Fragment() {
         yourTestsViewModel =
             ViewModelProvider(this).get(YourTestsViewModel::class.java)
         adapter.attachListener {
-            //  Toast.makeText(context,it.toString(),Toast.LENGTH_LONG).show()
             navigateTo(it)
         }
 

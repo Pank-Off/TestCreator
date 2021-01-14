@@ -13,6 +13,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import ru.punkoff.testforeveryone.ui.your_tests.play_test.result.ShowResultFragment
 import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment
 import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment.Companion.EXTRA_TEST
 
@@ -62,9 +63,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(javaClass.simpleName, "navigateTo: ${testFragment?.arguments}")
         if (testFragment?.arguments?.get(EXTRA_TEST) == null) {
             navController.navigate(R.id.nav_creator)
-        }
-
-        if (testFragment?.arguments?.get(EXTRA_TEST) != null) {
+        } else {
             navController.navigate(R.id.nav_pass, testFragment.arguments)
         }
     }
@@ -81,8 +80,12 @@ class MainActivity : AppCompatActivity() {
         navController.navigate(R.id.nav_your_tests)
     }
 
-    fun navigateToShowResultFragment() {
-        navController.navigate(R.id.nav_show_result)
+    fun navigateToShowResultFragment(resultFragment: ShowResultFragment?) {
+        if (resultFragment?.arguments?.get(EXTRA_TEST) == null) {
+            navController.navigate(R.id.nav_show_result)
+        } else {
+            navController.navigate(R.id.nav_show_result, resultFragment.arguments)
+        }
     }
 
     fun navigateToYourResults() {

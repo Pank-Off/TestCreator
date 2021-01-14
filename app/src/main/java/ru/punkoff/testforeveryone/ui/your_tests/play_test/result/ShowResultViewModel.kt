@@ -27,5 +27,4 @@ class ShowResultViewModel : ViewModel() {
         intent.putExtra(Intent.EXTRA_TEXT, shareBody)
         return intent
     }
-
 }

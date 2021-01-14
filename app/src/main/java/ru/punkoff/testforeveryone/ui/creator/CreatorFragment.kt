@@ -30,7 +30,6 @@ class CreatorFragment : Fragment() {
         creatorViewModel =
             ViewModelProvider(this).get(CreatorViewModel::class.java)
         Repository.createNewTest()
-        // Log.d(javaClass.simpleName, "Pochemu ${Repository.test}")
         with(binding) {
             nextBtn.setOnClickListener {
                 if (textInputTitle.text.toString() != "" && textInputDescription.text.toString() != "") {
