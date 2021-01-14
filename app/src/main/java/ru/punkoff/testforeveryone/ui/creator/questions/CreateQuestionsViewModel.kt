@@ -12,16 +12,21 @@ class CreateQuestionsViewModel : ViewModel() {
     private val questionsLiveData = MutableLiveData<List<Question>>()
 
     fun setQuestions(frag: QuestionsFragment) {
-        questionsList.add(
-            Question(
-                frag.view?.textEditTextQuestion?.text.toString(),
-                frag.view?.textEditTextAnswerOne?.text.toString(),
-                frag.view?.textEditTextAnswerTwo?.text.toString(),
-                frag.view?.textEditTextAnswerThree?.text.toString()
-            )
-        )
+        val hashMap = HashMap<String, String?>()
+        hashMap[frag.view?.textEditTextAnswerOne?.text.toString()] =
+            if (frag.view?.textEditTextRateOne?.text.toString() == "") "0" else frag.view?.textEditTextRateOne?.text.toString()
+        hashMap[frag.view?.textEditTextAnswerTwo?.text.toString()] =
+            if (frag.view?.textEditTextRateTwo?.text.toString() == "") "0" else frag.view?.textEditTextRateTwo?.text.toString()
+        hashMap[frag.view?.textEditTextAnswerThree?.text.toString()] =
+            if (frag.view?.textEditTextRateThree?.text.toString() == "") "0" else frag.view?.textEditTextRateThree?.text.toString()
+
+        if (hashMap.containsKey("")) {
+            hashMap.remove("")
+        }
+        questionsList.add(Question(frag.view?.textEditTextQuestion?.text.toString(), hashMap))
         questionsLiveData.value = questionsList
         Repository.setQuestions(questionsList)
+
     }
 
     override fun onCleared() {

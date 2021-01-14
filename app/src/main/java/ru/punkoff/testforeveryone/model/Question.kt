@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Question(
     val question: String,
-    val answerOne: String,
-    val answerTwo: String,
-    val answerThree: String
+    val answers: HashMap<String, String?>,
+//    val answerTwo: HashMap<String, Int>,
+//    val answerThree: HashMap<String, Int>
 ) : Parcelable

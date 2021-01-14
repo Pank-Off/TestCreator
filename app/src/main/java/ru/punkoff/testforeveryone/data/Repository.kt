@@ -1,6 +1,7 @@
 package ru.punkoff.testforeveryone.data
 
 import android.util.Log
+import ru.punkoff.testforeveryone.data.local.room.ResultEntity
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.model.Question
 import ru.punkoff.testforeveryone.model.Result
@@ -8,6 +9,7 @@ import ru.punkoff.testforeveryone.model.Result
 object Repository {
     var test = TestEntity(0, "", "", emptyList(), emptyList())
 
+    //  var results = ResultEntity(0, "", "", 0, 0)
     val tests = listOf(
         TestEntity(
             0,

@@ -47,19 +47,29 @@ class TestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Log.d(javaClass.simpleName, "Test + $test")
-        adapter.attachListener {
-
+        adapter.attachListener { score, position ->
+            testViewModel.refreshScore(score?.toInt(), position)
         }
         with(binding) {
             questionList.adapter = adapter
             questionList.layoutManager = LinearLayoutManager(context)
             titleView.text = test?.title
+            showResultBtn.setOnClickListener {
+                //Log.d(javaClass.simpleName,"button click")
+
+                Log.d(javaClass.simpleName, "Score: ${testViewModel.getScore().value} ")
+
+            }
         }
 
         testViewModel.observeViewState().observe(viewLifecycleOwner) {
             Log.d(javaClass.simpleName, "questions: ${it?.questions}")
             adapter.submitList(it?.questions)
         }
+
+    }
+
+    private fun navigateToShowResultFragment() {
 
     }
 
