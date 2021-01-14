@@ -44,9 +44,9 @@ class TestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Log.d(javaClass.simpleName, "Test + $test")
-        adapter.attachListener { score, position ->
-            Log.d(javaClass.simpleName, "Score: $score position $position")
-            testViewModel.refreshScore(score?.toInt(), position)
+        adapter.attachListener { answer, score ->
+            Log.d(javaClass.simpleName, "answer: $answer score $score")
+            score?.toInt()?.let { testViewModel.refreshScore(answer, it) }
         }
         with(binding) {
             questionList.adapter = adapter
@@ -54,8 +54,13 @@ class TestFragment : Fragment() {
             titleView.text = test?.title
             showResultBtn.setOnClickListener {
                 //Log.d(javaClass.simpleName,"button click")
+                var score = 0
+                testViewModel.getScore().value?.forEach {
+                    score += it.value
+                }
 
-                Log.d(javaClass.simpleName, "Score: ${testViewModel.getScore().value} ")
+                testViewModel.createResult(test, score)
+                Log.d(javaClass.simpleName, "Score: $score ")
 
             }
         }

@@ -25,6 +25,7 @@ class YourTestsViewModel : ViewModel() {
                         test.body,
                         test.questions,
                         test.results,
+                        test.maxScore,
                         test.color
                     )
                 )

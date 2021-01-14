@@ -1,17 +1,12 @@
 package ru.punkoff.testforeveryone.ui.your_tests.pass_test.adapter
 
-import android.opengl.Visibility
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.databinding.ItemFragmentTestBinding
-import ru.punkoff.testforeveryone.databinding.ItemTestBinding
 import ru.punkoff.testforeveryone.model.Question
 
 val DIFF_UTIL: DiffUtil.ItemCallback<Question> = object : DiffUtil.ItemCallback<Question>() {
@@ -80,18 +75,18 @@ class TestAdapter : ListAdapter<Question, TestAdapter.TestViewHolder>(DIFF_UTIL)
                 radioBtnOne.setOnClickListener {
                     radioBtnTwo.isChecked = false
                     radioBtnThree.isChecked = false
-                    listener.onClick(item.answers[keys[0]], 0)
+                    listener.onClick(item.question, item.answers[keys[0]])
                 }
                 radioBtnTwo.setOnClickListener {
                     radioBtnOne.isChecked = false
                     radioBtnThree.isChecked = false
-                    listener.onClick(item.answers[keys[1]], 1)
+                    listener.onClick(item.question, item.answers[keys[1]])
                 }
 
                 radioBtnThree.setOnClickListener {
                     radioBtnTwo.isChecked = false
                     radioBtnOne.isChecked = false
-                    listener.onClick(item.answers[keys[2]], 2)
+                    listener.onClick(item.question, item.answers[keys[2]])
                 }
             }
         }

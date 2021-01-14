@@ -10,6 +10,7 @@ import ru.punkoff.testforeveryone.model.Question
 class CreateQuestionsViewModel : ViewModel() {
 
     private val questionsList = mutableListOf<Question>()
+    private val scoreList = mutableListOf<Int?>()
     private val questionsLiveData = MutableLiveData<List<Question>>()
 
     fun setQuestions(frag: QuestionsFragment) {
@@ -24,14 +25,30 @@ class CreateQuestionsViewModel : ViewModel() {
         hashMap[frag.view?.textEditTextAnswerThree?.text.toString()] =
             if (frag.view?.textEditTextRateThree?.text.toString() == "") "0" else frag.view?.textEditTextRateThree?.text.toString()
 
+
         if (hashMap.containsKey("")) {
             hashMap.remove("")
         }
+        val list = mutableListOf<Int>()
+        hashMap.forEach {
+            it.value?.toInt()?.let { it1 -> list.add(it1) }
+        }
+        val int = list.maxOrNull()
+        scoreList.add(int)
         Log.d(javaClass.simpleName, hashMap.toString())
         questionsList.add(Question(frag.view?.textEditTextQuestion?.text.toString(), hashMap))
         questionsLiveData.value = questionsList
-        Repository.setQuestions(questionsList)
+    }
 
+    fun setMaxScore() {
+        var maxScore = 0
+        scoreList.forEach {
+            if (it != null) {
+                maxScore += it
+            }
+        }
+        Repository.setQuestions(questionsList)
+        Repository.setMaxScore(maxScore)
     }
 
     override fun onCleared() {

@@ -47,6 +47,8 @@ class CreateQuestionsFragment : Fragment() {
                         childFragmentManager.findFragmentByTag("FragQuestion $i") as QuestionsFragment
                     createQuestionsViewModel.setQuestions(frag)
                 }
+                createQuestionsViewModel.setMaxScore()
+
                 navigateToNextStepResult()
             }
         }
