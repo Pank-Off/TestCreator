@@ -3,6 +3,7 @@ package ru.punkoff.testforeveryone.data.local
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ru.punkoff.testforeveryone.app.App
+import ru.punkoff.testforeveryone.data.local.room.ResultEntity
 import ru.punkoff.testforeveryone.data.local.room.TestDao
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 
@@ -16,4 +17,10 @@ class LocalDatabase : DatabaseProvider {
     override suspend fun saveTest(test: TestEntity) =
         withContext(Dispatchers.IO) { testDao.insert(test) }
 
+    override suspend fun saveResult(result: ResultEntity) {
+        withContext(Dispatchers.IO) { testDao.insert(result) }
+    }
+
+    override suspend fun observeResults(): List<ResultEntity> =
+        withContext(Dispatchers.IO) { testDao.getResults() }
 }

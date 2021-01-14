@@ -13,7 +13,7 @@ import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.databinding.FragmentYourTestsBinding
 import ru.punkoff.testforeveryone.ui.adapter.TestsAdapter
 import ru.punkoff.testforeveryone.ui.all_tests.TestsViewState
-import ru.punkoff.testforeveryone.ui.your_tests.pass_test.TestFragment
+import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment
 
 class YourTestsFragment : Fragment() {
 
@@ -37,7 +37,6 @@ class YourTestsFragment : Fragment() {
         yourTestsViewModel =
             ViewModelProvider(this).get(YourTestsViewModel::class.java)
         adapter.attachListener {
-            //  Toast.makeText(context,it.toString(),Toast.LENGTH_LONG).show()
             navigateTo(it)
         }
 

@@ -1,4 +1,4 @@
-package ru.punkoff.testforeveryone.ui.your_tests.pass_test
+package ru.punkoff.testforeveryone.ui.your_tests.play_test.test
 
 import android.os.Bundle
 import android.util.Log
@@ -9,12 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.item_fragment_test.*
+import ru.punkoff.testforeveryone.MainActivity
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.databinding.FragmentTestBinding
-import ru.punkoff.testforeveryone.ui.all_tests.TestsViewState
-import ru.punkoff.testforeveryone.ui.your_tests.YourTestsViewModel
-import ru.punkoff.testforeveryone.ui.your_tests.pass_test.adapter.TestAdapter
+import ru.punkoff.testforeveryone.ui.your_tests.play_test.adapter.TestAdapter
 
 class TestFragment : Fragment() {
 
@@ -47,20 +45,33 @@ class TestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Log.d(javaClass.simpleName, "Test + $test")
-        adapter.attachListener {
-
+        adapter.attachListener { answer, score ->
+            Log.d(javaClass.simpleName, "answer: $answer score $score")
+            score?.toInt()?.let { testViewModel.refreshScore(answer, it) }
         }
         with(binding) {
             questionList.adapter = adapter
             questionList.layoutManager = LinearLayoutManager(context)
             titleView.text = test?.title
+            showResultBtn.setOnClickListener {
+                var score = 0
+                testViewModel.getScore().value?.forEach {
+                    score += it.value
+                }
+                test?.let { it1 -> testViewModel.createResult(it1, score) }
+                Log.d(javaClass.simpleName, "Score: $score ")
+                navigateToShowResultFragment()
+            }
         }
 
         testViewModel.observeViewState().observe(viewLifecycleOwner) {
             Log.d(javaClass.simpleName, "questions: ${it?.questions}")
             adapter.submitList(it?.questions)
         }
+    }
 
+    private fun navigateToShowResultFragment() {
+        (requireActivity() as MainActivity).navigateToShowResultFragment(null)
     }
 
     companion object {

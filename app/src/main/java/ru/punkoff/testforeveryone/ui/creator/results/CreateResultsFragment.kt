@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.item_fragment_results.view.*
 import ru.punkoff.testforeveryone.MainActivity
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.Repository
@@ -30,7 +32,6 @@ class CreateResultsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(javaClass.simpleName, "Pochemu ${Repository.test}")
         createResultsViewModel =
             ViewModelProvider(this).get(CreateResultsViewModel::class.java)
 
@@ -43,15 +44,30 @@ class CreateResultsFragment : Fragment() {
                     .add(R.id.fragmentContainer, fragment, "FragResult $count").commit()
             }
             saveBtn.setOnClickListener {
+                var correctMaxScore = true
                 for (i in 1..count!!) {
                     val frag =
                         childFragmentManager.findFragmentByTag("FragResult $i") as ResultsFragment
-                    createResultsViewModel.setResults(frag)
+                    val textFromEditTextTo = frag.view?.textEditTextTo?.text.toString()
+                    val score =
+                        if (textFromEditTextTo == "") 0 else textFromEditTextTo.toInt()
+                    val maxScore = Repository.test.maxScore
+                    if (score > maxScore) {
+                        Snackbar.make(
+                            it,
+                            "Your score is limited maxScore (${maxScore})",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                        correctMaxScore = false
+                    } else {
+                        createResultsViewModel.setResults(frag)
+                    }
                 }
-
-                createResultsViewModel.saveTest()
-                Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
-                navigateToYourTests()
+                if (correctMaxScore) {
+                    createResultsViewModel.saveTest()
+                    Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
+                    navigateToYourTests()
+                }
             }
         }
     }

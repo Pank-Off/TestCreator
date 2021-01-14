@@ -1,7 +1,6 @@
 package ru.punkoff.testforeveryone.ui.creator
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +30,6 @@ class CreatorFragment : Fragment() {
         creatorViewModel =
             ViewModelProvider(this).get(CreatorViewModel::class.java)
         Repository.createNewTest()
-        Log.d(javaClass.simpleName, "Pochemu ${Repository.test}")
         with(binding) {
             nextBtn.setOnClickListener {
                 if (textInputTitle.text.toString() != "" && textInputDescription.text.toString() != "") {

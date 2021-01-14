@@ -76,7 +76,19 @@
 
     <fragment
         android:id="@+id/nav_pass"
-        android:name="ru.punkoff.testforeveryone.ui.your_tests.pass_test.TestFragment"
+        android:name="ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment"
         android:label="@string/menu_your_tests"
-        tools:layout="@layout/fragment_test" />
+        tools:layout="@layout/fragment_test" >
+        <action
+            android:id="@+id/action_nav_pass_to_showResultFragment"
+            app:destination="@id/nav_show_result" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_show_result"
+        android:name="ru.punkoff.testforeveryone.ui.your_tests.play_test.result.ShowResultFragment"
+        android:label="@string/menu_show_result_fragment" >
+        <action
+            android:id="@+id/action_nav_show_result_to_nav_results"
+            app:destination="@id/nav_results" />
+    </fragment>
 </navigation>
