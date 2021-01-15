@@ -23,4 +23,7 @@ class LocalDatabase : DatabaseProvider {
 
     override suspend fun observeResults(): List<ResultEntity> =
         withContext(Dispatchers.IO) { testDao.getResults() }
+
+    override suspend fun getTestByTitle(titleTest: String): TestEntity =
+        withContext(Dispatchers.IO) { testDao.getTestByTitle(titleTest) }
 }

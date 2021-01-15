@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_all_tests">
+    app:startDestination="@+id/nav_your_tests">
 
-    <fragment
-        android:id="@+id/nav_all_tests"
-        android:name="ru.punkoff.testforeveryone.ui.all_tests.AllTestsFragment"
-        android:label="@string/menu_all_tests"
-        tools:layout="@layout/fragment_all_tests" />
+    <!--    <fragment-->
+    <!--        android:id="@+id/nav_all_tests"-->
+    <!--        android:name="ru.punkoff.testforeveryone.ui.all_tests.AllTestsFragment"-->
+    <!--        android:label="@string/menu_all_tests"-->
+    <!--        tools:layout="@layout/fragment_all_tests" />-->
 
     <fragment
         android:id="@+id/nav_your_tests"
@@ -29,7 +29,11 @@
         android:name="ru.punkoff.testforeveryone.ui.your_results.YourResultsFragment"
         android:label="@string/menu_your_results"
         tools:layout="@layout/fragment_results" />
+    <fragment
+        android:id="@+id/nav_share_us"
+        android:name="ru.punkoff.testforeveryone.ui.share_about_us.ShareAboutUsFragment">
 
+    </fragment>
     <fragment
         android:id="@+id/nav_creator"
         android:name="ru.punkoff.testforeveryone.ui.creator.CreatorFragment"
@@ -40,11 +44,11 @@
             app:destination="@id/nav_create_questions" />
     </fragment>
 
-    <fragment
-        android:id="@+id/nav_notifications"
-        android:name="ru.punkoff.testforeveryone.ui.notifications.NotificationsFragment"
-        android:label="@string/menu_notifications"
-        tools:layout="@layout/fragment_notifications" />
+    <!--    <fragment-->
+    <!--        android:id="@+id/nav_notifications"-->
+    <!--        android:name="ru.punkoff.testforeveryone.ui.notifications.NotificationsFragment"-->
+    <!--        android:label="@string/menu_notifications"-->
+    <!--        tools:layout="@layout/fragment_notifications" />-->
 
     <fragment
         android:id="@+id/nav_settings"
@@ -78,7 +82,7 @@
         android:id="@+id/nav_pass"
         android:name="ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment"
         android:label="@string/menu_your_tests"
-        tools:layout="@layout/fragment_test" >
+        tools:layout="@layout/fragment_test">
         <action
             android:id="@+id/action_nav_pass_to_showResultFragment"
             app:destination="@id/nav_show_result" />
@@ -86,9 +90,12 @@
     <fragment
         android:id="@+id/nav_show_result"
         android:name="ru.punkoff.testforeveryone.ui.your_tests.play_test.result.ShowResultFragment"
-        android:label="@string/menu_show_result_fragment" >
+        android:label="@string/menu_show_result_fragment">
         <action
             android:id="@+id/action_nav_show_result_to_nav_results"
             app:destination="@id/nav_results" />
+        <action
+            android:id="@+id/action_nav_show_result_to_nav_pass"
+            app:destination="@id/nav_pass" />
     </fragment>
 </navigation>

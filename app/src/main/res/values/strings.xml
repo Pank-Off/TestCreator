@@ -2,8 +2,8 @@
     <string name="app_name" translatable="false">Test for everyone</string>
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Test For Everyone</string>
+    <string name="nav_header_subtitle">You are not authorized</string>
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings" translatable="false">Settings</string>
 
@@ -42,4 +42,6 @@
     <string name="restart">Restart</string>
     <string name="save_result">Save Result</string>
     <string name="share_friends">Share friends</string>
+    <string name="system">System</string>
+    <string name="share_about_us">Share about us</string>
 </resources>

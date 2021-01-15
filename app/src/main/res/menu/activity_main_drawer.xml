@@ -4,36 +4,44 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_all_tests"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_all_tests" />
+        <!--        <item-->
+        <!--            android:id="@+id/nav_all_tests"-->
+        <!--            android:icon="@android:drawable/ic_media_play"-->
+        <!--            android:title="@string/menu_all_tests" />-->
         <item
             android:id="@+id/nav_your_tests"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_casino_black_24dp"
             android:title="@string/menu_your_tests" />
         <item
             android:id="@+id/nav_results"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_archive_black_24dp"
             android:title="@string/menu_your_results" />
         <item
             android:id="@+id/nav_creator"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_build_black_24dp"
             android:title="@string/menu_create_new_test" />
-        <item
-            android:id="@+id/nav_notifications"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_notifications" />
+        <!--        <item-->
+        <!--            android:id="@+id/nav_notifications"-->
+        <!--            android:icon="@drawable/ic_menu_slideshow"-->
+        <!--            android:title="@string/menu_notifications" />-->
     </group>
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_settings" />
-        <item
-            android:id="@+id/nav_rate_us"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_rate_us" />
-    </group>
+    <item android:title="@string/system">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="@string/menu_settings" />
+            <item
+                android:id="@+id/nav_share_us"
+                android:icon="@drawable/ic_share_symbol_icon_icons"
+                android:title="@string/share_about_us" />
+            <item
+                android:id="@+id/nav_rate_us"
+                android:icon="@android:drawable/btn_star_big_on"
+                android:title="@string/menu_rate_us" />
+        </menu>
+    </item>
+
+
 </menu>

@@ -1,4 +1,4 @@
-package ru.punkoff.testforeveryone.ui.your_tests.play_test.result
+package ru.punkoff.testforeveryone.ui.share_about_us
 
 import android.content.Intent
 import android.util.Log
@@ -10,16 +10,7 @@ import ru.punkoff.testforeveryone.data.Repository
 import ru.punkoff.testforeveryone.data.local.LocalDatabase
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 
-class ShowResultViewModel : ViewModel() {
-
-    private val testLiveData = MutableLiveData<TestEntity>()
-    private val databaseHelper = LocalDatabase()
-    fun saveResult() {
-        viewModelScope.launch {
-            databaseHelper.saveResult(Repository.result)
-            Log.d(javaClass.simpleName, Repository.result.toString())
-        }
-    }
+class ShareAboutUsViewModel : ViewModel() {
 
     fun setOnShareBtnClickListener(): Intent {
         val intent = Intent(Intent.ACTION_SEND)
@@ -30,13 +21,4 @@ class ShowResultViewModel : ViewModel() {
         intent.putExtra(Intent.EXTRA_TEXT, shareBody)
         return intent
     }
-
-    fun getTestByTitle(title: String) {
-        viewModelScope.launch {
-            val test = databaseHelper.getTestByTitle(title)
-            testLiveData.value = test
-        }
-    }
-
-    fun observeTest() = testLiveData
 }

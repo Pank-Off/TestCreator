@@ -11,4 +11,6 @@ interface DatabaseProvider {
     suspend fun saveResult(result: ResultEntity)
 
     suspend fun observeResults(): List<ResultEntity>
+
+    suspend fun getTestByTitle(titleTest: String): TestEntity
 }

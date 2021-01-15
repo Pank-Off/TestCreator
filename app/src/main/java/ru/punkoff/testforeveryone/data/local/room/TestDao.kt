@@ -17,5 +17,8 @@ interface TestDao {
     fun insert(result: ResultEntity)
 
     @Query("SELECT * FROM table_results")
-    fun getResults():List<ResultEntity>
+    fun getResults(): List<ResultEntity>
+
+    @Query("SELECT * FROM table_tests WHERE title = :titleTest")
+    fun getTestByTitle(titleTest: String): TestEntity
 }
