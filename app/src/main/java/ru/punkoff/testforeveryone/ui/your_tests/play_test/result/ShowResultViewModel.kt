@@ -2,14 +2,17 @@ package ru.punkoff.testforeveryone.ui.your_tests.play_test.result
 
 import android.content.Intent
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.punkoff.testforeveryone.data.Repository
 import ru.punkoff.testforeveryone.data.local.LocalDatabase
+import ru.punkoff.testforeveryone.data.local.room.TestEntity
 
 class ShowResultViewModel : ViewModel() {
 
+    private val testLiveData = MutableLiveData<TestEntity>()
     private val databaseHelper = LocalDatabase()
     fun saveResult() {
         viewModelScope.launch {
@@ -27,4 +30,13 @@ class ShowResultViewModel : ViewModel() {
         intent.putExtra(Intent.EXTRA_TEXT, shareBody)
         return intent
     }
+
+    fun getTestByTitle(title: String) {
+        viewModelScope.launch {
+            val test = databaseHelper.getTestByTitle(title)
+            testLiveData.value = test
+        }
+    }
+
+    fun observeTest() = testLiveData
 }

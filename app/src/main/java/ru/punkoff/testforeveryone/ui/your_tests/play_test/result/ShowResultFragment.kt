@@ -11,10 +11,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import ru.punkoff.testforeveryone.MainActivity
+import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.Repository
 import ru.punkoff.testforeveryone.data.local.room.ResultEntity
+import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.databinding.FragmentShowResultBinding
+import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment
 
 class ShowResultFragment : Fragment() {
 
@@ -57,6 +61,12 @@ class ShowResultFragment : Fragment() {
                 titleView.text = result?.title
                 bodyView.text = result?.body
                 saveResultBtn.isVisible = false
+                restartBtn.setOnClickListener {
+                    requireActivity().findNavController(R.id.nav_host_fragment).popBackStack()
+                    showResultViewModel.observeTest().observe(viewLifecycleOwner) {
+                        navigateToRestartTest(it)
+                    }
+                }
             } else {
                 val scorePercent: Double =
                     Repository.result.score.toDouble() / Repository.result.maxScore.toDouble() * 100
@@ -64,10 +74,11 @@ class ShowResultFragment : Fragment() {
                     "You scored ${Repository.result.score} out of ${Repository.result.maxScore} points ($scorePercent)"
                 titleView.text = Repository.result.title
                 bodyView.text = Repository.result.body
+                restartBtn.setOnClickListener {
+                    requireActivity().findNavController(R.id.nav_host_fragment).popBackStack()
+                }
             }
-            restartBtn.setOnClickListener {
-                Toast.makeText(context, "Restart test", Toast.LENGTH_SHORT).show()
-            }
+
             saveResultBtn.setOnClickListener {
                 showResultViewModel.saveResult()
                 Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
@@ -79,6 +90,7 @@ class ShowResultFragment : Fragment() {
                 startActivity(Intent.createChooser(intent, "Share using"))
             }
         }
+        result?.testTitle?.let { showResultViewModel.getTestByTitle(it) }
     }
 
     companion object {
@@ -95,5 +107,9 @@ class ShowResultFragment : Fragment() {
 
     private fun navigateToYourResults() {
         (requireActivity() as MainActivity).navigateToYourResults()
+    }
+
+    private fun navigateToRestartTest(test: TestEntity?) {
+        (requireActivity() as MainActivity).navigateTo(TestFragment.create(test))
     }
 }

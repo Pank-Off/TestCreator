@@ -90,5 +90,8 @@
         <action
             android:id="@+id/action_nav_show_result_to_nav_results"
             app:destination="@id/nav_results" />
+        <action
+            android:id="@+id/action_nav_show_result_to_nav_pass"
+            app:destination="@id/nav_pass" />
     </fragment>
 </navigation>
