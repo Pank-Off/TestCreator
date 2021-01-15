@@ -21,111 +21,146 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldAnswerOne"
-        android:layout_width="320dp"
+    <LinearLayout
+        android:id="@+id/linear_lay_one"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/textFieldMargin"
-        android:hint="@string/answer_choice"
+        android:baselineAligned="false"
+        android:weightSum="5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textFieldQuestion">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textEditTextAnswerOne"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldRateOne"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/textFieldMargin"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldQuestion">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textEditTextRateOne"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldAnswerOne"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="number" />
+            android:layout_margin="@dimen/textFieldMargin"
+            android:layout_weight="4"
+            android:hint="@string/answer_choice">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textEditTextAnswerOne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldAnswerTwo"
-        android:layout_width="320dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldRateOne"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/textFieldMargin"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textFieldQuestion">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textEditTextRateOne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="4" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_lay_two"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/textFieldMargin"
-        android:hint="@string/answer_choice"
+        android:weightSum="5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldAnswerOne">
+        app:layout_constraintTop_toBottomOf="@+id/linear_lay_one">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textEditTextAnswerTwo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldRateTwo"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/textFieldMargin"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldAnswerOne">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textEditTextRateTwo"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldAnswerTwo"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="number" />
+            android:layout_margin="@dimen/textFieldMargin"
+            android:layout_weight="4"
+            android:hint="@string/answer_choice"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textFieldAnswerOne">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textEditTextAnswerTwo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldAnswerThree"
-        android:layout_width="320dp"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldRateTwo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/textFieldMargin"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textFieldAnswerOne">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textEditTextRateTwo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="4" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_lay_three"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/textFieldMargin"
-        android:hint="@string/answer_choice"
+        android:weightSum="5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldAnswerTwo">
+        app:layout_constraintTop_toBottomOf="@+id/linear_lay_two">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textEditTextAnswerThree"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldRateThree"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/textFieldMargin"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldAnswerTwo">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textEditTextRateThree"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldAnswerThree"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="number" />
+            android:layout_margin="@dimen/textFieldMargin"
+            android:layout_weight="4"
+            android:hint="@string/answer_choice"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textFieldAnswerTwo">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textEditTextAnswerThree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldRateThree"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/textFieldMargin"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textFieldAnswerTwo">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textEditTextRateThree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="4" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_margin="8dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@id/textFieldAnswerThree" />
+        app:layout_constraintTop_toBottomOf="@id/linear_lay_three" />
 </androidx.constraintlayout.widget.ConstraintLayout>

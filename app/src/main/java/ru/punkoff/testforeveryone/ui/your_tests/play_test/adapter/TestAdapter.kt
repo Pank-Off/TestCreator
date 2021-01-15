@@ -51,10 +51,10 @@ class TestAdapter : ListAdapter<Question, TestAdapter.TestViewHolder>(DIFF_UTIL)
             with(binding) {
                 question.text = "${position + 1}. ${item.question}"
                 when (keys.size) {
-                    0 ->{
-                        radioBtnOne.visibility = android.widget.RadioButton.GONE
-                        radioBtnTwo.visibility = android.widget.RadioButton.GONE
-                        radioBtnThree.visibility = android.widget.RadioButton.GONE
+                    0 -> {
+                        radioBtnOne.visibility = RadioButton.GONE
+                        radioBtnTwo.visibility = RadioButton.GONE
+                        radioBtnThree.visibility = RadioButton.GONE
                     }
                     1 -> {
                         textAnswerOne.text = "A. ${keys[0]}"
