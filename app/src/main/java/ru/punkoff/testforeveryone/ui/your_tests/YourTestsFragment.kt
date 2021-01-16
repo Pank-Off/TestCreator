@@ -37,6 +37,7 @@ class YourTestsFragment : Fragment() {
         yourTestsViewModel =
             ViewModelProvider(this).get(YourTestsViewModel::class.java)
         adapter.attachListener {
+            Log.d(javaClass.simpleName, "Color: ${it.color}")
             navigateTo(it)
         }
 
@@ -44,6 +45,7 @@ class YourTestsFragment : Fragment() {
             listTests.adapter = adapter
             listTests.layoutManager = LinearLayoutManager(context)
             fab.setOnClickListener {
+
                 navigateTo(null)
             }
         }

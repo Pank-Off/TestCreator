@@ -1,8 +1,6 @@
 package ru.punkoff.testforeveryone.data.local.room
 
-import android.content.Context
 import android.os.Parcelable
-import androidx.core.content.ContextCompat
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
@@ -24,17 +22,15 @@ data class TestEntity(
 ) : Parcelable
 
 
-fun Color.mapToColor(context: Context): Int {
+fun Color.mapToColor(): Int {
 
-    val id = when (this) {
-        Color.WHITE -> R.color.color_white
-        Color.YELLOW -> R.color.color_yellow
-        Color.GREEN -> R.color.color_green
-        Color.BLUE -> R.color.color_blue
-        Color.RED -> R.color.color_red
-        Color.VIOLET -> R.color.color_violet
-        Color.PINK -> R.color.color_pink
+    return when (this) {
+        Color.WHITE -> R.drawable.gradient_white
+        Color.YELLOW -> R.drawable.gradient_yellow
+        Color.GREEN -> R.drawable.gradient_green
+        Color.BLUE -> R.drawable.gradient_blue
+        Color.RED -> R.drawable.gradient_red
+        Color.VIOLET -> R.drawable.gradient_violet
+        Color.PINK -> R.drawable.gradient_pink
     }
-
-    return ContextCompat.getColor(context, id)
 }

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.punkoff.testforeveryone.MainActivity
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
+import ru.punkoff.testforeveryone.data.local.room.mapToColor
 import ru.punkoff.testforeveryone.databinding.FragmentTestBinding
 import ru.punkoff.testforeveryone.ui.your_tests.play_test.adapter.TestAdapter
 
@@ -43,6 +44,8 @@ class TestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        test?.color?.mapToColor()?.let { view.setBackgroundResource(it) }
 
         Log.d(javaClass.simpleName, "Test + $test")
         adapter.attachListener { answer, score ->
@@ -81,7 +84,7 @@ class TestFragment : Fragment() {
             val bundle = Bundle()
             bundle.putParcelable(EXTRA_TEST, test)
             testFragment.arguments = bundle
-            Log.d("TAG", "Bundle: $test")
+            Log.d(TestFragment::class.java.simpleName, "Bundle: $test")
             return testFragment
         }
     }
