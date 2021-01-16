@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 import ru.punkoff.testforeveryone.data.Repository
-import ru.punkoff.testforeveryone.data.local.LocalDatabase
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 
 class TestViewModel(val test: TestEntity?) : ViewModel() {
@@ -28,17 +25,41 @@ class TestViewModel(val test: TestEntity?) : ViewModel() {
     }
 
     fun createResult(test: TestEntity, score: Int) {
+        Log.d(javaClass.simpleName, "Color: ${test.color}")
+        if (test.results.isEmpty()) {
+            createEmptyResult(test)
+        }
         test.results.forEach {
-            if (score >= it.from.toInt() && score <= it.to.toInt()) {
+            var minScore = 0
+            var maxScore = 0
+            try {
+                minScore = it.from.toInt()
+                maxScore = it.to.toInt()
+            } catch (exc: NumberFormatException) {
+                Log.e(javaClass.simpleName, exc.stackTraceToString())
+            }
+            if (score in minScore..maxScore) {
                 Repository.createResult(
                     testTitle = test.title,
                     it.title,
                     it.description,
                     test.maxScore,
-                    score
+                    score,
+                    test.color
                 )
             }
         }
+    }
+
+    private fun createEmptyResult(test: TestEntity) {
+        Repository.createResult(
+            testTitle = test.title,
+            "",
+            "",
+            0,
+            0,
+            test.color
+        )
     }
 
     fun getScore(): LiveData<HashMap<String, Int>> = mScore

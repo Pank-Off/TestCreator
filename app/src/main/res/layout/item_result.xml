@@ -8,8 +8,12 @@
     android:layout_marginTop="@dimen/card_view_margin"
     android:layout_marginEnd="@dimen/card_view_margin"
     android:layout_marginBottom="@dimen/card_view_margin"
-    app:cardBackgroundColor="@color/color_green"
     app:cardCornerRadius="@dimen/card_view_radius">
+
+    <ImageView
+        android:id="@+id/cardView_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +43,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/play_btn_margin"
-            android:text="@string/show_results"
-            app:backgroundTint="@color/button_color" />
+            android:text="@string/show_results" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -54,10 +54,9 @@ class TestsAdapter : ListAdapter<TestEntity, TestsAdapter.TestsViewHolder>(DIFF_
             with(binding) {
                 title.text = item.title
                 body.text = item.body
-                root.setCardBackgroundColor(item.color.mapToColor(root.context))
+                cardViewBackground.setBackgroundResource(item.color.mapToColor())
                 playBtn.setOnClickListener(clickListener)
             }
         }
-
     }
 }

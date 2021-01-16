@@ -56,7 +56,7 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
             with(binding) {
                 title.text = item.testTitle
                 body.text = item.title
-                root.setCardBackgroundColor(item.color.mapToColor(root.context))
+                cardViewBackground.setBackgroundResource(item.color.mapToColor())
                 showBtn.setOnClickListener(clickListener)
             }
         }

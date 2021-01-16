@@ -1,6 +1,7 @@
 package ru.punkoff.testforeveryone.data
 
 import android.util.Log
+import ru.punkoff.testforeveryone.data.local.room.Color
 import ru.punkoff.testforeveryone.data.local.room.ResultEntity
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.model.Question
@@ -70,8 +71,15 @@ object Repository {
         test = TestEntity(0, "", "", emptyList(), emptyList(), 0)
     }
 
-    fun createResult(testTitle: String, title: String, body: String, maxScore: Int, score: Int) {
-        result = ResultEntity(0, testTitle, title, body, maxScore, score)
+    fun createResult(
+        testTitle: String,
+        title: String,
+        body: String,
+        maxScore: Int,
+        score: Int,
+        color: Color
+    ) {
+        Log.d(javaClass.simpleName, "Color: $color")
+        result = ResultEntity(0, testTitle, title, body, maxScore, score, color)
     }
-
 }

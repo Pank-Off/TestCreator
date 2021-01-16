@@ -17,6 +17,7 @@ import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.Repository
 import ru.punkoff.testforeveryone.data.local.room.ResultEntity
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
+import ru.punkoff.testforeveryone.data.local.room.mapToColor
 import ru.punkoff.testforeveryone.databinding.FragmentShowResultBinding
 import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment
 
@@ -54,6 +55,7 @@ class ShowResultFragment : Fragment() {
         requireActivity().actionBar?.setHomeButtonEnabled(false)
         with(binding) {
             if (result != null) {
+                result?.color?.mapToColor()?.let { view.setBackgroundResource(it) }
                 val scorePercent: Double =
                     result!!.score.toDouble() / result!!.maxScore.toDouble() * 100
                 scoreView.text =
@@ -68,6 +70,7 @@ class ShowResultFragment : Fragment() {
                     }
                 }
             } else {
+                Repository.result.color.mapToColor().let { view.setBackgroundResource(it) }
                 val scorePercent: Double =
                     Repository.result.score.toDouble() / Repository.result.maxScore.toDouble() * 100
                 scoreView.text =
@@ -100,7 +103,7 @@ class ShowResultFragment : Fragment() {
             val bundle = Bundle()
             bundle.putParcelable(EXTRA_RESULT, result)
             resultFragment.arguments = bundle
-            Log.d("TAG", "Bundle: $result")
+            Log.d(ShowResultFragment::class.java.simpleName, "Bundle: $result")
             return resultFragment
         }
     }
