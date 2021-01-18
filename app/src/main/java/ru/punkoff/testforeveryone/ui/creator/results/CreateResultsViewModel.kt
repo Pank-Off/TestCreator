@@ -6,14 +6,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.android.synthetic.main.item_fragment_results.view.*
 import kotlinx.coroutines.launch
 import ru.punkoff.testforeveryone.data.Repository
-import ru.punkoff.testforeveryone.data.local.LocalDatabase
+import ru.punkoff.testforeveryone.data.local.DatabaseProvider
 import ru.punkoff.testforeveryone.model.Result
 
-class CreateResultsViewModel : ViewModel() {
+class CreateResultsViewModel(private val databaseHelper: DatabaseProvider) : ViewModel() {
 
-    private val databaseHelper = LocalDatabase()
-
-    private val resultsList = mutableListOf<Result>()
     private val resultsLiveData = MutableLiveData<List<Result>>()
     fun saveTest() {
         viewModelScope.launch {
@@ -22,6 +19,7 @@ class CreateResultsViewModel : ViewModel() {
     }
 
     fun setResults(frag: ResultsFragment) {
+        val resultsList = mutableListOf<Result>()
         resultsList.add(
             Result(
                 frag.view?.textEditTextFrom?.text.toString(),

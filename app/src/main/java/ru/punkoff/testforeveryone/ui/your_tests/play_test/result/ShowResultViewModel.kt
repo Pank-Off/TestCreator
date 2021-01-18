@@ -7,13 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.punkoff.testforeveryone.data.Repository
-import ru.punkoff.testforeveryone.data.local.LocalDatabase
+import ru.punkoff.testforeveryone.data.local.DatabaseProvider
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 
-class ShowResultViewModel : ViewModel() {
+class ShowResultViewModel(private val databaseHelper: DatabaseProvider) : ViewModel() {
 
     private val testLiveData = MutableLiveData<TestEntity>()
-    private val databaseHelper = LocalDatabase()
     fun saveResult() {
         viewModelScope.launch {
             databaseHelper.saveResult(Repository.result)

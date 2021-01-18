@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import ru.punkoff.testforeveryone.MainActivity
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.data.local.room.mapToColor
@@ -24,12 +24,8 @@ class TestFragment : Fragment() {
             EXTRA_TEST
         )
     }
-    private val testViewModel by lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return TestViewModel(test) as T
-            }
-        }).get(TestViewModel::class.java)
+    private val testViewModel by viewModel<TestViewModel> {
+        parametersOf(test)
     }
     private var _binding: FragmentTestBinding? = null
     private val binding: FragmentTestBinding get() = _binding!!

@@ -5,11 +5,12 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class RateUsFragment : Fragment() {
 
-    private lateinit var rateUsViewModel: RateUsViewModel
+    private val rateUsViewModel by viewModel<RateUsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

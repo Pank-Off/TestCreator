@@ -7,15 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.punkoff.testforeveryone.databinding.FragmentAllTestsBinding
 import ru.punkoff.testforeveryone.ui.adapter.TestsAdapter
 
 class AllTestsFragment : Fragment() {
 
-    private lateinit var allTestsViewModel: AllTestsViewModel
+    private val allTestsViewModel by viewModel<AllTestsViewModel>()
 
     private val adapter = TestsAdapter()
 
@@ -32,8 +32,6 @@ class AllTestsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        allTestsViewModel =
-            ViewModelProvider(this).get(AllTestsViewModel::class.java)
         adapter.attachListener { test ->
             Toast.makeText(
                 context,

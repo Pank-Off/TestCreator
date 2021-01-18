@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.punkoff.testforeveryone.MainActivity
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.Repository
@@ -14,7 +14,7 @@ import ru.punkoff.testforeveryone.databinding.FragmentCreateQuestionsBinding
 
 class CreateQuestionsFragment : Fragment() {
 
-    private lateinit var createQuestionsViewModel: CreateQuestionsViewModel
+    private val createQuestionsViewModel by viewModel<CreateQuestionsViewModel>()
 
     private var count: Int? = 0
     private var _binding: FragmentCreateQuestionsBinding? = null
@@ -31,8 +31,6 @@ class CreateQuestionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        createQuestionsViewModel =
-            ViewModelProvider(this).get(CreateQuestionsViewModel::class.java)
         Log.d(javaClass.simpleName, "Pochemu ${Repository.test}")
         with(binding) {
             addQuestionBtn.setOnClickListener {

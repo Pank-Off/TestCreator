@@ -9,9 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.punkoff.testforeveryone.MainActivity
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.Repository
@@ -26,13 +25,7 @@ class ShowResultFragment : Fragment() {
     private var _binding: FragmentShowResultBinding? = null
     private val binding: FragmentShowResultBinding get() = _binding!!
 
-    private val showResultViewModel by lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return ShowResultViewModel() as T
-            }
-        }).get(ShowResultViewModel::class.java)
-    }
+    private val showResultViewModel by viewModel<ShowResultViewModel>()
 
     private val result: ResultEntity? by lazy(LazyThreadSafetyMode.NONE) {
         arguments?.getParcelable(
