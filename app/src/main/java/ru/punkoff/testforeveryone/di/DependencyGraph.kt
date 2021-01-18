@@ -3,6 +3,8 @@ package ru.punkoff.testforeveryone.di
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
+import ru.punkoff.testforeveryone.data.TempResult
+import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.data.local.DatabaseProvider
 import ru.punkoff.testforeveryone.data.local.LocalDatabase
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
@@ -23,8 +25,12 @@ object DependencyGraph {
     private val viewModelModule by lazy {
         module {
             viewModel { AllTestsViewModel() }
-            viewModel { CreateQuestionsViewModel() }
-            viewModel { CreateResultsViewModel(get()) }
+            viewModel { (test: TempTest) ->
+                CreateQuestionsViewModel(test)
+            }
+            viewModel { (test: TempTest) ->
+                CreateResultsViewModel(get(), test)
+            }
             viewModel { CreatorViewModel() }
             viewModel { NotificationsViewModel() }
             viewModel { RateUsViewModel() }
@@ -35,7 +41,9 @@ object DependencyGraph {
             viewModel { (test: TestEntity?) ->
                 TestViewModel(test)
             }
-            viewModel { ShowResultViewModel(get()) }
+            viewModel { (result: TempResult) ->
+                ShowResultViewModel(get(), result)
+            }
         }
     }
 

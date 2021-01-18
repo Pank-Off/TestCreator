@@ -43,7 +43,6 @@ class YourTestsFragment : Fragment() {
             listTests.adapter = adapter
             listTests.layoutManager = LinearLayoutManager(context)
             fab.setOnClickListener {
-
                 navigateTo(null)
             }
         }

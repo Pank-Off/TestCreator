@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import ru.punkoff.testforeveryone.MainActivity
+import ru.punkoff.testforeveryone.data.TempResult
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.data.local.room.mapToColor
 import ru.punkoff.testforeveryone.databinding.FragmentTestBinding
@@ -59,7 +60,11 @@ class TestFragment : Fragment() {
                 }
                 test?.let { it1 -> testViewModel.createResult(it1, score) }
                 Log.d(javaClass.simpleName, "Score: $score ")
-                navigateToShowResultFragment()
+                testViewModel.getResultLiveData().observe(viewLifecycleOwner) {
+                    Log.d(javaClass.simpleName, "getResultLiveData: ${it.getResult()}")
+                    navigateToShowResultFragment(it)
+                }
+
             }
         }
 
@@ -69,8 +74,8 @@ class TestFragment : Fragment() {
         }
     }
 
-    private fun navigateToShowResultFragment() {
-        (requireActivity() as MainActivity).navigateToShowResultFragment(null)
+    private fun navigateToShowResultFragment(result: TempResult) {
+        (requireActivity() as MainActivity).navigateToShowResultFragment(null, result)
     }
 
     companion object {

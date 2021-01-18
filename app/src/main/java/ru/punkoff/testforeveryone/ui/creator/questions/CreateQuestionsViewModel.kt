@@ -4,14 +4,20 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.android.synthetic.main.item_fragment_questions.view.*
-import ru.punkoff.testforeveryone.data.Repository
+import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.model.Question
 
-class CreateQuestionsViewModel : ViewModel() {
+class CreateQuestionsViewModel(test: TempTest) : ViewModel() {
 
     private val questionsList = mutableListOf<Question>()
     private val scoreList = mutableListOf<Int?>()
     private val questionsLiveData = MutableLiveData<List<Question>>()
+
+    private val testLiveData = MutableLiveData<TempTest>()
+
+    init {
+        testLiveData.value = test
+    }
 
     fun setQuestions(frag: QuestionsFragment) {
         val hashMap = LinkedHashMap<String, String?>()
@@ -36,6 +42,7 @@ class CreateQuestionsViewModel : ViewModel() {
         scoreList.add(int)
         Log.d(javaClass.simpleName, hashMap.toString())
         questionsList.add(Question(frag.view?.textEditTextQuestion?.text.toString(), hashMap))
+        testLiveData.value?.setQuestions(questionsList)
         questionsLiveData.value = questionsList
     }
 
@@ -46,12 +53,8 @@ class CreateQuestionsViewModel : ViewModel() {
                 maxScore += it
             }
         }
-        Repository.setQuestions(questionsList)
-        Repository.setMaxScore(maxScore)
+        testLiveData.value?.setMaxScore(maxScore)
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        questionsLiveData.value = emptyList()
-    }
+    fun getTestLiveData() = testLiveData
 }

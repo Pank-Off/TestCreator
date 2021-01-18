@@ -57,9 +57,7 @@ class YourResultsFragment : Fragment() {
 
     private fun navigateTo(result: ResultEntity?) {
         (requireActivity() as MainActivity).navigateToShowResultFragment(
-            ShowResultFragment.create(
-                result
-            )
+            ShowResultFragment.create(result), null
         )
     }
 }
