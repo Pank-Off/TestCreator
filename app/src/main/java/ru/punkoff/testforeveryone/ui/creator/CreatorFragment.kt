@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.punkoff.testforeveryone.MainActivity
-import ru.punkoff.testforeveryone.data.Repository
+import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.databinding.FragmentCreatorBinding
 
 class CreatorFragment : Fragment() {
 
-    private lateinit var creatorViewModel: CreatorViewModel
+    private val creatorViewModel by viewModel<CreatorViewModel>()
 
     private var _binding: FragmentCreatorBinding? = null
     private val binding: FragmentCreatorBinding get() = _binding!!
@@ -27,9 +27,6 @@ class CreatorFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        creatorViewModel =
-            ViewModelProvider(this).get(CreatorViewModel::class.java)
-        Repository.createNewTest()
         with(binding) {
             nextBtn.setOnClickListener {
                 if (textInputTitle.text.toString() != "" && textInputDescription.text.toString() != "") {
@@ -37,7 +34,9 @@ class CreatorFragment : Fragment() {
                         textInputTitle.text.toString(),
                         textInputDescription.text.toString()
                     )
-                    navigateToNextStep()
+                    creatorViewModel.getTest().observe(viewLifecycleOwner) {
+                        navigateToNextStep(it)
+                    }
                 } else {
                     if (textInputTitle.text.toString() == "") {
                         textInputTitle.error = "Input Title"
@@ -50,7 +49,7 @@ class CreatorFragment : Fragment() {
         }
     }
 
-    private fun navigateToNextStep() {
-        (requireActivity() as MainActivity).navigateToNextStep()
+    private fun navigateToNextStep(test: TempTest) {
+        (requireActivity() as MainActivity).navigateToNextStep(test)
     }
 }

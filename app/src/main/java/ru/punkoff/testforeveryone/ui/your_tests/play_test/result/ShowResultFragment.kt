@@ -9,12 +9,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import ru.punkoff.testforeveryone.MainActivity
 import ru.punkoff.testforeveryone.R
-import ru.punkoff.testforeveryone.data.Repository
+import ru.punkoff.testforeveryone.data.TempResult
+import ru.punkoff.testforeveryone.data.TempResult.Companion.EXTRA_TEMP_RESULT
 import ru.punkoff.testforeveryone.data.local.room.ResultEntity
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.data.local.room.mapToColor
@@ -26,18 +27,18 @@ class ShowResultFragment : Fragment() {
     private var _binding: FragmentShowResultBinding? = null
     private val binding: FragmentShowResultBinding get() = _binding!!
 
-    private val showResultViewModel by lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return ShowResultViewModel() as T
-            }
-        }).get(ShowResultViewModel::class.java)
-    }
-
     private val result: ResultEntity? by lazy(LazyThreadSafetyMode.NONE) {
         arguments?.getParcelable(
             EXTRA_RESULT
         )
+    }
+    private val tempResult: TempResult? by lazy(LazyThreadSafetyMode.NONE) {
+        arguments?.getParcelable(
+            EXTRA_TEMP_RESULT
+        )
+    }
+    private val showResultViewModel by viewModel<ShowResultViewModel> {
+        parametersOf(tempResult)
     }
 
     override fun onCreateView(
@@ -55,6 +56,8 @@ class ShowResultFragment : Fragment() {
         requireActivity().actionBar?.setHomeButtonEnabled(false)
         with(binding) {
             if (result != null) {
+
+                Log.d(javaClass.simpleName, "This is result $result")
                 result?.color?.mapToColor()?.let { view.setBackgroundResource(it) }
                 val scorePercent: Double =
                     result!!.score.toDouble() / result!!.maxScore.toDouble() * 100
@@ -70,13 +73,14 @@ class ShowResultFragment : Fragment() {
                     }
                 }
             } else {
-                Repository.result.color.mapToColor().let { view.setBackgroundResource(it) }
+                Log.d(javaClass.simpleName, "RESULT MAZAFAKA: ${tempResult.toString()}")
+                tempResult?.getColor()?.mapToColor()?.let { view.setBackgroundResource(it) }
                 val scorePercent: Double =
-                    Repository.result.score.toDouble() / Repository.result.maxScore.toDouble() * 100
+                    tempResult!!.getScore().toDouble() / tempResult!!.getMaxScore().toDouble() * 100
                 scoreView.text =
-                    "You scored ${Repository.result.score} out of ${Repository.result.maxScore} points ($scorePercent)"
-                titleView.text = Repository.result.title
-                bodyView.text = Repository.result.body
+                    "You scored ${tempResult?.getScore()} out of ${tempResult?.getMaxScore()} points ($scorePercent)"
+                titleView.text = tempResult?.getTitle()
+                bodyView.text = tempResult?.getBody()
                 restartBtn.setOnClickListener {
                     requireActivity().findNavController(R.id.nav_host_fragment).popBackStack()
                 }

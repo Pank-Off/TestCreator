@@ -4,17 +4,19 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.punkoff.testforeveryone.data.Repository
+import ru.punkoff.testforeveryone.data.TempResult
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 
 class TestViewModel(val test: TestEntity?) : ViewModel() {
 
     private val mScore: MutableLiveData<HashMap<String, Int>> = MutableLiveData()
     private val testLiveData = MutableLiveData<TestEntity?>()
+    private val resultLiveData = MutableLiveData<TempResult>()
 
     init {
         testLiveData.value = test
         mScore.value = HashMap()
+        resultLiveData.value = TempResult()
     }
 
     fun observeViewState() = testLiveData
@@ -25,7 +27,7 @@ class TestViewModel(val test: TestEntity?) : ViewModel() {
     }
 
     fun createResult(test: TestEntity, score: Int) {
-        Log.d(javaClass.simpleName, "Color: ${test.color}")
+        Log.d(javaClass.simpleName, "test.results: ${test.results}")
         if (test.results.isEmpty()) {
             createEmptyResult(test)
         }
@@ -38,8 +40,9 @@ class TestViewModel(val test: TestEntity?) : ViewModel() {
             } catch (exc: NumberFormatException) {
                 Log.e(javaClass.simpleName, exc.stackTraceToString())
             }
+            Log.d(javaClass.simpleName, "SCORE: $score minScore: $minScore maxScore: $maxScore")
             if (score in minScore..maxScore) {
-                Repository.createResult(
+                resultLiveData.value?.createResult(
                     testTitle = test.title,
                     it.title,
                     it.description,
@@ -52,7 +55,7 @@ class TestViewModel(val test: TestEntity?) : ViewModel() {
     }
 
     private fun createEmptyResult(test: TestEntity) {
-        Repository.createResult(
+        resultLiveData.value?.createResult(
             testTitle = test.title,
             "",
             "",
@@ -62,5 +65,7 @@ class TestViewModel(val test: TestEntity?) : ViewModel() {
         )
     }
 
+    fun getResultLiveData() = resultLiveData
     fun getScore(): LiveData<HashMap<String, Int>> = mScore
+
 }

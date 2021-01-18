@@ -6,18 +6,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.punkoff.testforeveryone.data.Repository
-import ru.punkoff.testforeveryone.data.local.LocalDatabase
+import ru.punkoff.testforeveryone.data.TempResult
+import ru.punkoff.testforeveryone.data.local.DatabaseProvider
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 
-class ShowResultViewModel : ViewModel() {
+class ShowResultViewModel(
+    private val databaseHelper: DatabaseProvider,
+    private val result: TempResult?
+) : ViewModel() {
 
     private val testLiveData = MutableLiveData<TestEntity>()
-    private val databaseHelper = LocalDatabase()
     fun saveResult() {
         viewModelScope.launch {
-            databaseHelper.saveResult(Repository.result)
-            Log.d(javaClass.simpleName, Repository.result.toString())
+            result?.let { databaseHelper.saveResult(result.getResult()) }
+            Log.d(javaClass.simpleName, result?.getResult().toString())
         }
     }
 

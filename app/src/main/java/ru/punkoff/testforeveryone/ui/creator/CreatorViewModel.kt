@@ -1,16 +1,19 @@
 package ru.punkoff.testforeveryone.ui.creator
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
-import ru.punkoff.testforeveryone.data.Repository
-import ru.punkoff.testforeveryone.data.local.LocalDatabase
-import ru.punkoff.testforeveryone.data.local.room.TestEntity
+import ru.punkoff.testforeveryone.data.TempTest
 
 class CreatorViewModel : ViewModel() {
+    private val testLiveData = MutableLiveData<TempTest>()
 
-    fun createTest(title: String, description: String) {
-        Repository.createTest(title, description)
+    init {
+        testLiveData.value = TempTest()
     }
 
+    fun createTest(title: String, description: String) {
+        testLiveData.value?.createTest(title, description)
+    }
+
+    fun getTest() = testLiveData
 }

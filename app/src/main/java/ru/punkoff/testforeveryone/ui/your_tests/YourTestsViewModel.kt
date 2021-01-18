@@ -5,13 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.punkoff.testforeveryone.data.local.LocalDatabase
+import ru.punkoff.testforeveryone.data.local.DatabaseProvider
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.ui.all_tests.TestsViewState
 
-class YourTestsViewModel : ViewModel() {
+class YourTestsViewModel(databaseHelper: DatabaseProvider) : ViewModel() {
     private val mainLiveData = MutableLiveData<TestsViewState>(TestsViewState.EMPTY)
-    private val databaseHelper = LocalDatabase()
 
     init {
         viewModelScope.launch {

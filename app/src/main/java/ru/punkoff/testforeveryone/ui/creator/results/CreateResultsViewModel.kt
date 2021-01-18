@@ -5,19 +5,25 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.android.synthetic.main.item_fragment_results.view.*
 import kotlinx.coroutines.launch
-import ru.punkoff.testforeveryone.data.Repository
-import ru.punkoff.testforeveryone.data.local.LocalDatabase
+import ru.punkoff.testforeveryone.data.TempTest
+import ru.punkoff.testforeveryone.data.local.DatabaseProvider
 import ru.punkoff.testforeveryone.model.Result
 
-class CreateResultsViewModel : ViewModel() {
+class CreateResultsViewModel(
+    private val databaseHelper: DatabaseProvider, test: TempTest
+) : ViewModel() {
 
-    private val databaseHelper = LocalDatabase()
-
-    private val resultsList = mutableListOf<Result>()
     private val resultsLiveData = MutableLiveData<List<Result>>()
+    private val testLiveData = MutableLiveData<TempTest>()
+    private val resultsList = mutableListOf<Result>()
+
+    init {
+        testLiveData.value = test
+    }
+
     fun saveTest() {
         viewModelScope.launch {
-            databaseHelper.saveTest(Repository.test)
+            testLiveData.value?.getTest()?.let { databaseHelper.saveTest(it) }
         }
     }
 
@@ -31,8 +37,10 @@ class CreateResultsViewModel : ViewModel() {
             )
         )
         resultsLiveData.value = resultsList
-        Repository.setResults(resultsList)
+        testLiveData.value?.setResults(resultsList)
     }
+
+    fun getTestLiveData() = testLiveData
 
     override fun onCleared() {
         super.onCleared()

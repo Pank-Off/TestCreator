@@ -13,6 +13,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import ru.punkoff.testforeveryone.data.TempResult
+import ru.punkoff.testforeveryone.data.TempResult.Companion.EXTRA_TEMP_RESULT
+import ru.punkoff.testforeveryone.data.TempTest
+import ru.punkoff.testforeveryone.data.TempTest.Companion.EXTRA_TEMP_TEST
 import ru.punkoff.testforeveryone.ui.your_tests.play_test.result.ShowResultFragment
 import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment
 import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment.Companion.EXTRA_TEST
@@ -69,21 +73,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun navigateToNextStep() {
-        navController.navigate(R.id.nav_create_questions)
+    fun navigateToNextStep(test: TempTest) {
+        val bundle = Bundle()
+        bundle.putParcelable(EXTRA_TEMP_TEST, test)
+        navController.navigate(R.id.nav_create_questions, bundle)
     }
 
-    fun navigateToNextStepResult() {
-        navController.navigate(R.id.nav_create_results)
+    fun navigateToNextStepResult(test: TempTest) {
+        val bundle = Bundle()
+        bundle.putParcelable(EXTRA_TEMP_TEST, test)
+        navController.navigate(R.id.nav_create_results, bundle)
     }
 
     fun navigateToYourTests() {
         navController.navigate(R.id.nav_your_tests)
     }
 
-    fun navigateToShowResultFragment(resultFragment: ShowResultFragment?) {
+    fun navigateToShowResultFragment(resultFragment: ShowResultFragment?, result: TempResult?) {
         if (resultFragment?.arguments?.get(EXTRA_TEST) == null) {
-            navController.navigate(R.id.nav_show_result)
+            val bundle = Bundle()
+            bundle.putParcelable(EXTRA_TEMP_RESULT, result)
+            navController.navigate(R.id.nav_show_result, bundle)
         } else {
             navController.navigate(R.id.nav_show_result, resultFragment.arguments)
         }

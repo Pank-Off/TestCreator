@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.punkoff.testforeveryone.MainActivity
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.databinding.FragmentYourTestsBinding
@@ -17,7 +17,7 @@ import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment
 
 class YourTestsFragment : Fragment() {
 
-    private lateinit var yourTestsViewModel: YourTestsViewModel
+    private val yourTestsViewModel by viewModel<YourTestsViewModel>()
     private val adapter = TestsAdapter()
 
     private var _binding: FragmentYourTestsBinding? = null
@@ -34,8 +34,6 @@ class YourTestsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        yourTestsViewModel =
-            ViewModelProvider(this).get(YourTestsViewModel::class.java)
         adapter.attachListener {
             Log.d(javaClass.simpleName, "Color: ${it.color}")
             navigateTo(it)
@@ -45,7 +43,6 @@ class YourTestsFragment : Fragment() {
             listTests.adapter = adapter
             listTests.layoutManager = LinearLayoutManager(context)
             fab.setOnClickListener {
-
                 navigateTo(null)
             }
         }

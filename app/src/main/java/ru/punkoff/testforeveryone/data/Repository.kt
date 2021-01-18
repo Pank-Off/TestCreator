@@ -1,16 +1,9 @@
 package ru.punkoff.testforeveryone.data
 
-import android.util.Log
-import ru.punkoff.testforeveryone.data.local.room.Color
-import ru.punkoff.testforeveryone.data.local.room.ResultEntity
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
-import ru.punkoff.testforeveryone.model.Question
-import ru.punkoff.testforeveryone.model.Result
 
 object Repository {
-    var test = TestEntity(0, "", "", emptyList(), emptyList(), 0)
 
-    var result = ResultEntity(0, "", "", "", 0, 0)
     val tests = listOf(
         TestEntity(
             0,
@@ -43,43 +36,4 @@ object Repository {
             emptyList(), emptyList(), 0
         )
     )
-
-    fun createTest(title: String, body: String) {
-        test = TestEntity(0, title, body, emptyList(), emptyList(), 0)
-    }
-
-    fun setQuestions(questions: List<Question>) {
-        test.questions = questions
-        for (score in questions) {
-            score.answers.forEach {
-                Log.d("setQuestions: ", it.toString())
-            }
-        }
-        Log.d(javaClass.simpleName, test.toString())
-    }
-
-    fun setResults(results: List<Result>) {
-        test.results = results
-        Log.d(javaClass.simpleName, test.toString())
-    }
-
-    fun setMaxScore(score: Int) {
-        test.maxScore = score
-    }
-
-    fun createNewTest() {
-        test = TestEntity(0, "", "", emptyList(), emptyList(), 0)
-    }
-
-    fun createResult(
-        testTitle: String,
-        title: String,
-        body: String,
-        maxScore: Int,
-        score: Int,
-        color: Color
-    ) {
-        Log.d(javaClass.simpleName, "Color: $color")
-        result = ResultEntity(0, testTitle, title, body, maxScore, score, color)
-    }
 }

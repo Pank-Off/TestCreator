@@ -74,4 +74,15 @@ dependencies {
 
     //GSON
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    // DI
+    def koin_ver = '2.2.2'
+    implementation "org.koin:koin-core:$koin_ver"
+    implementation "org.koin:koin-core-ext:$koin_ver"
+    implementation "org.koin:koin-android:$koin_ver"
+    implementation "org.koin:koin-androidx-scope:$koin_ver"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_ver"
+    implementation "org.koin:koin-androidx-fragment:$koin_ver"
+    implementation "org.koin:koin-androidx-workmanager:$koin_ver"
+    implementation "org.koin:koin-androidx-compose:$koin_ver"
 }

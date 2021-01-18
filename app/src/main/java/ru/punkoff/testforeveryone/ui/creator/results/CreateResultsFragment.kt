@@ -7,16 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.item_fragment_results.view.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import ru.punkoff.testforeveryone.MainActivity
 import ru.punkoff.testforeveryone.R
-import ru.punkoff.testforeveryone.data.Repository
+import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.databinding.FragmentCreateResultsBinding
 
 class CreateResultsFragment : Fragment() {
-    private lateinit var createResultsViewModel: CreateResultsViewModel
+    private val test: TempTest? by lazy(LazyThreadSafetyMode.NONE) {
+        arguments?.getParcelable(
+            TempTest.EXTRA_TEMP_TEST
+        )
+    }
+    private val createResultsViewModel by viewModel<CreateResultsViewModel>{
+        parametersOf(test)
+    }
 
     private var count: Int? = 0
     private var _binding: FragmentCreateResultsBinding? = null
@@ -32,8 +40,6 @@ class CreateResultsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        createResultsViewModel =
-            ViewModelProvider(this).get(CreateResultsViewModel::class.java)
 
         with(binding) {
             addResultsBtn.setOnClickListener {
@@ -51,8 +57,8 @@ class CreateResultsFragment : Fragment() {
                     val textFromEditTextTo = frag.view?.textEditTextTo?.text.toString()
                     val score =
                         if (textFromEditTextTo == "") 0 else textFromEditTextTo.toInt()
-                    val maxScore = Repository.test.maxScore
-                    if (score > maxScore) {
+                    val maxScore = test?.getMaxScore()
+                    if (score > maxScore!!) {
                         Snackbar.make(
                             it,
                             "Your score is limited maxScore (${maxScore})",
