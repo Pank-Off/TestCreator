@@ -10,6 +10,9 @@ interface TestDao {
     @Insert
     fun insert(test: TestEntity)
 
+    @Query("DELETE FROM table_tests WHERE testId = :id")
+    fun delete(id: Long)
+
     @Query("SELECT * FROM table_tests")
     fun getTests(): List<TestEntity>
 

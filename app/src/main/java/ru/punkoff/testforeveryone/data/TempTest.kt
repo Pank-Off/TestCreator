@@ -12,10 +12,10 @@ import ru.punkoff.testforeveryone.model.Result
 class TempTest : Parcelable {
 
     @IgnoredOnParcel
-    private var test = TestEntity(0, "", "", emptyList(), emptyList(), 0)
+    private var test = TestEntity(0, "", "", emptyList(), emptyList(), 0, "")
 
     fun createTest(title: String, body: String) {
-        test = TestEntity(0, title, body, emptyList(), emptyList(), 0)
+        test = TestEntity(0, title, body, emptyList(), emptyList(), 0, "")
     }
 
     fun setQuestions(questions: List<Question>) {
@@ -40,6 +40,10 @@ class TempTest : Parcelable {
     fun getTest() = test
 
     fun getMaxScore() = test.maxScore
+
+    fun setDataPlay(date: String) {
+        test.playData = date
+    }
 
     companion object {
         const val EXTRA_TEMP_TEST = "TEST"

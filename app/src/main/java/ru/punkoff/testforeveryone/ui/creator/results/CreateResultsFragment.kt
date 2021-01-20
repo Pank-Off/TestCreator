@@ -9,6 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.item_fragment_results.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import ru.punkoff.testforeveryone.MainActivity
@@ -22,7 +26,7 @@ class CreateResultsFragment : Fragment() {
             TempTest.EXTRA_TEMP_TEST
         )
     }
-    private val createResultsViewModel by viewModel<CreateResultsViewModel>{
+    private val createResultsViewModel by viewModel<CreateResultsViewModel> {
         parametersOf(test)
     }
 
@@ -71,8 +75,11 @@ class CreateResultsFragment : Fragment() {
                 }
                 if (correctMaxScore) {
                     createResultsViewModel.saveTest()
-                    Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
-                    navigateToYourTests()
+                    GlobalScope.launch(Dispatchers.Main) {
+                        delay(100)
+                        Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
+                        navigateToYourTests()
+                    }
                 }
             }
         }

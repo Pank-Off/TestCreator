@@ -26,4 +26,7 @@ class LocalDatabase : DatabaseProvider {
 
     override suspend fun getTestByTitle(titleTest: String): TestEntity =
         withContext(Dispatchers.IO) { testDao.getTestByTitle(titleTest) }
+
+    override suspend fun deleteTest(id: Long) =
+        withContext(Dispatchers.IO) { testDao.delete(id) }
 }

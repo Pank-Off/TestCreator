@@ -18,4 +18,5 @@
     <dimen name="text_question_margin">8sp</dimen>
     <dimen name="margin_top_answer">12dp</dimen>
     <dimen name="padding_end_text_questions">64dp</dimen>
+    <dimen name="margin_delete_icon">8dp</dimen>
 </resources>
