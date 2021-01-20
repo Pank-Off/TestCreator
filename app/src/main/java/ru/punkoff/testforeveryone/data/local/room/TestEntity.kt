@@ -7,6 +7,11 @@ import kotlinx.android.parcel.Parcelize
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.model.Question
 import ru.punkoff.testforeveryone.model.Result
+import kotlin.random.Random
+
+private val idRandom = Random(0)
+val idTest: Long
+    get() = idRandom.nextLong()
 
 @Entity(tableName = "table_tests")
 @Parcelize
@@ -18,7 +23,9 @@ data class TestEntity(
     var questions: List<Question>,
     var results: List<Result>,
     var maxScore: Int,
+    var playData: String,
     var color: Color = Color.values().toList().shuffled().first(),
+    val testId: Long = idTest,
 ) : Parcelable
 
 

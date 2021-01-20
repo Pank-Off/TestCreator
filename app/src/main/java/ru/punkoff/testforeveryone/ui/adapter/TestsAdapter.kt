@@ -25,6 +25,7 @@ class TestsAdapter : ListAdapter<TestEntity, TestsAdapter.TestsViewHolder>(DIFF_
 
     private lateinit var listener: Listener
 
+    private lateinit var deleteCardListener: DeleteCardListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestsViewHolder {
         return TestsViewHolder(parent)
     }
@@ -37,6 +38,10 @@ class TestsAdapter : ListAdapter<TestEntity, TestsAdapter.TestsViewHolder>(DIFF_
         this.listener = listener
     }
 
+    fun attachDeleteListener(listener: DeleteCardListener) {
+        deleteCardListener = listener
+    }
+
     inner class TestsViewHolder(
         parent: ViewGroup, private val binding: ItemTestBinding = ItemTestBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
@@ -46,6 +51,11 @@ class TestsAdapter : ListAdapter<TestEntity, TestsAdapter.TestsViewHolder>(DIFF_
         private val clickListener: View.OnClickListener = View.OnClickListener {
             listener.onClick(currentTest)
         }
+
+        private val deleteCardClickListener: View.OnClickListener = View.OnClickListener {
+            deleteCardListener.onClick(currentTest)
+
+        }
         private lateinit var currentTest: TestEntity
 
         fun bind(item: TestEntity) {
@@ -54,8 +64,10 @@ class TestsAdapter : ListAdapter<TestEntity, TestsAdapter.TestsViewHolder>(DIFF_
             with(binding) {
                 title.text = item.title
                 body.text = item.body
+                dataPlay.text = item.playData
                 cardViewBackground.setBackgroundResource(item.color.mapToColor())
                 playBtn.setOnClickListener(clickListener)
+                deleteIcon.setOnClickListener(deleteCardClickListener)
             }
         }
     }

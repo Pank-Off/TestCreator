@@ -1,6 +1,7 @@
 package ru.punkoff.testforeveryone.ui.creator
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,8 +29,17 @@ class CreatorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
+            if (textInputTitle.text?.length!! > textFieldTitle.counterMaxLength) {
+                textFieldTitle.helperText = "Max length"
+                Log.d(javaClass.simpleName, "helperText: ${textFieldTitle.helperText}")
+            }
+            if (textInputDescription.text?.length!! > textFieldDescription.counterMaxLength) {
+                textFieldDescription.helperText = "Max length"
+            }
             nextBtn.setOnClickListener {
-                if (textInputTitle.text.toString() != "" && textInputDescription.text.toString() != "") {
+                if (textInputTitle.text.toString() != "" && textInputDescription.text.toString() != ""
+                    && textInputTitle.text?.length!! <= textFieldTitle.counterMaxLength && textInputDescription.text?.length!! <= textFieldDescription.counterMaxLength
+                ) {
                     creatorViewModel.createTest(
                         textInputTitle.text.toString(),
                         textInputDescription.text.toString()
@@ -38,6 +48,8 @@ class CreatorFragment : Fragment() {
                         navigateToNextStep(it)
                     }
                 } else {
+                    Log.d(javaClass.simpleName, "Length: ${textInputTitle.text?.length}")
+                    Log.d(javaClass.simpleName, "MaxLength ${textFieldTitle.counterMaxLength}")
                     if (textInputTitle.text.toString() == "") {
                         textInputTitle.error = "Input Title"
                     }

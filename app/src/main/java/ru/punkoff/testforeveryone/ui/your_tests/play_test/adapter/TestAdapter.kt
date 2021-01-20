@@ -3,6 +3,7 @@ package ru.punkoff.testforeveryone.ui.your_tests.play_test.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -55,21 +56,27 @@ class TestAdapter : ListAdapter<Question, TestAdapter.TestViewHolder>(DIFF_UTIL)
                         radioBtnOne.visibility = RadioButton.GONE
                         radioBtnTwo.visibility = RadioButton.GONE
                         radioBtnThree.visibility = RadioButton.GONE
+                        textAnswerThree.visibility = TextView.GONE
+                        textAnswerTwo.visibility = TextView.GONE
+                        textAnswerOne.visibility = TextView.GONE
                     }
                     1 -> {
-                        textAnswerOne.text = "A. ${keys[0]}"
+                        textAnswerOne.text = keys[0]
                         radioBtnTwo.visibility = RadioButton.GONE
                         radioBtnThree.visibility = RadioButton.GONE
+                        textAnswerThree.visibility = TextView.GONE
+                        textAnswerTwo.visibility = TextView.GONE
                     }
                     2 -> {
                         radioBtnThree.visibility = RadioButton.GONE
-                        textAnswerOne.text = "A. ${keys[0]}"
-                        textAnswerTwo.text = "B. ${keys[1]}"
+                        textAnswerThree.visibility = TextView.GONE
+                        textAnswerOne.text = keys[0]
+                        textAnswerTwo.text = keys[1]
                     }
                     3 -> {
-                        textAnswerOne.text = "A. ${keys[0]}"
-                        textAnswerTwo.text = "B. ${keys[1]}"
-                        textAnswerThree.text = "C. ${keys[2]}"
+                        textAnswerOne.text = keys[0]
+                        textAnswerTwo.text = keys[1]
+                        textAnswerThree.text = keys[2]
                     }
                 }
 
