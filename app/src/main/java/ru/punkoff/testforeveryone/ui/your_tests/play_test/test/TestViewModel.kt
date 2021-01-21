@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ru.punkoff.testforeveryone.data.DataHelper
 import ru.punkoff.testforeveryone.data.TempResult
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 
@@ -48,6 +49,7 @@ class TestViewModel(val test: TestEntity?) : ViewModel() {
                     it.description,
                     test.maxScore,
                     score,
+                    "Last play: ${DataHelper.parseDate()}",
                     test.color
                 )
             }
@@ -61,11 +63,11 @@ class TestViewModel(val test: TestEntity?) : ViewModel() {
             "",
             0,
             0,
+            "",
             test.color
         )
     }
 
     fun getResultLiveData() = resultLiveData
     fun getScore(): LiveData<HashMap<String, Int>> = mScore
-
 }

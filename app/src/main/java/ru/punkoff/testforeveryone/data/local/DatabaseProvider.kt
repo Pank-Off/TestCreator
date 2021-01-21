@@ -15,4 +15,6 @@ interface DatabaseProvider {
     suspend fun getTestByTitle(titleTest: String): TestEntity
 
     suspend fun deleteTest(id: Long)
+
+    suspend fun deleteResult(id: Long)
 }

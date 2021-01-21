@@ -1,16 +1,14 @@
 package ru.punkoff.testforeveryone.ui.creator.results
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.android.synthetic.main.item_fragment_results.view.*
 import kotlinx.coroutines.launch
+import ru.punkoff.testforeveryone.data.DataHelper
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.data.local.DatabaseProvider
 import ru.punkoff.testforeveryone.model.Result
-import java.text.SimpleDateFormat
-import java.util.*
 
 class CreateResultsViewModel(
     private val databaseHelper: DatabaseProvider, test: TempTest
@@ -25,21 +23,11 @@ class CreateResultsViewModel(
     }
 
     fun saveTest() {
-        val date = parseDate()
-        testLiveData.value?.setDataPlay(date)
+        val date = "Create test: ${DataHelper.parseDate()}"
+        testLiveData.value?.setDataCreate(date)
         viewModelScope.launch {
             testLiveData.value?.getTest()?.let { databaseHelper.saveTest(it) }
         }
-    }
-
-    private fun parseDate(): String {
-        val saveTime = Calendar.getInstance().time
-        Log.d(javaClass.simpleName, "saveTime $saveTime")
-        val simpleDateFormat = SimpleDateFormat("MMMM d yyyy", Locale.ENGLISH)
-        simpleDateFormat.timeZone = TimeZone.getTimeZone("Europe/Moscow")
-        val dateString = "Create test: ${simpleDateFormat.format(saveTime)}"
-        Log.d(javaClass.simpleName, "dateString $dateString")
-        return dateString
     }
 
     fun setResults(frag: ResultsFragment) {

@@ -41,8 +41,8 @@ class TempTest : Parcelable {
 
     fun getMaxScore() = test.maxScore
 
-    fun setDataPlay(date: String) {
-        test.playData = date
+    fun setDataCreate(date: String) {
+        test.createData = date
     }
 
     companion object {

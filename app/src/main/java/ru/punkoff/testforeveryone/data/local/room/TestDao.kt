@@ -11,13 +11,16 @@ interface TestDao {
     fun insert(test: TestEntity)
 
     @Query("DELETE FROM table_tests WHERE testId = :id")
-    fun delete(id: Long)
+    fun deleteTest(id: Long)
 
     @Query("SELECT * FROM table_tests")
     fun getTests(): List<TestEntity>
 
     @Insert
     fun insert(result: ResultEntity)
+
+    @Query("DELETE FROM table_results WHERE resultId = :id")
+    fun deleteResult(id: Long)
 
     @Query("SELECT * FROM table_results")
     fun getResults(): List<ResultEntity>

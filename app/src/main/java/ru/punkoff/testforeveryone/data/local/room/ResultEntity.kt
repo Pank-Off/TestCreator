@@ -4,6 +4,11 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
+import kotlin.random.Random
+
+private val idRandom = Random(0)
+val idResult: Long
+    get() = idRandom.nextLong()
 
 @Entity(tableName = "table_results")
 @Parcelize
@@ -15,6 +20,8 @@ data class ResultEntity(
     val body: String,
     val maxScore: Int,
     var score: Int,
+    var lastPlayData: String,
     var color: Color = Color.values().toList().shuffled().first(),
+    val resultId: Long = idResult,
 ) : Parcelable
 

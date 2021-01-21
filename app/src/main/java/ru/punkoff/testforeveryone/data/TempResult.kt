@@ -11,17 +11,18 @@ import ru.punkoff.testforeveryone.data.local.room.ResultEntity
 class TempResult : Parcelable {
 
     @IgnoredOnParcel
-    private var result = ResultEntity(0, "", "", "", 0, 0)
+    private var result = ResultEntity(0, "", "", "", 0, 0, "")
     fun createResult(
         testTitle: String,
         title: String,
         body: String,
         maxScore: Int,
         score: Int,
+        lastPlay: String,
         color: Color
     ) {
         Log.d(javaClass.simpleName, "Color: $color")
-        result = ResultEntity(0, testTitle, title, body, maxScore, score, color)
+        result = ResultEntity(0, testTitle, title, body, maxScore, score, lastPlay, color)
     }
 
     fun getColor() = result.color
@@ -31,6 +32,7 @@ class TempResult : Parcelable {
     fun getMaxScore() = result.maxScore
 
     fun getTitle() = result.title
+
     fun getBody() = result.body
 
     fun getResult() = result
