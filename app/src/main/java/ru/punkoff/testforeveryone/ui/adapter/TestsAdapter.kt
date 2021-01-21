@@ -64,7 +64,7 @@ class TestsAdapter : ListAdapter<TestEntity, TestsAdapter.TestsViewHolder>(DIFF_
             with(binding) {
                 title.text = item.title
                 body.text = item.body
-                dataPlay.text = item.playData
+                dataPlay.text = item.createData
                 cardViewBackground.setBackgroundResource(item.color.mapToColor())
                 playBtn.setOnClickListener(clickListener)
                 deleteIcon.setOnClickListener(deleteCardClickListener)

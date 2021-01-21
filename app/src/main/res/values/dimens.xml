@@ -19,4 +19,6 @@
     <dimen name="margin_top_answer">12dp</dimen>
     <dimen name="padding_end_text_questions">64dp</dimen>
     <dimen name="margin_delete_icon">8dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="delete_icon_elevation">8dp</dimen>
 </resources>

@@ -1,5 +1,6 @@
 package ru.punkoff.testforeveryone.ui.your_results
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,24 +14,38 @@ class YourResultsViewModel(private val databaseHelper: DatabaseProvider) : ViewM
 
     init {
         viewModelScope.launch {
-            val resultsFromDatabase = databaseHelper.observeResults()
-            val results = ArrayList<ResultEntity>()
-            for (result in resultsFromDatabase) {
-                results.add(
-                    ResultEntity(
-                        0,
-                        result.testTitle,
-                        result.title,
-                        result.body,
-                        result.maxScore,
-                        result.score,
-                        result.color
-                    )
-                )
-            }
-            results.reverse()
-            mainLiveData.value = ResultsViewState.Value(results)
+            getDataFromDb()
         }
+    }
+
+    fun deleteResult(id: Long) {
+        viewModelScope.launch {
+            databaseHelper.deleteResult(id)
+            Log.d(javaClass.simpleName, "Delete Result: $id")
+            getDataFromDb()
+        }
+    }
+
+    private suspend fun getDataFromDb() {
+        val resultsFromDatabase = databaseHelper.observeResults()
+        val results = ArrayList<ResultEntity>()
+        for (result in resultsFromDatabase) {
+            results.add(
+                ResultEntity(
+                    0,
+                    result.testTitle,
+                    result.title,
+                    result.body,
+                    result.maxScore,
+                    result.score,
+                    result.lastPlayData,
+                    result.color,
+                    result.resultId
+                )
+            )
+        }
+        results.reverse()
+        mainLiveData.value = ResultsViewState.Value(results)
     }
 
     fun observeViewState(): LiveData<ResultsViewState> = mainLiveData

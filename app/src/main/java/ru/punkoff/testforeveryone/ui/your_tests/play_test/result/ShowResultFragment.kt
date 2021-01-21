@@ -10,6 +10,10 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import ru.punkoff.testforeveryone.MainActivity
@@ -21,6 +25,7 @@ import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.data.local.room.mapToColor
 import ru.punkoff.testforeveryone.databinding.FragmentShowResultBinding
 import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment
+import kotlin.math.floor
 
 class ShowResultFragment : Fragment() {
 
@@ -61,8 +66,15 @@ class ShowResultFragment : Fragment() {
                 result?.color?.mapToColor()?.let { view.setBackgroundResource(it) }
                 val scorePercent: Double =
                     result!!.score.toDouble() / result!!.maxScore.toDouble() * 100
-                scoreView.text =
-                    "You scored ${result?.score} out of ${result?.maxScore} points ($scorePercent)"
+                val scoreViewText = String.format(
+                    resources.getString(R.string.you_scored) + result?.score + resources.getString(
+                        R.string.out_of
+                    ) + result?.maxScore + resources.getString(R.string.points) + "(${
+                        floor(scorePercent * 100) / 100
+                    })"
+                )
+                scoreView.text = scoreViewText
+
                 titleView.text = result?.title
                 bodyView.text = result?.body
                 saveResultBtn.isVisible = false
@@ -77,8 +89,17 @@ class ShowResultFragment : Fragment() {
                 tempResult?.getColor()?.mapToColor()?.let { view.setBackgroundResource(it) }
                 val scorePercent: Double =
                     tempResult!!.getScore().toDouble() / tempResult!!.getMaxScore().toDouble() * 100
-                scoreView.text =
-                    "You scored ${tempResult?.getScore()} out of ${tempResult?.getMaxScore()} points ($scorePercent)"
+
+                val scoreViewText: String = String.format(
+                    resources.getString(R.string.you_scored) + tempResult?.getScore() + resources.getString(
+                        R.string.out_of
+                    ) + tempResult?.getMaxScore() + resources.getString(R.string.points) + "(${
+                        floor(
+                            scorePercent * 100
+                        ) / 100
+                    })"
+                )
+                scoreView.text = scoreViewText
                 titleView.text = tempResult?.getTitle()
                 bodyView.text = tempResult?.getBody()
                 restartBtn.setOnClickListener {
@@ -88,8 +109,11 @@ class ShowResultFragment : Fragment() {
 
             saveResultBtn.setOnClickListener {
                 showResultViewModel.saveResult()
-                Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
-                navigateToYourResults()
+                GlobalScope.launch(Dispatchers.Main) {
+                    delay(100)
+                    Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
+                    navigateToYourResults()
+                }
             }
 
             shareBtn.setOnClickListener {

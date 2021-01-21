@@ -26,7 +26,7 @@ val DIFF_UTIL: DiffUtil.ItemCallback<ResultEntity> =
 class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolder>(DIFF_UTIL) {
 
     private lateinit var listener: Listener
-
+    private lateinit var deleteCardResultListener: DeleteResultCardListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultsViewHolder {
         return ResultsViewHolder(parent)
     }
@@ -39,6 +39,10 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
         this.listener = listener
     }
 
+    fun attachDeleteListener(listener: DeleteResultCardListener) {
+        deleteCardResultListener = listener
+    }
+
     inner class ResultsViewHolder(
         parent: ViewGroup, private val binding: ItemResultBinding = ItemResultBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
@@ -48,6 +52,10 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
         private val clickListener: View.OnClickListener = View.OnClickListener {
             listener.onClick(currentResult)
         }
+        private val deleteCardResultClickListener: View.OnClickListener = View.OnClickListener {
+            deleteCardResultListener.onClick(currentResult)
+
+        }
         private lateinit var currentResult: ResultEntity
 
         fun bind(item: ResultEntity) {
@@ -56,8 +64,10 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
             with(binding) {
                 title.text = item.testTitle
                 body.text = item.title
+                dataPlay.text = item.lastPlayData
                 cardViewBackground.setBackgroundResource(item.color.mapToColor())
                 showBtn.setOnClickListener(clickListener)
+                deleteIcon.setOnClickListener(deleteCardResultClickListener)
             }
         }
     }

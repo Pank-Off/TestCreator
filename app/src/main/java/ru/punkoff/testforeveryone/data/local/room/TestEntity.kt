@@ -23,7 +23,7 @@ data class TestEntity(
     var questions: List<Question>,
     var results: List<Result>,
     var maxScore: Int,
-    var playData: String,
+    var createData: String,
     var color: Color = Color.values().toList().shuffled().first(),
     val testId: Long = idTest,
 ) : Parcelable

@@ -8,7 +8,17 @@
     android:layout_marginTop="@dimen/card_view_margin"
     android:layout_marginEnd="@dimen/card_view_margin"
     android:layout_marginBottom="@dimen/card_view_margin"
-    app:cardCornerRadius="@dimen/card_view_radius">
+    app:cardCornerRadius="@dimen/card_view_radius"
+    app:cardElevation="@dimen/card_elevation">
+
+    <ImageView
+        android:id="@+id/deleteIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="@dimen/margin_delete_icon"
+        android:elevation="@dimen/delete_icon_elevation"
+        android:src="@android:drawable/ic_menu_delete" />
 
     <ImageView
         android:id="@+id/cardView_background"
@@ -38,11 +48,32 @@
             android:layout_margin="@dimen/body_margin"
             tools:text="@string/perceptive_body" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/show_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/play_btn_margin"
-            android:text="@string/show_results" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/data_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|bottom"
+                android:layout_margin="@dimen/margin_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/create_test" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/show_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/play_btn_margin"
+                android:text="@string/show_results"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
