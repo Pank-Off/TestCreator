@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.item_fragment_results.*
 import kotlinx.android.synthetic.main.item_fragment_results.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -19,6 +20,7 @@ import ru.punkoff.testforeveryone.MainActivity
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.databinding.FragmentCreateResultsBinding
+import java.lang.NullPointerException
 
 class CreateResultsFragment : Fragment() {
     private val test: TempTest? by lazy(LazyThreadSafetyMode.NONE) {
@@ -55,6 +57,7 @@ class CreateResultsFragment : Fragment() {
             }
             saveBtn.setOnClickListener {
                 var correctMaxScore = true
+                val correctInput = checkTextFieldCorrectInput()
                 for (i in 1..count!!) {
                     val frag =
                         childFragmentManager.findFragmentByTag("FragResult $i") as ResultsFragment
@@ -73,16 +76,36 @@ class CreateResultsFragment : Fragment() {
                         createResultsViewModel.setResults(frag)
                     }
                 }
-                if (correctMaxScore) {
+                if (correctMaxScore && correctInput) {
                     createResultsViewModel.saveTest()
                     GlobalScope.launch(Dispatchers.Main) {
                         delay(100)
                         Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
                         navigateToYourTests()
                     }
+                } else if (!correctInput) {
+                    if (textInputTitle.text.toString() == "") {
+                        textInputTitle.error = "Input Title"
+                    }
+                    if (textInputDescription.text.toString() == "") {
+                        textInputDescription.error = "Input Description"
+                    }
                 }
             }
         }
+    }
+
+    private fun checkTextFieldCorrectInput(): Boolean {
+        try {
+            if (textInputTitle.text.toString() != "" && textInputDescription.text.toString() != ""
+                && textInputTitle.text?.length!! <= textFieldTitle.counterMaxLength && textInputDescription.text?.length!! <= textFieldDescription.counterMaxLength
+            ) {
+                return true
+            }
+        } catch (exc: NullPointerException) {
+            return true
+        }
+        return false
     }
 
     private fun navigateToYourTests() {

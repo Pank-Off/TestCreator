@@ -10,14 +10,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/textFieldMargin"
         android:text="@string/result_for_the_sum_of_points"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldFrom"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/textFieldMargin"
         android:hint="@string/from"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,8 +36,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldTo"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/textFieldMargin"
         android:hint="@string/to"
         app:layout_constraintStart_toEndOf="@id/textFieldFrom"
@@ -52,33 +55,45 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldTitle"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/textFieldMargin"
         android:hint="@string/title"
+        app:counterEnabled="true"
+        app:counterMaxLength="30"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textFieldFrom">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:maxLength="31" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldDescription"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/textFieldMargin"
         android:hint="@string/description"
+        app:counterEnabled="true"
+        app:counterMaxLength="120"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textFieldTitle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:maxLength="121" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
