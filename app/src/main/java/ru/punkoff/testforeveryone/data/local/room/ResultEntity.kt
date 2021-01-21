@@ -4,9 +4,10 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
+import java.util.*
 import kotlin.random.Random
 
-private val idRandom = Random(0)
+private val idRandom = Random(Calendar.getInstance().timeInMillis)
 val idResult: Long
     get() = idRandom.nextLong()
 

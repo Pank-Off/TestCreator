@@ -7,9 +7,10 @@ import kotlinx.android.parcel.Parcelize
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.model.Question
 import ru.punkoff.testforeveryone.model.Result
+import java.util.*
 import kotlin.random.Random
 
-private val idRandom = Random(0)
+private val idRandom = Random(Calendar.getInstance().timeInMillis)
 val idTest: Long
     get() = idRandom.nextLong()
 
