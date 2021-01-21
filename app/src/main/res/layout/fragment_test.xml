@@ -17,6 +17,7 @@
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="24sp"
+            android:textStyle="italic"
             tools:text="Title" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -30,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin_button"
-            android:text="@string/show_results" />
+            android:text="@string/show_results"
+            android:textAllCaps="false" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>

@@ -7,6 +7,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldQuestion"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/textFieldMargin"
@@ -32,6 +33,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldAnswerOne"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/textFieldMargin"
@@ -41,15 +43,17 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textEditTextAnswerOne"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:maxLines="2" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldRateOne"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="@dimen/textFieldMargin"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
@@ -76,6 +80,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldAnswerTwo"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/textFieldMargin"
@@ -87,14 +92,17 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textEditTextAnswerTwo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:maxLines="2" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldRateTwo"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="@dimen/textFieldMargin"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
@@ -122,9 +130,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldAnswerThree"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/textFieldMargin"
+
             android:layout_weight="4"
             android:hint="@string/answer_choice"
             app:layout_constraintStart_toStartOf="parent"
@@ -133,14 +143,17 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textEditTextAnswerThree"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:maxLines="2" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldRateThree"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="@dimen/textFieldMargin"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
