@@ -30,7 +30,7 @@ class TestViewModel(val test: TestEntity?) : ViewModel() {
     fun createResult(test: TestEntity, score: Int) {
         Log.d(javaClass.simpleName, "test.results: ${test.results}")
         if (test.results.isEmpty()) {
-            createEmptyResult(test)
+            createEmptyResult(test, score)
         }
         test.results.forEach {
             var minScore = 0
@@ -56,13 +56,13 @@ class TestViewModel(val test: TestEntity?) : ViewModel() {
         }
     }
 
-    private fun createEmptyResult(test: TestEntity) {
+    private fun createEmptyResult(test: TestEntity, score: Int) {
         resultLiveData.value?.createResult(
             testTitle = test.title,
             "",
             "",
-            0,
-            0,
+            test.maxScore,
+            score,
             "",
             test.color
         )
