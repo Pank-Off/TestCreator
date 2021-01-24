@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.punkoff.testforeveryone.MainActivity
+import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.databinding.FragmentCreatorBinding
 
@@ -36,6 +38,7 @@ class CreatorFragment : Fragment() {
             if (textInputDescription.text?.length!! > textFieldDescription.counterMaxLength) {
                 textFieldDescription.helperText = "Max length"
             }
+            nextBtn.startAnimation(AnimationUtils.loadAnimation(context, R.anim.enlarge_main_fab))
             nextBtn.setOnClickListener {
                 if (textInputTitle.text.toString() != "" && textInputDescription.text.toString() != ""
                     && textInputTitle.text?.length!! <= textFieldTitle.counterMaxLength && textInputDescription.text?.length!! <= textFieldDescription.counterMaxLength
@@ -46,6 +49,12 @@ class CreatorFragment : Fragment() {
                     )
                     creatorViewModel.getTest().observe(viewLifecycleOwner) {
                         navigateToNextStep(it)
+                        nextBtn.startAnimation(
+                            AnimationUtils.loadAnimation(
+                                context,
+                                R.anim.shrink_main_fab
+                            )
+                        )
                     }
                 } else {
                     Log.d(javaClass.simpleName, "Length: ${textInputTitle.text?.length}")
