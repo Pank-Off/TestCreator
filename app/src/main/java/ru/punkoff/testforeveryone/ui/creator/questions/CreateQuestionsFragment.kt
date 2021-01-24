@@ -48,12 +48,14 @@ class CreateQuestionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val fragment = QuestionsFragment()
         count = childFragmentManager.fragments.size + 1
         childFragmentManager.beginTransaction()
             .add(R.id.fragmentContainer, fragment, "FragQuestion $count").commit()
         with(binding) {
-            nextBtn.setOnClickListener {
+            mainFab.startAnimation(loadAnimation(context, R.anim.enlarge_main_fab))
+            mainFab.setOnClickListener {
                 fabIsNotExpanded = if (fabIsNotExpanded) {
                     showFabs()
                     setOnDeleteFabClickListener()
@@ -70,11 +72,13 @@ class CreateQuestionsFragment : Fragment() {
 
     private fun setOnDeleteFabClickListener() {
         delete_fab.setOnClickListener {
-            childFragmentManager.beginTransaction()
-                .detach(fragmentContainer[count?.minus(1)!!].findFragment()).commit()
-            count = childFragmentManager.fragments.size - 1
-            hideFabs()
-            fabIsNotExpanded = true
+            if (count!! > 0) {
+                childFragmentManager.beginTransaction()
+                    .detach(fragmentContainer[count?.minus(1)!!].findFragment()).commit()
+                count = childFragmentManager.fragments.size - 1
+                hideFabs()
+                fabIsNotExpanded = true
+            }
         }
     }
 
@@ -127,47 +131,47 @@ class CreateQuestionsFragment : Fragment() {
     }
 
     private fun hideFabs() {
-        val layoutParams1 = delete_fab.layoutParams as FrameLayout.LayoutParams
-        layoutParams1.rightMargin -= (delete_fab.width * 3.5).toInt()
-        layoutParams1.bottomMargin -= (delete_fab.height * 0.0).toInt()
-        delete_fab.layoutParams = layoutParams1
+        val layoutParamsDeleteFab = delete_fab.layoutParams as FrameLayout.LayoutParams
+        layoutParamsDeleteFab.rightMargin -= (delete_fab.width * 3.5).toInt()
+        layoutParamsDeleteFab.bottomMargin -= (delete_fab.height * 0.0).toInt()
+        delete_fab.layoutParams = layoutParamsDeleteFab
         delete_fab.startAnimation(loadAnimation(context, R.anim.delete_fab_hide))
         delete_fab.isClickable = false
 
-        val layoutParams2 = add_fab.layoutParams as FrameLayout.LayoutParams
-        layoutParams2.rightMargin -= (add_fab.width * 2.5).toInt()
-        layoutParams2.bottomMargin -= (add_fab.height * 0.0).toInt()
-        add_fab.layoutParams = layoutParams2
+        val layoutParamsAddFab = add_fab.layoutParams as FrameLayout.LayoutParams
+        layoutParamsAddFab.rightMargin -= (add_fab.width * 2.5).toInt()
+        layoutParamsAddFab.bottomMargin -= (add_fab.height * 0.0).toInt()
+        add_fab.layoutParams = layoutParamsAddFab
         add_fab.startAnimation(loadAnimation(context, R.anim.add_fab_hide))
         add_fab.isClickable = false
 
-        val layoutParams3 = next_step_fab.layoutParams as FrameLayout.LayoutParams
-        layoutParams3.rightMargin -= (next_step_fab.width * 1.5).toInt()
-        layoutParams3.bottomMargin -= (next_step_fab.height * 0.0).toInt()
-        next_step_fab.layoutParams = layoutParams3
+        val layoutParamsNextStepFab = next_step_fab.layoutParams as FrameLayout.LayoutParams
+        layoutParamsNextStepFab.rightMargin -= (next_step_fab.width * 1.5).toInt()
+        layoutParamsNextStepFab.bottomMargin -= (next_step_fab.height * 0.0).toInt()
+        next_step_fab.layoutParams = layoutParamsNextStepFab
         next_step_fab.startAnimation(loadAnimation(context, R.anim.next_step_fab_hide))
         next_step_fab.isClickable = false
     }
 
     private fun showFabs() {
-        val layoutParams1 = delete_fab.layoutParams as FrameLayout.LayoutParams
-        layoutParams1.rightMargin += (delete_fab.width * 3.5).toInt()
-        layoutParams1.bottomMargin += (delete_fab.height * 0.0).toInt()
-        delete_fab.layoutParams = layoutParams1
+        val layoutParamsDeleteFab = delete_fab.layoutParams as FrameLayout.LayoutParams
+        layoutParamsDeleteFab.rightMargin += (delete_fab.width * 3.5).toInt()
+        layoutParamsDeleteFab.bottomMargin += (delete_fab.height * 0.0).toInt()
+        delete_fab.layoutParams = layoutParamsDeleteFab
         delete_fab.startAnimation(loadAnimation(context, R.anim.delete_fab_show))
         delete_fab.isClickable = true
 
-        val layoutParams2 = add_fab.layoutParams as FrameLayout.LayoutParams
-        layoutParams2.rightMargin += (add_fab.width * 2.5).toInt()
-        layoutParams2.bottomMargin += (add_fab.height * 0.0).toInt()
-        add_fab.layoutParams = layoutParams2
+        val layoutParamsAddFab = add_fab.layoutParams as FrameLayout.LayoutParams
+        layoutParamsAddFab.rightMargin += (add_fab.width * 2.5).toInt()
+        layoutParamsAddFab.bottomMargin += (add_fab.height * 0.0).toInt()
+        add_fab.layoutParams = layoutParamsAddFab
         add_fab.startAnimation(loadAnimation(context, R.anim.add_fab_show))
         add_fab.isClickable = true
 
-        val layoutParams3 = next_step_fab.layoutParams as FrameLayout.LayoutParams
-        layoutParams3.rightMargin += (next_step_fab.width * 1.5).toInt()
-        layoutParams3.bottomMargin += (next_step_fab.height * 0.0).toInt()
-        next_step_fab.layoutParams = layoutParams3
+        val layoutParamsNextStepFab = next_step_fab.layoutParams as FrameLayout.LayoutParams
+        layoutParamsNextStepFab.rightMargin += (next_step_fab.width * 1.5).toInt()
+        layoutParamsNextStepFab.bottomMargin += (next_step_fab.height * 0.0).toInt()
+        next_step_fab.layoutParams = layoutParamsNextStepFab
         next_step_fab.startAnimation(loadAnimation(context, R.anim.next_step_fab_show))
         next_step_fab.isClickable = true
     }
@@ -175,4 +179,5 @@ class CreateQuestionsFragment : Fragment() {
     private fun navigateToNextStepResult(test: TempTest) {
         (requireActivity() as MainActivity).navigateToNextStepResult(test)
     }
+
 }

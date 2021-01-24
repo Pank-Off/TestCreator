@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -58,8 +59,10 @@ class YourTestsFragment : Fragment() {
         with(binding) {
             listTests.adapter = adapter
             listTests.layoutManager = LinearLayoutManager(context)
+            fab.startAnimation(AnimationUtils.loadAnimation(context, R.anim.enlarge_main_fab))
             fab.setOnClickListener {
                 navigateTo(null)
+                fab.startAnimation(AnimationUtils.loadAnimation(context, R.anim.shrink_main_fab))
             }
         }
 
@@ -78,4 +81,5 @@ class YourTestsFragment : Fragment() {
     private fun navigateTo(test: TestEntity?) {
         (requireActivity() as MainActivity).navigateTo(TestFragment.create(test))
     }
+
 }
