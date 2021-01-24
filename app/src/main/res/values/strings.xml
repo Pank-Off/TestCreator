@@ -56,4 +56,12 @@
     <string name="out_of">" out of "</string>
     <string name="points">" points "</string>
     <string name="input_question_text_snackbar">Some fields were not filled in (at least two answers to one question)</string>
+    <string name="empty_question">Empty question</string>
+    <string name="ok">OK</string>
+    <string name="input_question">Input Question</string>
+    <string name="max_length">Max length</string>
+    <string name="input_title">Input Title</string>
+    <string name="input_description">Input Description</string>
+    <string name="your_score_is_limited_maxScore">Your score is limited maxScore</string>
+    <string name="save">Save</string>
 </resources>

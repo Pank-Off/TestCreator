@@ -51,7 +51,9 @@ class CreateResultsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        if (count == 0) {
+            addResultFragment()
+        }
         with(binding) {
             next_step_fab.setImageResource(android.R.drawable.ic_menu_save)
 
@@ -72,6 +74,20 @@ class CreateResultsFragment : Fragment() {
         }
     }
 
+    private fun addResultFragment() {
+        val fragment = ResultsFragment()
+        count = childFragmentManager.fragments.size + 1
+        Log.d(javaClass.simpleName, "count $count")
+        childFragmentManager.beginTransaction()
+            .add(R.id.fragmentContainer, fragment, "FragResult $count").commit()
+    }
+
+    private fun deleteResultFragment() {
+        childFragmentManager.beginTransaction()
+            .detach(fragmentContainer[count?.minus(1)!!].findFragment()).commit()
+        count = childFragmentManager.fragments.size - 1
+    }
+
     private fun setOnSaveFabClickListener() {
         next_step_fab.setOnClickListener {
             var correctMaxScore = true
@@ -87,7 +103,7 @@ class CreateResultsFragment : Fragment() {
                 if (score > maxScore!!) {
                     Snackbar.make(
                         it,
-                        "Your score is limited maxScore (${maxScore})",
+                        "${getString(R.string.your_score_is_limited_maxScore)} (${maxScore})",
                         Snackbar.LENGTH_SHORT
                     ).show()
                     correctMaxScore = false
@@ -99,15 +115,15 @@ class CreateResultsFragment : Fragment() {
                 createResultsViewModel.saveTest()
                 GlobalScope.launch(Dispatchers.Main) {
                     delay(100)
-                    Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.save), Toast.LENGTH_SHORT).show()
                     navigateToYourTests()
                 }
             } else if (!correctInput) {
                 if (textInputTitle.text.toString() == "") {
-                    textInputTitle.error = "Input Title"
+                    textInputTitle.error = getString(R.string.input_title)
                 }
                 if (textInputDescription.text.toString() == "") {
-                    textInputDescription.error = "Input Description"
+                    textInputDescription.error = getString(R.string.input_description)
                 }
             }
         }
@@ -128,10 +144,8 @@ class CreateResultsFragment : Fragment() {
 
     private fun setOnDeleteFabClickListener() {
         delete_fab.setOnClickListener {
-            if (count!! > 0) {
-                childFragmentManager.beginTransaction()
-                    .detach(fragmentContainer[count?.minus(1)!!].findFragment()).commit()
-                count = childFragmentManager.fragments.size - 1
+            if (count!! > 1) {
+                deleteResultFragment()
                 hideFabs()
                 fabIsNotExpanded = true
             }
@@ -140,11 +154,7 @@ class CreateResultsFragment : Fragment() {
 
     private fun setOnAddFabClickListener() {
         add_fab.setOnClickListener {
-            val fragment = ResultsFragment()
-            count = childFragmentManager.fragments.size + 1
-            Log.d(javaClass.simpleName, "count $count")
-            childFragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, fragment, "FragResult $count").commit()
+            addResultFragment()
             hideFabs()
             fabIsNotExpanded = true
         }
