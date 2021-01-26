@@ -49,10 +49,13 @@ class CreateQuestionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val fragment = QuestionsFragment()
-        count = childFragmentManager.fragments.size + 1
-        childFragmentManager.beginTransaction()
-            .add(R.id.fragmentContainer, fragment, "FragQuestion $count").commit()
+        createQuestionsViewModel.clearQuestionsList()
+        if (count == 0) {
+            val fragment = QuestionsFragment()
+            count = childFragmentManager.fragments.size + 1
+            childFragmentManager.beginTransaction()
+                .add(R.id.fragmentContainer, fragment, "FragQuestion $count").commit()
+        }
         with(binding) {
             mainFab.startAnimation(loadAnimation(context, R.anim.enlarge_main_fab))
             mainFab.setOnClickListener {
@@ -72,7 +75,7 @@ class CreateQuestionsFragment : Fragment() {
 
     private fun setOnDeleteFabClickListener() {
         delete_fab.setOnClickListener {
-            if (count!! > 0) {
+            if (count!! > 1) {
                 childFragmentManager.beginTransaction()
                     .detach(fragmentContainer[count?.minus(1)!!].findFragment()).commit()
                 count = childFragmentManager.fragments.size - 1
@@ -108,15 +111,28 @@ class CreateQuestionsFragment : Fragment() {
 
                 if (!emptyQuestionField && !emptyTwoAnswersField) {
                     createQuestionsViewModel.setQuestions(frag)
-                } else {
-                    Snackbar.make(
+                } else if (emptyQuestionField) {
+                    frag.view?.textEditTextQuestion?.error = getString(R.string.input_question)
+
+                    val snackBar = Snackbar.make(
+                        it,
+                        resources.getString(R.string.empty_question),
+                        Snackbar.LENGTH_SHORT
+                    ).setAction(getString(R.string.ok)) { }
+                    snackBar.anchorView = main_fab
+                    snackBar.show()
+                    emptyField = true
+                    createQuestionsViewModel.clearQuestionsList()
+                } else if (emptyTwoAnswersField) {
+                    val snackBar = Snackbar.make(
                         it,
                         resources.getString(R.string.input_question_text_snackbar),
                         Snackbar.LENGTH_LONG
-                    ).show()
-                    createQuestionsViewModel.clearQuestionsList()
+                    )
+                    snackBar.anchorView = main_fab
+                    snackBar.show()
                     emptyField = true
-                    break
+                    createQuestionsViewModel.clearQuestionsList()
                 }
             }
             if (!emptyField) {

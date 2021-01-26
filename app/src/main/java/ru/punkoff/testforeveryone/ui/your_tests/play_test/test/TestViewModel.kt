@@ -68,6 +68,10 @@ class TestViewModel(val test: TestEntity?) : ViewModel() {
         )
     }
 
+    fun clearScore() {
+        mScore.value?.clear()
+    }
+
     fun getResultLiveData() = resultLiveData
     fun getScore(): LiveData<HashMap<String, Int>> = mScore
 }

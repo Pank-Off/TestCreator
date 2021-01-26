@@ -32,11 +32,11 @@ class CreatorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             if (textInputTitle.text?.length!! > textFieldTitle.counterMaxLength) {
-                textFieldTitle.helperText = "Max length"
+                textFieldTitle.helperText = getString(R.string.max_length)
                 Log.d(javaClass.simpleName, "helperText: ${textFieldTitle.helperText}")
             }
             if (textInputDescription.text?.length!! > textFieldDescription.counterMaxLength) {
-                textFieldDescription.helperText = "Max length"
+                textFieldDescription.helperText = getString(R.string.max_length)
             }
             nextBtn.startAnimation(AnimationUtils.loadAnimation(context, R.anim.enlarge_main_fab))
             nextBtn.setOnClickListener {
@@ -60,10 +60,10 @@ class CreatorFragment : Fragment() {
                     Log.d(javaClass.simpleName, "Length: ${textInputTitle.text?.length}")
                     Log.d(javaClass.simpleName, "MaxLength ${textFieldTitle.counterMaxLength}")
                     if (textInputTitle.text.toString() == "") {
-                        textInputTitle.error = "Input Title"
+                        textInputTitle.error = getString(R.string.input_title)
                     }
                     if (textInputDescription.text.toString() == "") {
-                        textInputDescription.error = "Input Description"
+                        textInputDescription.error = getString(R.string.input_description)
                     }
                 }
             }
