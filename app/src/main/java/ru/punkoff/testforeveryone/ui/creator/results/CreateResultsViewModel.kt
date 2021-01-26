@@ -30,6 +30,11 @@ class CreateResultsViewModel(
         }
     }
 
+    fun clearResultsList() {
+        resultsList.clear()
+        resultsLiveData.value = resultsList
+    }
+
     fun setResults(frag: ResultsFragment) {
         resultsList.add(
             Result(

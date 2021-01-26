@@ -64,4 +64,7 @@
     <string name="input_description">Input Description</string>
     <string name="your_score_is_limited_maxScore">Your score is limited maxScore</string>
     <string name="save">Save</string>
+    <string name="empty_title">Empty Title</string>
+    <string name="empty_description">Empty Description</string>
+    <string name="min_score_more_then_max">May be min score should be more then min score?</string>
 </resources>

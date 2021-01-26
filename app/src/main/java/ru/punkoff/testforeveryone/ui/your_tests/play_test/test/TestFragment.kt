@@ -41,9 +41,8 @@ class TestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         test?.color?.mapToColor()?.let { view.setBackgroundResource(it) }
-
+        testViewModel.clearScore()
         Log.d(javaClass.simpleName, "Test + $test")
         adapter.attachListener { answer, score ->
             Log.d(javaClass.simpleName, "answer: $answer score $score")
@@ -56,6 +55,7 @@ class TestFragment : Fragment() {
             showResultBtn.setOnClickListener {
                 var score = 0
                 testViewModel.getScore().value?.forEach {
+                    Log.d("getScore: ", it.value.toString())
                     score += it.value
                 }
                 test?.let { it1 -> testViewModel.createResult(it1, score) }

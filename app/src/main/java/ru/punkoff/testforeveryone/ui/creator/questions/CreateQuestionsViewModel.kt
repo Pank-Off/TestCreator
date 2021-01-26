@@ -56,9 +56,11 @@ class CreateQuestionsViewModel(test: TempTest) : ViewModel() {
         testLiveData.value?.setMaxScore(maxScore)
     }
 
-    fun clearQuestionsList(){
+    fun clearQuestionsList() {
         questionsList.clear()
         questionsLiveData.value = questionsList
+        scoreList.clear()
     }
+
     fun getTestLiveData() = testLiveData
 }

@@ -49,6 +49,7 @@ class CreateQuestionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        createQuestionsViewModel.clearQuestionsList()
         if (count == 0) {
             val fragment = QuestionsFragment()
             count = childFragmentManager.fragments.size + 1
@@ -112,7 +113,7 @@ class CreateQuestionsFragment : Fragment() {
                     createQuestionsViewModel.setQuestions(frag)
                 } else if (emptyQuestionField) {
                     frag.view?.textEditTextQuestion?.error = getString(R.string.input_question)
-                    createQuestionsViewModel.clearQuestionsList()
+
                     val snackBar = Snackbar.make(
                         it,
                         resources.getString(R.string.empty_question),
@@ -121,7 +122,7 @@ class CreateQuestionsFragment : Fragment() {
                     snackBar.anchorView = main_fab
                     snackBar.show()
                     emptyField = true
-
+                    createQuestionsViewModel.clearQuestionsList()
                 } else if (emptyTwoAnswersField) {
                     val snackBar = Snackbar.make(
                         it,
@@ -131,6 +132,7 @@ class CreateQuestionsFragment : Fragment() {
                     snackBar.anchorView = main_fab
                     snackBar.show()
                     emptyField = true
+                    createQuestionsViewModel.clearQuestionsList()
                 }
             }
             if (!emptyField) {

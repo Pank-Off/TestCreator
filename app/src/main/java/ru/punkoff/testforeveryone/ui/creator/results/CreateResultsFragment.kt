@@ -91,26 +91,60 @@ class CreateResultsFragment : Fragment() {
     private fun setOnSaveFabClickListener() {
         next_step_fab.setOnClickListener {
             var correctMaxScore = true
-            val correctInput = checkTextFieldCorrectInput()
+            var correctInput = true
             for (i in 1..count!!) {
                 val frag =
                     childFragmentManager.findFragmentByTag("FragResult $i") as ResultsFragment
 
-                val textFromEditTextTo = frag.view?.textEditTextTo?.text.toString()
+                val textEditTextTo = frag.view?.textEditTextTo?.text.toString()
+                val textEditTextFrom = frag.view?.textEditTextFrom?.text.toString()
+                val emptyTitleInput = frag.view?.textInputTitle?.text.toString() == ""
+                val emptyDescriptionInput = frag.view?.textInputDescription?.text.toString() == ""
+
                 val score =
-                    if (textFromEditTextTo == "") 0 else textFromEditTextTo.toInt()
+                    if (textEditTextTo == "") 0 else textEditTextTo.toInt()
                 val maxScore = test?.getMaxScore()
-                if (score > maxScore!!) {
-                    Snackbar.make(
-                        it,
-                        "${getString(R.string.your_score_is_limited_maxScore)} (${maxScore})",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+
+                val scoreFrom = if (textEditTextFrom == "") 0 else textEditTextFrom.toInt()
+                val scoreTo = if (textEditTextTo == "") 0 else textEditTextTo.toInt()
+                if (emptyTitleInput || emptyDescriptionInput) {
+                    var snackBarText = getString(R.string.empty_title)
+                    if (emptyDescriptionInput) {
+                        snackBarText = getString(R.string.empty_description)
+                        frag.view?.textInputDescription?.error =
+                            getString(R.string.input_description)
+                    }
+                    if (emptyTitleInput) {
+                        snackBarText = getString(R.string.empty_title)
+                        frag.view?.textInputTitle?.error = getString(R.string.input_title)
+                    }
+                    showSnackBar(snackBarText)
+                    correctInput = false
+
+                } else if (score > maxScore!!) {
+                    val snackBarText =
+                        "${getString(R.string.your_score_is_limited_maxScore)} (${maxScore})"
+                    showSnackBar(snackBarText)
                     correctMaxScore = false
+
+                } else if (scoreTo - scoreFrom < 0) {
+                    val snackBarText = getString(R.string.min_score_more_then_max)
+                    showSnackBar(snackBarText)
+                    correctMaxScore = false
+
+                } else if (frag.requireView().textInputTitle.text?.length!! > frag.requireView().textFieldTitle.counterMaxLength) {
+                    correctInput = false
+                    createResultsViewModel.clearResultsList()
+                } else if (frag.requireView().textInputDescription.text?.length!! > frag.requireView().textFieldDescription.counterMaxLength) {
+                    correctInput = false
+                    createResultsViewModel.clearResultsList()
                 } else {
                     createResultsViewModel.setResults(frag)
                 }
+                Log.d(javaClass.simpleName, "WTF ${frag.requireView().textInputTitle.text?.length}")
             }
+
+
             if (correctMaxScore && correctInput) {
                 createResultsViewModel.saveTest()
                 GlobalScope.launch(Dispatchers.Main) {
@@ -129,17 +163,12 @@ class CreateResultsFragment : Fragment() {
         }
     }
 
-    private fun checkTextFieldCorrectInput(): Boolean {
-        try {
-            if (textInputTitle.text.toString() != "" && textInputDescription.text.toString() != ""
-                && textInputTitle.text?.length!! <= textFieldTitle.counterMaxLength && textInputDescription.text?.length!! <= textFieldDescription.counterMaxLength
-            ) {
-                return true
-            }
-        } catch (exc: NullPointerException) {
-            return true
-        }
-        return false
+    private fun showSnackBar(snackBarText: String) {
+        val snackBar = Snackbar.make(main_fab, snackBarText, Snackbar.LENGTH_LONG)
+        snackBar.show()
+        snackBar.anchorView = main_fab
+        snackBar.show()
+        createResultsViewModel.clearResultsList()
     }
 
     private fun setOnDeleteFabClickListener() {
