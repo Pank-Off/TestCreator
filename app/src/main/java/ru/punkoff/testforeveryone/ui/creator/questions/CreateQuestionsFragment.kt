@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils.loadAnimation
-import android.widget.FrameLayout
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
@@ -51,22 +50,19 @@ class CreateQuestionsFragment : Fragment() {
 
         createQuestionsViewModel.clearQuestionsList()
         if (count == 0) {
-            val fragment = QuestionsFragment()
-            count = childFragmentManager.fragments.size + 1
-            childFragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, fragment, "FragQuestion $count").commit()
+            addQuestionFragmentToContainer()
         }
         with(binding) {
             mainFab.startAnimation(loadAnimation(context, R.anim.enlarge_main_fab))
             mainFab.setOnClickListener {
                 fabIsNotExpanded = if (fabIsNotExpanded) {
-                    showFabs()
+                    mainFab.showFabs(delete_fab, add_fab, next_step_fab)
                     setOnDeleteFabClickListener()
                     setOnAddFabClickListener()
                     setOnNextStepFabClickListener()
                     false
                 } else {
-                    hideFabs()
+                    mainFab.hideFabs(delete_fab, add_fab, next_step_fab)
                     true
                 }
             }
@@ -76,22 +72,16 @@ class CreateQuestionsFragment : Fragment() {
     private fun setOnDeleteFabClickListener() {
         delete_fab.setOnClickListener {
             if (count!! > 1) {
-                childFragmentManager.beginTransaction()
-                    .detach(fragmentContainer[count?.minus(1)!!].findFragment()).commit()
-                count = childFragmentManager.fragments.size - 1
-                hideFabs()
-                fabIsNotExpanded = true
+                detachQuestionFragmentFromContainer()
             }
         }
     }
 
+
     private fun setOnAddFabClickListener() {
         add_fab.setOnClickListener {
-            val fragment = QuestionsFragment()
-            count = childFragmentManager.fragments.size + 1
-            childFragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, fragment, "FragQuestion $count").commit()
-            hideFabs()
+            addQuestionFragmentToContainer()
+            main_fab.hideFabs(delete_fab, add_fab, next_step_fab)
             fabIsNotExpanded = true
         }
     }
@@ -107,32 +97,18 @@ class CreateQuestionsFragment : Fragment() {
                     (frag.view?.textEditTextAnswerOne?.text.toString() == "" && frag.view?.textEditTextAnswerTwo?.text.toString() == "") ||
                             (frag.view?.textEditTextAnswerTwo?.text.toString() == "" && frag.view?.textEditTextAnswerThree?.text.toString() == "") ||
                             (frag.view?.textEditTextAnswerOne?.text.toString() == "" && frag.view?.textEditTextAnswerThree?.text.toString() == "") ||
-                            (frag.view?.textEditTextAnswerOne?.text.toString() == "" && frag.view?.textEditTextAnswerTwo?.text.toString() == "" && frag.view?.textEditTextAnswerThree?.text.toString() == "")
+                            (frag.view?.textEditTextAnswerOne?.text.toString() == "" && frag.view?.textEditTextAnswerTwo?.text.toString() == "" &&
+                                    frag.view?.textEditTextAnswerThree?.text.toString() == "")
 
                 if (!emptyQuestionField && !emptyTwoAnswersField) {
                     createQuestionsViewModel.setQuestions(frag)
                 } else if (emptyQuestionField) {
                     frag.view?.textEditTextQuestion?.error = getString(R.string.input_question)
-
-                    val snackBar = Snackbar.make(
-                        it,
-                        resources.getString(R.string.empty_question),
-                        Snackbar.LENGTH_SHORT
-                    ).setAction(getString(R.string.ok)) { }
-                    snackBar.anchorView = main_fab
-                    snackBar.show()
+                    showSnackBar(resources.getString(R.string.empty_question))
                     emptyField = true
-                    createQuestionsViewModel.clearQuestionsList()
                 } else if (emptyTwoAnswersField) {
-                    val snackBar = Snackbar.make(
-                        it,
-                        resources.getString(R.string.input_question_text_snackbar),
-                        Snackbar.LENGTH_LONG
-                    )
-                    snackBar.anchorView = main_fab
-                    snackBar.show()
+                    showSnackBar(resources.getString(R.string.input_question_text_snackbar))
                     emptyField = true
-                    createQuestionsViewModel.clearQuestionsList()
                 }
             }
             if (!emptyField) {
@@ -141,59 +117,35 @@ class CreateQuestionsFragment : Fragment() {
                     navigateToNextStepResult(test)
                 }
             }
-            hideFabs()
+            main_fab.hideFabs(delete_fab, add_fab, next_step_fab)
             fabIsNotExpanded = true
         }
     }
 
-    private fun hideFabs() {
-        val layoutParamsDeleteFab = delete_fab.layoutParams as FrameLayout.LayoutParams
-        layoutParamsDeleteFab.rightMargin -= (delete_fab.width * 3.5).toInt()
-        layoutParamsDeleteFab.bottomMargin -= (delete_fab.height * 0.0).toInt()
-        delete_fab.layoutParams = layoutParamsDeleteFab
-        delete_fab.startAnimation(loadAnimation(context, R.anim.delete_fab_hide))
-        delete_fab.isClickable = false
-
-        val layoutParamsAddFab = add_fab.layoutParams as FrameLayout.LayoutParams
-        layoutParamsAddFab.rightMargin -= (add_fab.width * 2.5).toInt()
-        layoutParamsAddFab.bottomMargin -= (add_fab.height * 0.0).toInt()
-        add_fab.layoutParams = layoutParamsAddFab
-        add_fab.startAnimation(loadAnimation(context, R.anim.add_fab_hide))
-        add_fab.isClickable = false
-
-        val layoutParamsNextStepFab = next_step_fab.layoutParams as FrameLayout.LayoutParams
-        layoutParamsNextStepFab.rightMargin -= (next_step_fab.width * 1.5).toInt()
-        layoutParamsNextStepFab.bottomMargin -= (next_step_fab.height * 0.0).toInt()
-        next_step_fab.layoutParams = layoutParamsNextStepFab
-        next_step_fab.startAnimation(loadAnimation(context, R.anim.next_step_fab_hide))
-        next_step_fab.isClickable = false
+    private fun addQuestionFragmentToContainer() {
+        val fragment = QuestionsFragment()
+        count = childFragmentManager.fragments.size + 1
+        childFragmentManager.beginTransaction()
+            .add(R.id.fragmentContainer, fragment, "FragQuestion $count").commit()
     }
 
-    private fun showFabs() {
-        val layoutParamsDeleteFab = delete_fab.layoutParams as FrameLayout.LayoutParams
-        layoutParamsDeleteFab.rightMargin += (delete_fab.width * 3.5).toInt()
-        layoutParamsDeleteFab.bottomMargin += (delete_fab.height * 0.0).toInt()
-        delete_fab.layoutParams = layoutParamsDeleteFab
-        delete_fab.startAnimation(loadAnimation(context, R.anim.delete_fab_show))
-        delete_fab.isClickable = true
+    private fun detachQuestionFragmentFromContainer() {
+        childFragmentManager.beginTransaction()
+            .detach(fragmentContainer[count?.minus(1)!!].findFragment()).commit()
+        count = childFragmentManager.fragments.size - 1
+        main_fab.hideFabs(delete_fab, add_fab, next_step_fab)
+        fabIsNotExpanded = true
+    }
 
-        val layoutParamsAddFab = add_fab.layoutParams as FrameLayout.LayoutParams
-        layoutParamsAddFab.rightMargin += (add_fab.width * 2.5).toInt()
-        layoutParamsAddFab.bottomMargin += (add_fab.height * 0.0).toInt()
-        add_fab.layoutParams = layoutParamsAddFab
-        add_fab.startAnimation(loadAnimation(context, R.anim.add_fab_show))
-        add_fab.isClickable = true
-
-        val layoutParamsNextStepFab = next_step_fab.layoutParams as FrameLayout.LayoutParams
-        layoutParamsNextStepFab.rightMargin += (next_step_fab.width * 1.5).toInt()
-        layoutParamsNextStepFab.bottomMargin += (next_step_fab.height * 0.0).toInt()
-        next_step_fab.layoutParams = layoutParamsNextStepFab
-        next_step_fab.startAnimation(loadAnimation(context, R.anim.next_step_fab_show))
-        next_step_fab.isClickable = true
+    private fun showSnackBar(snackBarText: String) {
+        val snackBar = Snackbar.make(main_fab, snackBarText, Snackbar.LENGTH_LONG)
+        snackBar.show()
+        snackBar.anchorView = main_fab
+        snackBar.show()
+        createQuestionsViewModel.clearQuestionsList()
     }
 
     private fun navigateToNextStepResult(test: TempTest) {
         (requireActivity() as MainActivity).navigateToNextStepResult(test)
     }
-
 }

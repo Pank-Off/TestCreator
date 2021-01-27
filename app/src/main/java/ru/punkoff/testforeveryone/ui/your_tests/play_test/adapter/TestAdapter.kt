@@ -1,14 +1,18 @@
 package ru.punkoff.testforeveryone.ui.your_tests.play_test.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.databinding.ItemFragmentTestBinding
 import ru.punkoff.testforeveryone.model.Question
+import kotlin.properties.Delegates
 
 val DIFF_UTIL: DiffUtil.ItemCallback<Question> = object : DiffUtil.ItemCallback<Question>() {
     override fun areItemsTheSame(oldItem: Question, newItem: Question): Boolean {
@@ -23,9 +27,16 @@ val DIFF_UTIL: DiffUtil.ItemCallback<Question> = object : DiffUtil.ItemCallback<
 class TestAdapter : ListAdapter<Question, TestAdapter.TestViewHolder>(DIFF_UTIL) {
 
     private lateinit var listener: Listener
-
+    var firstStart = true
+    private var currentPosition = 0
     fun attachListener(listener: Listener) {
         this.listener = listener
+    }
+
+    fun showQuestion(position: Int) {
+        firstStart = false
+        currentPosition = position
+        notifyItemChanged(currentPosition)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestViewHolder {
@@ -33,7 +44,7 @@ class TestAdapter : ListAdapter<Question, TestAdapter.TestViewHolder>(DIFF_UTIL)
     }
 
     override fun onBindViewHolder(holder: TestViewHolder, position: Int) {
-        holder.bind(getItem(position), position)
+        holder.bind(getItem(position), position, currentPosition)
     }
 
     inner class TestViewHolder(
@@ -46,57 +57,83 @@ class TestAdapter : ListAdapter<Question, TestAdapter.TestViewHolder>(DIFF_UTIL)
 
         private lateinit var keys: List<String>
 
-        fun bind(item: Question, position: Int) {
+
+        fun bind(item: Question, position: Int, currentPosition: Int) {
+            Log.d(javaClass.simpleName, "Position in ViewHolder: $position")
             keys = item.answers.map { it.key }
 
             with(binding) {
-                question.text = "${position + 1}. ${item.question}"
-                when (keys.size) {
-                    0 -> {
-                        radioBtnOne.visibility = RadioButton.GONE
-                        radioBtnTwo.visibility = RadioButton.GONE
-                        radioBtnThree.visibility = RadioButton.GONE
-                        textAnswerThree.visibility = TextView.GONE
-                        textAnswerTwo.visibility = TextView.GONE
-                        textAnswerOne.visibility = TextView.GONE
-                    }
-                    1 -> {
-                        textAnswerOne.text = keys[0]
-                        radioBtnTwo.visibility = RadioButton.GONE
-                        radioBtnThree.visibility = RadioButton.GONE
-                        textAnswerThree.visibility = TextView.GONE
-                        textAnswerTwo.visibility = TextView.GONE
-                    }
-                    2 -> {
-                        radioBtnThree.visibility = RadioButton.GONE
-                        textAnswerThree.visibility = TextView.GONE
-                        textAnswerOne.text = keys[0]
-                        textAnswerTwo.text = keys[1]
-                    }
-                    3 -> {
-                        textAnswerOne.text = keys[0]
-                        textAnswerTwo.text = keys[1]
-                        textAnswerThree.text = keys[2]
-                    }
-                }
+                if (firstStart) {
+                    question.visibility = TextView.GONE
+                    buttonOne.visibility = View.GONE
+                    buttonTwo.visibility = View.GONE
+                    buttonThree.visibility = View.GONE
+                    question.text = "${position + 1}. ${item.question}"
+                } else if (currentPosition == position) {
 
-                radioBtnOne.setOnClickListener {
-                    radioBtnTwo.isChecked = false
-                    radioBtnThree.isChecked = false
-                    listener.onClick(item.question, item.answers[keys[0]])
-                }
-                radioBtnTwo.setOnClickListener {
-                    radioBtnOne.isChecked = false
-                    radioBtnThree.isChecked = false
-                    listener.onClick(item.question, item.answers[keys[1]])
-                }
+                    question.visibility = TextView.VISIBLE
+                    buttonOne.visibility = View.VISIBLE
+                    buttonTwo.visibility = View.VISIBLE
+                    buttonThree.visibility = View.VISIBLE
 
-                radioBtnThree.setOnClickListener {
-                    radioBtnTwo.isChecked = false
-                    radioBtnOne.isChecked = false
-                    listener.onClick(item.question, item.answers[keys[2]])
+                    question.text = "${position + 1}. ${item.question}"
+
+                    root.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            question.context,
+                            R.anim.enlarge_main_fab
+                        )
+                    )
+
+                    when (keys.size) {
+                        0 -> {
+                            buttonOne.visibility = View.GONE
+                            buttonTwo.visibility = View.GONE
+                            buttonThree.visibility = View.GONE
+                        }
+                        1 -> {
+                            buttonOne.text = keys[0]
+                            buttonTwo.visibility = View.GONE
+                            buttonThree.visibility = View.GONE
+
+                        }
+                        2 -> {
+                            buttonThree.visibility = View.GONE
+
+                            buttonOne.text = keys[0]
+                            buttonTwo.text = keys[1]
+                        }
+                        3 -> {
+                            buttonOne.text = keys[0]
+                            buttonTwo.text = keys[1]
+                            buttonThree.text = keys[2]
+                        }
+                    }
+
+                    buttonOne.setOnClickListener {
+                        buttonTwo.alpha = 0.5F
+                        buttonThree.alpha = 0.5f
+                        buttonOne.alpha = 1.0f
+                        listener.onClick(item.question, item.answers[keys[0]])
+                    }
+                    buttonTwo.setOnClickListener {
+                        buttonOne.alpha = 0.5F
+                        buttonTwo.alpha = 1.0F
+                        buttonThree.alpha = 0.5f
+                        listener.onClick(item.question, item.answers[keys[1]])
+                    }
+
+                    buttonThree.setOnClickListener {
+                        buttonTwo.alpha = 0.5F
+                        buttonOne.alpha = 0.5f
+                        buttonThree.alpha = 1.0f
+                        listener.onClick(item.question, item.answers[keys[2]])
+                    }
                 }
             }
+
         }
+
     }
+
 }

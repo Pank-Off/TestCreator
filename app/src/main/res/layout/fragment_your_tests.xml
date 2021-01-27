@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        app:layout_behavior=".ui.custom_views.FabHideOnScroll"
+        app:layout_behavior=".ui.custom_views.HideOnScrollFabBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
