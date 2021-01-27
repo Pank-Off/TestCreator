@@ -9,7 +9,8 @@ import androidx.core.view.ViewCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class FabHideOnScroll(context: Context, attrs: AttributeSet) : FloatingActionButton.Behavior() {
+class HideOnScrollFabBehavior(context: Context, attrs: AttributeSet) :
+    FloatingActionButton.Behavior() {
 
     override fun onNestedScroll(
         coordinatorLayout: CoordinatorLayout,

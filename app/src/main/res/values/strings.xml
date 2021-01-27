@@ -67,4 +67,6 @@
     <string name="empty_title">Empty Title</string>
     <string name="empty_description">Empty Description</string>
     <string name="min_score_more_then_max">May be min score should be more then min score?</string>
+    <string name="sure_without_results">Are you sure, that you save your test without custom results?</string>
+    <string name="delete_form_result">Delete results?</string>
 </resources>

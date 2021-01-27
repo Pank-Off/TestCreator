@@ -90,7 +90,7 @@ class ShowResultFragment : Fragment() {
                 val scorePercent: Double =
                     tempResult!!.getScore().toDouble() / tempResult!!.getMaxScore().toDouble() * 100
 
-                val scoreViewText: String = String.format(
+                val scoreViewText = String.format(
                     resources.getString(R.string.you_scored) + tempResult?.getScore() + resources.getString(
                         R.string.out_of
                     ) + tempResult?.getMaxScore() + resources.getString(R.string.points) + "(${

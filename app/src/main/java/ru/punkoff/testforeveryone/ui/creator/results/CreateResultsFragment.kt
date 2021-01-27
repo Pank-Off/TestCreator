@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fab_layout.*
 import kotlinx.android.synthetic.main.fragment_create_questions.*
@@ -154,6 +155,8 @@ class CreateResultsFragment : Fragment() {
                 detachResultFragmentFromContainer()
                 main_fab.hideFabs(delete_fab, add_fab, next_step_fab)
                 fabIsNotExpanded = true
+            } else if (count == 1) {
+                showAlert()
             }
         }
     }
@@ -186,6 +189,22 @@ class CreateResultsFragment : Fragment() {
         snackBar.anchorView = main_fab
         snackBar.show()
         createResultsViewModel.clearResultsList()
+    }
+
+    private fun showAlert() {
+        context?.let { it ->
+            MaterialAlertDialogBuilder(it)
+                .setTitle(resources.getString(R.string.delete_form_result))
+                .setMessage(resources.getString(R.string.sure_without_results))
+                .setNegativeButton(resources.getString(R.string.decline)) { _, _ ->
+                    // Respond to negative button press
+                }
+                .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
+                    detachResultFragmentFromContainer()
+                    main_fab.hideFabs(delete_fab, add_fab, next_step_fab)
+                    fabIsNotExpanded = true
+                }.show()
+        }
     }
 
     private fun navigateToYourTests() {
