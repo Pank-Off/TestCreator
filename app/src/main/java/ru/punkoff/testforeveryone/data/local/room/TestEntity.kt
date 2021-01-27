@@ -36,7 +36,7 @@ fun Color.mapToColor(): Int {
         Color.WHITE -> R.drawable.gradient_white
         Color.YELLOW -> R.drawable.gradient_yellow
         Color.GREEN -> R.drawable.gradient_green
-        Color.BLUE -> R.drawable.gradient_blue
+        Color.BLUE -> R.drawable.gradient_orange
         Color.RED -> R.drawable.gradient_red
         Color.VIOLET -> R.drawable.gradient_violet
         Color.PINK -> R.drawable.gradient_pink

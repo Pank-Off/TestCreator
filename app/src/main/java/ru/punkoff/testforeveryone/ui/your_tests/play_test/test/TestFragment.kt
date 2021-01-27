@@ -5,8 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -21,6 +24,7 @@ import ru.punkoff.testforeveryone.ui.your_tests.play_test.adapter.TestAdapter
 class TestFragment : Fragment() {
 
     private val adapter = TestAdapter()
+
 
     private var position = 0
     private var maxSize = 0
@@ -49,8 +53,18 @@ class TestFragment : Fragment() {
         testViewModel.clearScore()
         adapter.firstStart = true
         position = 0
+        val dividerItemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
+        activity?.let {
+            ContextCompat.getDrawable(it, R.drawable.divider)?.let { drawable ->
+                dividerItemDecoration.setDrawable(
+                    drawable
+                )
+            }
+        }
+
         Log.d(javaClass.simpleName, "Test + $test")
         with(binding) {
+
             adapter.attachListener { answer, score ->
                 Log.d(javaClass.simpleName, "answer: $answer score $score")
                 score?.toInt()?.let {
@@ -68,6 +82,7 @@ class TestFragment : Fragment() {
 
             questionList.adapter = adapter
             questionList.layoutManager = LinearLayoutManager(context)
+            questionList.addItemDecoration(dividerItemDecoration)
             titleView.text = test?.title
             showResultBtn.setOnClickListener {
                 showResultBtn.visibility = MaterialButton.GONE
