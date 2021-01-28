@@ -67,9 +67,9 @@ class ShowResultFragment : Fragment() {
                 val scorePercent: Double =
                     result!!.score.toDouble() / result!!.maxScore.toDouble() * 100
                 val scoreViewText = String.format(
-                    resources.getString(R.string.you_scored) + result?.score + resources.getString(
+                    resources.getString(R.string.you_scored) + " " + result?.score + " " + resources.getString(
                         R.string.out_of
-                    ) + result?.maxScore + resources.getString(R.string.points) + "(${
+                    ) + " " + result?.maxScore + " " + resources.getString(R.string.points) + " " + "(${
                         floor(scorePercent * 100) / 100
                     })"
                 )
@@ -84,6 +84,21 @@ class ShowResultFragment : Fragment() {
                         navigateToRestartTest(it)
                     }
                 }
+
+                shareBtn.setOnClickListener {
+                    val shareText = String.format(
+                        getString(R.string.i_scored) + " " + result?.score + " " + getString(R.string.points) + " " + getString(
+                            R.string.out_of
+                        ) + " " + result?.maxScore + " " + getString(R.string.in_string) + " " + getString(
+                            R.string.the
+                        ) + " " + """"${result?.testTitle}" """ + " " + getString(R.string.test) + " ." +
+                                getString(R.string.how_much_will_you_gain) + "\n" + getString(R.string.href_on_App)
+                    )
+
+
+                    val intent: Intent = showResultViewModel.setOnShareBtnClickListener(shareText)
+                    startActivity(Intent.createChooser(intent, "Share using"))
+                }
             } else {
                 Log.d(javaClass.simpleName, "RESULT MAZAFAKA: ${tempResult.toString()}")
                 tempResult?.getColor()?.mapToColor()?.let { view.setBackgroundResource(it) }
@@ -91,9 +106,9 @@ class ShowResultFragment : Fragment() {
                     tempResult!!.getScore().toDouble() / tempResult!!.getMaxScore().toDouble() * 100
 
                 val scoreViewText = String.format(
-                    resources.getString(R.string.you_scored) + tempResult?.getScore() + resources.getString(
+                    resources.getString(R.string.you_scored) + " " + tempResult?.getScore() + " " + resources.getString(
                         R.string.out_of
-                    ) + tempResult?.getMaxScore() + resources.getString(R.string.points) + "(${
+                    ) + " " + tempResult?.getMaxScore() + " " + resources.getString(R.string.points) + " " + "(${
                         floor(
                             scorePercent * 100
                         ) / 100
@@ -105,6 +120,22 @@ class ShowResultFragment : Fragment() {
                 restartBtn.setOnClickListener {
                     requireActivity().findNavController(R.id.nav_host_fragment).popBackStack()
                 }
+
+                shareBtn.setOnClickListener {
+                    val shareText = String.format(
+                        getString(R.string.i_scored) + " " + tempResult?.getScore() + " " + getString(
+                            R.string.points
+                        ) + " " + getString(
+                            R.string.out_of
+                        ) + " " + tempResult?.getMaxScore() + " " + getString(R.string.in_string) + " " + getString(
+                            R.string.the
+                        ) + " " + """"${tempResult?.getTestTitle()}" """ + " " + getString(R.string.test) + " ." +
+                                getString(R.string.how_much_will_you_gain) + "\n" + getString(R.string.href_on_App)
+                    )
+
+                    val intent: Intent = showResultViewModel.setOnShareBtnClickListener(shareText)
+                    startActivity(Intent.createChooser(intent, "Share using"))
+                }
             }
 
             saveResultBtn.setOnClickListener {
@@ -114,11 +145,6 @@ class ShowResultFragment : Fragment() {
                     Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
                     navigateToYourResults()
                 }
-            }
-
-            shareBtn.setOnClickListener {
-                val intent: Intent = showResultViewModel.setOnShareBtnClickListener()
-                startActivity(Intent.createChooser(intent, "Share using"))
             }
         }
         result?.testTitle?.let { showResultViewModel.getTestByTitle(it) }

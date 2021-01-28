@@ -37,6 +37,8 @@ class TempResult : Parcelable {
 
     fun getResult() = result
 
+    fun getTestTitle() = result.testTitle
+
     companion object {
         const val EXTRA_TEMP_RESULT = "EXTRA_TEMP_RESULT"
     }
