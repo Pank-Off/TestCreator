@@ -1,11 +1,12 @@
 package ru.punkoff.testforeveryone.ui.your_tests
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AnimationUtils
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -26,6 +27,9 @@ class YourTestsFragment : Fragment() {
     private var _binding: FragmentYourTestsBinding? = null
     private val binding: FragmentYourTestsBinding get() = _binding!!
 
+    private lateinit var searchView: SearchView
+    private lateinit var queryTextListener: SearchView.OnQueryTextListener
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,6 +41,7 @@ class YourTestsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         adapter.attachListener {
             Log.d(javaClass.simpleName, "Color: ${it.color}")
             navigateTo(it)
@@ -76,6 +81,44 @@ class YourTestsFragment : Fragment() {
                 TestsViewState.EMPTY -> Unit
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+
+        inflater.inflate(R.menu.main, menu)
+        val searchItem: MenuItem = menu.findItem(R.id.search)
+        // Associate searchable configuration with the SearchView
+        val searchManager =
+            requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        searchView = searchItem.actionView as SearchView
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+        queryTextListener = object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                Log.i("onQueryTextSubmit", query)
+                adapter.filter.filter(query)
+
+                Log.i("ItemCount()", adapter.itemCount.toString())
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                Log.i("onQueryTextChange", newText)
+                adapter.filter.filter(newText)
+                Log.i("ItemCount()", adapter.itemCount.toString())
+                return true
+            }
+
+        }
+        searchView.setOnQueryTextListener(queryTextListener)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.search) {
+            return false
+        }
+        searchView.setOnQueryTextListener(queryTextListener)
+        return super.onOptionsItemSelected(item)
     }
 
     private fun navigateTo(test: TestEntity?) {
