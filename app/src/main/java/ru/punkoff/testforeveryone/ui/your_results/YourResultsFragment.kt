@@ -2,9 +2,7 @@ package ru.punkoff.testforeveryone.ui.your_results
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -36,6 +34,7 @@ class YourResultsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         adapter.attachListener {
             navigateTo(it)
         }
@@ -68,6 +67,11 @@ class YourResultsFragment : Fragment() {
                 ResultsViewState.EMPTY -> Unit
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main, menu)
     }
 
     private fun navigateTo(result: ResultEntity?) {

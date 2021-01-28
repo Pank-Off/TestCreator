@@ -52,9 +52,9 @@
     <string name="supporting_text_dialog">Are you sure, that you want to delete this test from your phone?</string>
     <string name="decline">Decline</string>
     <string name="accept">Accept</string>
-    <string name="you_scored">"You scored "</string>
-    <string name="out_of">" out of "</string>
-    <string name="points">" points "</string>
+    <string name="you_scored">"You scored"</string>
+    <string name="out_of">"out of"</string>
+    <string name="points">"points"</string>
     <string name="input_question_text_snackbar">Some fields were not filled in (at least two answers to one question)</string>
     <string name="empty_question">Empty question</string>
     <string name="ok">OK</string>
@@ -70,4 +70,12 @@
     <string name="sure_without_results">Are you sure, that you save your test without custom results?</string>
     <string name="delete_form_result">Delete results?</string>
     <string name="start">Start</string>
+
+    <string name="href_on_App" translatable="false">ref on app in Google market</string>
+    <string name="i_scored">I scored</string>
+    <string name="in_string">in</string>
+    <string name="the">the</string>
+    <string name="test">test</string>
+    <string name="how_much_will_you_gain">How much will you gain?</string>
+    <string name="search_title">searchTitle</string>
 </resources>

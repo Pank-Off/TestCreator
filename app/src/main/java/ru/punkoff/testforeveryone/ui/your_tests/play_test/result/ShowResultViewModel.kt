@@ -23,13 +23,12 @@ class ShowResultViewModel(
         }
     }
 
-    fun setOnShareBtnClickListener(): Intent {
+    fun setOnShareBtnClickListener(shareText: String): Intent {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/plain"
-        val shareBody = "ref on app in Google market"
         val shareSub = "Share sub"
         intent.putExtra(Intent.EXTRA_SUBJECT, shareSub)
-        intent.putExtra(Intent.EXTRA_TEXT, shareBody)
+        intent.putExtra(Intent.EXTRA_TEXT, shareText)
         return intent
     }
 
