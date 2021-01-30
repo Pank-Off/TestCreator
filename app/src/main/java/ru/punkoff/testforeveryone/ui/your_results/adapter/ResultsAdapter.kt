@@ -4,12 +4,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.punkoff.testforeveryone.data.local.room.ResultEntity
 import ru.punkoff.testforeveryone.data.local.room.mapToColor
 import ru.punkoff.testforeveryone.databinding.ItemResultBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 val DIFF_UTIL: DiffUtil.ItemCallback<ResultEntity> =
@@ -23,8 +27,11 @@ val DIFF_UTIL: DiffUtil.ItemCallback<ResultEntity> =
         }
     }
 
-class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolder>(DIFF_UTIL) {
+class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolder>(DIFF_UTIL),
+    Filterable {
 
+    private lateinit var resultsListFiltered: List<ResultEntity>
+    private var firstStart = true
     private lateinit var listener: Listener
     private lateinit var deleteCardResultListener: DeleteResultCardListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultsViewHolder {
@@ -32,7 +39,7 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
     }
 
     override fun onBindViewHolder(holder: ResultsViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(resultsListFiltered[position])
     }
 
     fun attachListener(listener: Listener) {
@@ -41,6 +48,13 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
 
     fun attachDeleteListener(listener: DeleteResultCardListener) {
         deleteCardResultListener = listener
+    }
+
+    override fun getItemCount(): Int {
+        if (firstStart) {
+            resultsListFiltered = currentList
+        }
+        return resultsListFiltered.size
     }
 
     inner class ResultsViewHolder(
@@ -68,6 +82,41 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
                 cardViewBackground.setBackgroundResource(item.color.mapToColor())
                 showBtn.setOnClickListener(clickListener)
                 deleteIcon.setOnClickListener(deleteCardResultClickListener)
+            }
+        }
+    }
+
+    override fun getFilter(): Filter {
+
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence): FilterResults {
+                val charString: String = constraint.toString()
+                Log.d(javaClass.simpleName + " charString", charString)
+                Log.d(javaClass.simpleName, currentList.toString())
+                if (charString.isEmpty()) {
+                    resultsListFiltered = currentList
+                } else {
+                    val filteredList: ArrayList<ResultEntity> = ArrayList()
+                    for (result in currentList) {
+                        if (result.testTitle.toLowerCase(Locale.ROOT)
+                                .contains(charString.toLowerCase(Locale.ROOT))
+                        ) {
+
+                            filteredList.add(result)
+                        }
+                    }
+
+                    resultsListFiltered = filteredList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = resultsListFiltered
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults) {
+                resultsListFiltered = results.values as List<ResultEntity>
+                firstStart = false
+                notifyDataSetChanged()
             }
         }
     }

@@ -76,11 +76,13 @@ class YourTestsFragment : Fragment() {
                 is TestsViewState.Value -> {
                     Log.d(javaClass.simpleName, "observe: $it")
                     adapter.submitList(it.tests)
+
                     Log.d(javaClass.simpleName, it.tests.toString())
                 }
                 TestsViewState.EMPTY -> Unit
             }
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -96,7 +98,6 @@ class YourTestsFragment : Fragment() {
             override fun onQueryTextSubmit(query: String): Boolean {
                 Log.i("onQueryTextSubmit", query)
                 adapter.filter.filter(query)
-
                 Log.i("ItemCount()", adapter.itemCount.toString())
                 return true
             }
@@ -107,7 +108,6 @@ class YourTestsFragment : Fragment() {
                 Log.i("ItemCount()", adapter.itemCount.toString())
                 return true
             }
-
         }
         searchView.setOnQueryTextListener(queryTextListener)
         super.onCreateOptionsMenu(menu, inflater)
