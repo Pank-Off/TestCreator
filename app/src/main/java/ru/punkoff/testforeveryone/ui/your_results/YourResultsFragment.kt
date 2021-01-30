@@ -1,8 +1,11 @@
 package ru.punkoff.testforeveryone.ui.your_results
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -22,6 +25,9 @@ class YourResultsFragment : Fragment() {
 
     private var _binding: FragmentResultsBinding? = null
     private val binding: FragmentResultsBinding get() = _binding!!
+
+    private lateinit var searchView: SearchView
+    private lateinit var queryTextListener: SearchView.OnQueryTextListener
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,9 +76,41 @@ class YourResultsFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+
         inflater.inflate(R.menu.main, menu)
+        val searchItem: MenuItem = menu.findItem(R.id.search)
+        // Associate searchable configuration with the SearchView
+        val searchManager =
+            requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        searchView = searchItem.actionView as SearchView
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+        queryTextListener = object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                Log.i("onQueryTextSubmit", query)
+                adapter.filter.filter(query)
+                Log.i("ItemCount()", adapter.itemCount.toString())
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                Log.i("onQueryTextChange", newText)
+                adapter.filter.filter(newText)
+                Log.i("ItemCount()", adapter.itemCount.toString())
+                return true
+            }
+        }
+        searchView.setOnQueryTextListener(queryTextListener)
+        super.onCreateOptionsMenu(menu, inflater)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.search) {
+            return false
+        }
+        searchView.setOnQueryTextListener(queryTextListener)
+        return super.onOptionsItemSelected(item)
+    }
+
 
     private fun navigateTo(result: ResultEntity?) {
         (requireActivity() as MainActivity).navigateToShowResultFragment(

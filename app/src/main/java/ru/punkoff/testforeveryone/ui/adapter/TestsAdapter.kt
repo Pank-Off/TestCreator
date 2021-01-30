@@ -50,10 +50,7 @@ class TestsAdapter : ListAdapter<TestEntity, TestsAdapter.TestsViewHolder>(DIFF_
     override fun getItemCount(): Int {
         if (firstStart) {
             testsListFiltered = currentList
-            firstStart = false
         }
-        Log.d("getItemCount", testsListFiltered.size.toString())
-
         return testsListFiltered.size
     }
 
@@ -117,9 +114,9 @@ class TestsAdapter : ListAdapter<TestEntity, TestsAdapter.TestsViewHolder>(DIFF_
                 return filterResults
             }
 
-
             override fun publishResults(constraint: CharSequence?, results: FilterResults) {
                 testsListFiltered = results.values as List<TestEntity>
+                firstStart = false
                 notifyDataSetChanged()
             }
         }
