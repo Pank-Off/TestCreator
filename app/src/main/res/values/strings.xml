@@ -66,7 +66,7 @@
     <string name="save">Save</string>
     <string name="empty_title">Empty Title</string>
     <string name="empty_description">Empty Description</string>
-    <string name="min_score_more_then_max">May be min score should be more then min score?</string>
+    <string name="min_score_more_then_max">May be max score should be more then min score?</string>
     <string name="sure_without_results">Are you sure, that you save your test without custom results?</string>
     <string name="delete_form_result">Delete results?</string>
     <string name="start">Start</string>
@@ -80,6 +80,11 @@
     <string name="search_title">searchTitle</string>
     <string name="log_out">Log out</string>
     <string name="log_in">Log in</string>
+    <string name="login_dialog_message">In order to solve other users tests and share your own, you need to log in</string>
+    <string name="login_dialog_title">Log in to your account?</string>
     <string name="logout_dialog_message">All your notes will be saved. You will be able to access them after logging in.</string>
     <string name="logout_dialog_title">Log out of your account?</string>
+    <string name="more_detailed">More detailed</string>
+
+    <string name="shareAboutUsText">Check out the new test creation app! I already downloaded it, and you?</string>
 </resources>

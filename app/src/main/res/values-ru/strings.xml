@@ -9,7 +9,7 @@
     <string name="menu_create_new_test">Создать новый тест</string>
     <string name="menu_notifications">Уведомления</string>
     <string name="menu_settings">Настройки</string>
-    <string name="menu_rate_us">Оцените нас</string>
+    <string name="menu_rate_us">Оценить нас</string>
     <string name="play">Пройти!</string>
     <string name="perceptive_title">Насколько вы проницательны?</string>
     <string name="perceptive_body">Проверьте, насколько вы понимаете кого-то</string>
@@ -30,6 +30,54 @@
     <string name="save_test">Сохранить</string>
     <string name="add_results">Добавить результаты</string>
     <string name="result_for_the_sum_of_points">Результат для суммы баллов:</string>
-    <string name="to">От</string>
-    <string name="from">До</string>
+    <string name="to">До</string>
+    <string name="from">От</string>
+
+    <string name="show_results">Результат</string>
+    <string name="results">Результат:</string>
+    <string name="menu_show_result_fragment">Результат</string>
+    <string name="restart">Заново</string>
+    <string name="save_result">Сохранить результат</string>
+    <string name="share_friends">Рассказать друзьям</string>
+    <string name="share_about_us">Рассказать о нас</string>
+    <string name="last_play">Последний результат:</string>
+    <string name="create_test">Время создания:</string>
+
+    <string name="title_dialog">Удалить тест?</string>
+    <string name="supporting_text_dialog">Вы уверены, что хотите удалить тест с вашего устройства?</string>
+    <string name="decline">Отменить</string>
+    <string name="accept">Принять</string>
+    <string name="you_scored">"Вы набрали"</string>
+    <string name="out_of">"из"</string>
+    <string name="points">"очков"</string>
+    <string name="input_question_text_snackbar">Некоторые поля были не заполнены (минимум два ответа к одному вопросу)</string>
+    <string name="empty_question">Пустой вопрос</string>
+    <string name="ok">ОК</string>
+    <string name="input_question">Введите вопрос</string>
+    <string name="max_length">Максимальная длина</string>
+    <string name="input_title">Введите заголовок</string>
+    <string name="input_description">Введите описание</string>
+    <string name="your_score_is_limited_maxScore">Введенное количество очков превышает максимальное</string>
+    <string name="save">Сохранить</string>
+    <string name="empty_title">Пустой заголовок</string>
+    <string name="empty_description">Пустое описание</string>
+    <string name="min_score_more_then_max">Может быть, максимальный балл должен быть больше, чем минимальный балл?</string>
+    <string name="sure_without_results">Вы уверены, что хотите сохранить тест без результата?</string>
+    <string name="delete_form_result">Удалить результат?</string>
+    <string name="start">Начать</string>
+
+    <string name="i_scored">Я набрал</string>
+    <string name="in_string">в</string>
+    <string name="the" />
+    <string name="test">тесте</string>
+    <string name="how_much_will_you_gain">А сколько набрал ты?</string>
+    <string name="log_out">Выйти</string>
+    <string name="log_in">Авторизоваться</string>
+    <string name="login_dialog_message">Для того чтобы решать тесты других пользователей и делиться своими необходимо авторизоваться</string>
+    <string name="login_dialog_title">Авторизация?</string>
+    <string name="logout_dialog_message">Все ваши заметки будут сохранены. Вы сможете получить к ним доступ после входа в систему.</string>
+    <string name="logout_dialog_title">Выйти из аккаунта?</string>
+    <string name="more_detailed">Подробнее</string>
+
+    <string name="shareAboutUsText">Зацени новое приложение для создания тестов! Я уже скачал, а ты?</string>
 </resources>

@@ -1,4 +1,4 @@
-package ru.punkoff.testforeveryone.ui.adapter
+package ru.punkoff.testforeveryone.ui.your_tests.adapter
 
 import android.util.Log
 import android.view.LayoutInflater

@@ -15,8 +15,7 @@ import ru.punkoff.testforeveryone.activities.MainActivity
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.databinding.FragmentYourTestsBinding
-import ru.punkoff.testforeveryone.ui.adapter.TestsAdapter
-import ru.punkoff.testforeveryone.ui.all_tests.TestsViewState
+import ru.punkoff.testforeveryone.ui.your_tests.adapter.TestsAdapter
 import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment
 
 class YourTestsFragment : Fragment() {
@@ -76,7 +75,6 @@ class YourTestsFragment : Fragment() {
                 is TestsViewState.Value -> {
                     Log.d(javaClass.simpleName, "observe: $it")
                     adapter.submitList(it.tests)
-
                     Log.d(javaClass.simpleName, it.tests.toString())
                 }
                 TestsViewState.EMPTY -> Unit

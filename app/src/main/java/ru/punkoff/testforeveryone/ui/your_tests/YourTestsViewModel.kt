@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.punkoff.testforeveryone.data.local.DatabaseProvider
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
-import ru.punkoff.testforeveryone.ui.all_tests.TestsViewState
 
 class YourTestsViewModel(private val databaseHelper: DatabaseProvider) : ViewModel() {
     private val mainLiveData = MutableLiveData<TestsViewState>(TestsViewState.EMPTY)

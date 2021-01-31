@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
@@ -22,8 +21,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import ru.punkoff.testforeveryone.activities.MainActivity
 import ru.punkoff.testforeveryone.R
+import ru.punkoff.testforeveryone.activities.MainActivity
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.databinding.FragmentCreateResultsBinding
 
@@ -130,12 +129,10 @@ class CreateResultsFragment : Fragment() {
                 Log.d(javaClass.simpleName, "WTF ${frag.requireView().textInputTitle.text?.length}")
             }
 
-
             if (correctMaxScore && correctInput) {
-                createResultsViewModel.saveTest()
+                createResultsViewModel.saveTest(resources.getString(R.string.create_test))
                 GlobalScope.launch(Dispatchers.Main) {
                     delay(100)
-                    Toast.makeText(context, getString(R.string.save), Toast.LENGTH_SHORT).show()
                     navigateToYourTests()
                 }
             } else if (!correctInput) {

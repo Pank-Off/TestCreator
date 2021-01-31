@@ -25,7 +25,6 @@ class TestFragment : Fragment() {
 
     private val adapter = TestAdapter()
 
-
     private var position = 0
     private var maxSize = 0
     private val test: TestEntity? by lazy(LazyThreadSafetyMode.NONE) {
@@ -95,7 +94,6 @@ class TestFragment : Fragment() {
             }
         }
 
-
         testViewModel.observeViewState().observe(viewLifecycleOwner) {
             Log.d(javaClass.simpleName, "questions: ${it?.questions}")
             adapter.submitList(it?.questions)
@@ -109,7 +107,13 @@ class TestFragment : Fragment() {
             Log.d("getScore: ", it.value.toString())
             score += it.value
         }
-        test?.let { it1 -> testViewModel.createResult(it1, score) }
+        test?.let { it1 ->
+            testViewModel.createResult(
+                it1,
+                score,
+                resources.getString(R.string.last_play)
+            )
+        }
         Log.d(javaClass.simpleName, "Score: $score ")
         testViewModel.getResultLiveData().observe(viewLifecycleOwner) {
             Log.d(javaClass.simpleName, "getResultLiveData: ${it.getResult()}")

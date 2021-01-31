@@ -1,4 +1,4 @@
-package ru.punkoff.testforeveryone.ui.all_tests
+package ru.punkoff.testforeveryone.ui.your_tests
 
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 
