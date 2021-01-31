@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import ru.punkoff.testforeveryone.MainActivity
+import ru.punkoff.testforeveryone.activities.MainActivity
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.databinding.FragmentYourTestsBinding

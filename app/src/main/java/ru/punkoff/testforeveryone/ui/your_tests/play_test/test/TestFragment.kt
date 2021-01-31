@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import ru.punkoff.testforeveryone.MainActivity
+import ru.punkoff.testforeveryone.activities.MainActivity
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.TempResult
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
