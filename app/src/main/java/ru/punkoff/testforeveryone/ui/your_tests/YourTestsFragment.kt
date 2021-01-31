@@ -56,7 +56,6 @@ class YourTestsFragment : Fragment() {
                     }
                     .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
                         yourTestsViewModel.deleteTest(it.testId)
-                        adapter.notifyDataSetChanged()
                     }.show()
             }
         }
@@ -122,5 +121,4 @@ class YourTestsFragment : Fragment() {
     private fun navigateTo(test: TestEntity?) {
         (requireActivity() as MainActivity).navigateTo(TestFragment.create(test))
     }
-
 }

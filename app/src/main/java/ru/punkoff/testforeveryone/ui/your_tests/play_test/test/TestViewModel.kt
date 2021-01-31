@@ -37,6 +37,10 @@ class TestViewModel(val test: TestEntity?) : ViewModel() {
             var maxScore = 0
             try {
                 minScore = it.from.toInt()
+            } catch (exc: NumberFormatException) {
+                Log.e(javaClass.simpleName, exc.stackTraceToString())
+            }
+            try {
                 maxScore = it.to.toInt()
             } catch (exc: NumberFormatException) {
                 Log.e(javaClass.simpleName, exc.stackTraceToString())

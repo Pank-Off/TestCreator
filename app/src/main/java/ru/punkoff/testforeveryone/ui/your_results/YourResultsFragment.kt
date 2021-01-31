@@ -54,7 +54,6 @@ class YourResultsFragment : Fragment() {
                     }
                     .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
                         yourResultsViewModel.deleteResult(it.resultId)
-                        adapter.notifyDataSetChanged()
                     }.show()
             }
         }

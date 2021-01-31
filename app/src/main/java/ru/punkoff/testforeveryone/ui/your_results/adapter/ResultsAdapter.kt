@@ -32,6 +32,7 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
 
     private lateinit var resultsListFiltered: List<ResultEntity>
     private var firstStart = true
+    private var successDelete = false
     private lateinit var listener: Listener
     private lateinit var deleteCardResultListener: DeleteResultCardListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultsViewHolder {
@@ -54,6 +55,10 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
         if (firstStart) {
             resultsListFiltered = currentList
         }
+        if (successDelete) {
+            resultsListFiltered = currentList.filter { resultsListFiltered.contains(it) }
+            successDelete = false
+        }
         return resultsListFiltered.size
     }
 
@@ -68,7 +73,7 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
         }
         private val deleteCardResultClickListener: View.OnClickListener = View.OnClickListener {
             deleteCardResultListener.onClick(currentResult)
-
+            successDelete = true
         }
         private lateinit var currentResult: ResultEntity
 
