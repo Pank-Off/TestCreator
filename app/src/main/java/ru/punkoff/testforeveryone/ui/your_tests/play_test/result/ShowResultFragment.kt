@@ -141,7 +141,6 @@ class ShowResultFragment : Fragment() {
                 showResultViewModel.saveResult()
                 GlobalScope.launch(Dispatchers.Main) {
                     delay(100)
-                    Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
                     navigateToYourResults()
                 }
             }

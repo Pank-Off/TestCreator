@@ -65,9 +65,8 @@ class YourResultsFragment : Fragment() {
         yourResultsViewModel.observeViewState().observe(viewLifecycleOwner) {
             when (it) {
                 is ResultsViewState.Value -> {
-                    Log.d(javaClass.simpleName, "observe: $it")
+                    Log.d(javaClass.simpleName, "observe: ${it.tests}")
                     adapter.submitList(it.tests)
-                    Log.d(javaClass.simpleName, it.tests.toString())
                 }
                 ResultsViewState.EMPTY -> Unit
             }
