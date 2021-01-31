@@ -31,9 +31,10 @@
         tools:layout="@layout/fragment_results" />
     <fragment
         android:id="@+id/nav_share_us"
-        android:name="ru.punkoff.testforeveryone.ui.share_about_us.ShareAboutUsFragment">
-
-    </fragment>
+        android:name="ru.punkoff.testforeveryone.ui.share_about_us.ShareAboutUsFragment" />
+    <fragment
+        android:id="@+id/nav_log_out"
+        android:name="ru.punkoff.testforeveryone.ui.google_log_out.GoogleLogOutFragment" />
     <fragment
         android:id="@+id/nav_creator"
         android:name="ru.punkoff.testforeveryone.ui.creator.CreatorFragment"
@@ -43,12 +44,6 @@
             android:id="@+id/action_nav_creator_to_nav_create_questions"
             app:destination="@id/nav_create_questions" />
     </fragment>
-
-    <!--    <fragment-->
-    <!--        android:id="@+id/nav_notifications"-->
-    <!--        android:name="ru.punkoff.testforeveryone.ui.notifications.NotificationsFragment"-->
-    <!--        android:label="@string/menu_notifications"-->
-    <!--        tools:layout="@layout/fragment_notifications" />-->
 
     <fragment
         android:id="@+id/nav_settings"

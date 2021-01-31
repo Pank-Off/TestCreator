@@ -16,8 +16,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import ru.punkoff.testforeveryone.MainActivity
 import ru.punkoff.testforeveryone.R
+import ru.punkoff.testforeveryone.activities.MainActivity
 import ru.punkoff.testforeveryone.data.TempResult
 import ru.punkoff.testforeveryone.data.TempResult.Companion.EXTRA_TEMP_RESULT
 import ru.punkoff.testforeveryone.data.local.room.ResultEntity

@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_create_questions.*
 import kotlinx.android.synthetic.main.item_fragment_questions.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import ru.punkoff.testforeveryone.MainActivity
+import ru.punkoff.testforeveryone.activities.MainActivity
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.data.TempTest.Companion.EXTRA_TEMP_TEST

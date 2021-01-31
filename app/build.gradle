@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 kapt {
     generateStubs = true
@@ -85,4 +86,10 @@ dependencies {
     implementation "org.koin:koin-androidx-fragment:$koin_ver"
     implementation "org.koin:koin-androidx-workmanager:$koin_ver"
     implementation "org.koin:koin-androidx-compose:$koin_ver"
+
+    //firebase
+    implementation 'com.google.firebase:firebase-core:18.0.2'
+    implementation 'com.google.firebase:firebase-firestore:22.0.2'
+    implementation platform('com.google.firebase:firebase-bom:26.1.0')
+    implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
 }

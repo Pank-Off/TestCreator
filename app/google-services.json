@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "87589520632",
+    "project_id": "testmaker-4fde2",
+    "storage_bucket": "testmaker-4fde2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:87589520632:android:34ec16c5eea75eec8ba70d",
+        "android_client_info": {
+          "package_name": "ru.punkoff.testforeveryone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "87589520632-48gs1m9v203r78hpijpa0adhp0hj62o1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSvSvvTju-eUUaFjQtw6PW5_2ruBd1Ges"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "87589520632-48gs1m9v203r78hpijpa0adhp0hj62o1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

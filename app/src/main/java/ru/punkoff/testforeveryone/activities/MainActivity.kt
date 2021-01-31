@@ -1,9 +1,10 @@
-package ru.punkoff.testforeveryone
+package ru.punkoff.testforeveryone.activities
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -12,23 +13,28 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
+import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.TempResult
 import ru.punkoff.testforeveryone.data.TempResult.Companion.EXTRA_TEMP_RESULT
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.data.TempTest.Companion.EXTRA_TEMP_TEST
+import ru.punkoff.testforeveryone.databinding.ActivityMainBinding
 import ru.punkoff.testforeveryone.ui.your_tests.play_test.result.ShowResultFragment
 import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment
 import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment.Companion.EXTRA_TEST
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
@@ -46,7 +52,8 @@ class MainActivity : AppCompatActivity() {
                 // R.id.nav_notifications,
                 R.id.nav_settings,
                 R.id.nav_share_us,
-                R.id.nav_rate_us
+                R.id.nav_rate_us,
+                R.id.nav_log_out
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -96,5 +103,30 @@ class MainActivity : AppCompatActivity() {
 
     fun navigateToYourResults() {
         navController.navigate(R.id.nav_results)
+    }
+
+    fun showLogoutDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(resources.getString(R.string.logout_dialog_title))
+            .setMessage(resources.getString(R.string.logout_dialog_message))
+            .setNegativeButton(resources.getString(R.string.decline)) { _, _ ->
+                // Respond to negative button press
+            }
+            .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
+                //onLogout()
+            }.show()
+
+    }
+
+    //    private fun onLogout() {
+//        AuthUI.getInstance()
+//            .signOut(this)
+//            .addOnCompleteListener {
+//                startActivity(Intent(this, SplashActivity::class.java))
+//                finish()
+//            }
+//    }
+    companion object {
+        fun getStartIntent(context: Context) = Intent(context, MainActivity::class.java)
     }
 }
