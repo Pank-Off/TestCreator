@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -79,9 +80,18 @@ class ShowResultFragment : Fragment() {
                 bodyView.text = result?.body
                 saveResultBtn.isVisible = false
                 restartBtn.setOnClickListener {
-                    requireActivity().findNavController(R.id.nav_host_fragment).popBackStack()
-                    showResultViewModel.observeTest().observe(viewLifecycleOwner) {
-                        navigateToRestartTest(it)
+                    val snackbar = Snackbar.make(
+                        restartBtn,
+                        getString(R.string.test_was_deleted_previously),
+                        Snackbar.LENGTH_SHORT
+                    )
+                    snackbar.anchorView = shareBtn
+                    showResultViewModel.observeTest().observe(viewLifecycleOwner) { test ->
+                        test?.let {
+                            requireActivity().findNavController(R.id.nav_host_fragment)
+                                .popBackStack()
+                            navigateToRestartTest(it)
+                        } ?: snackbar.show()
                     }
                 }
 
@@ -95,12 +105,10 @@ class ShowResultFragment : Fragment() {
                                 getString(R.string.how_much_will_you_gain) + "\n" + getString(R.string.href_on_App)
                     )
 
-
                     val intent: Intent = showResultViewModel.setOnShareBtnClickListener(shareText)
                     startActivity(Intent.createChooser(intent, "Share using"))
                 }
             } else {
-                Log.d(javaClass.simpleName, "RESULT MAZAFAKA: ${tempResult.toString()}")
                 tempResult?.getColor()?.mapToColor()?.let { view.setBackgroundResource(it) }
                 val scorePercent: Double =
                     tempResult!!.getScore().toDouble() / tempResult!!.getMaxScore().toDouble() * 100
