@@ -40,6 +40,8 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
     }
 
     override fun onBindViewHolder(holder: ResultsViewHolder, position: Int) {
+        Log.d(javaClass.simpleName, "resultsListFiltered $resultsListFiltered")
+        Log.d(javaClass.simpleName, "CurrentListFiltered $currentList")
         holder.bind(resultsListFiltered[position])
     }
 
@@ -55,11 +57,13 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
         if (firstStart) {
             resultsListFiltered = currentList
         }
+        var size = resultsListFiltered.size
         if (successDelete) {
-            resultsListFiltered = currentList.filter { resultsListFiltered.contains(it) }
+            resultsListFiltered = resultsListFiltered.filter { currentList.contains(it) }
             successDelete = false
+            size -= 1
         }
-        return resultsListFiltered.size
+        return size
     }
 
     inner class ResultsViewHolder(
