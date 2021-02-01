@@ -21,4 +21,5 @@
     <dimen name="margin_delete_icon">8dp</dimen>
     <dimen name="card_elevation">8dp</dimen>
     <dimen name="delete_icon_elevation">8dp</dimen>
+    <dimen name="padding_end_card_title">16dp</dimen>
 </resources>

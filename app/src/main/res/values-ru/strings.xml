@@ -39,6 +39,7 @@
     <string name="restart">Заново</string>
     <string name="save_result">Сохранить результат</string>
     <string name="share_friends">Рассказать друзьям</string>
+    <string name="system">Прочее</string>
     <string name="share_about_us">Рассказать о нас</string>
     <string name="last_play">Последний результат:</string>
     <string name="create_test">Время создания:</string>
@@ -80,4 +81,5 @@
     <string name="more_detailed">Подробнее</string>
 
     <string name="shareAboutUsText">Зацени новое приложение для создания тестов! Я уже скачал, а ты?</string>
+    <string name="test_was_deleted_previously">Упс… кажется этот тест был удален</string>
 </resources>
