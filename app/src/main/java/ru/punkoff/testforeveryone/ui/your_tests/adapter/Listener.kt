@@ -1,7 +1,7 @@
-package ru.punkoff.testforeveryone.ui.adapter
+package ru.punkoff.testforeveryone.ui.your_tests.adapter
 
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 
-fun interface DeleteCardListener {
+fun interface Listener {
     fun onClick(test: TestEntity)
 }

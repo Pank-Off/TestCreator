@@ -50,7 +50,7 @@ class MainActivity : BaseActivity() {
                 R.id.nav_results,
                 R.id.nav_creator,
                 // R.id.nav_notifications,
-                R.id.nav_settings,
+                //  R.id.nav_settings,
                 R.id.nav_share_us,
                 R.id.nav_rate_us,
                 R.id.nav_log_out
@@ -107,8 +107,8 @@ class MainActivity : BaseActivity() {
 
     fun showLogoutDialog() {
         MaterialAlertDialogBuilder(this)
-            .setTitle(resources.getString(R.string.logout_dialog_title))
-            .setMessage(resources.getString(R.string.logout_dialog_message))
+            .setTitle(resources.getString(R.string.login_dialog_title))
+            .setMessage(resources.getString(R.string.login_dialog_message))
             .setNegativeButton(resources.getString(R.string.decline)) { _, _ ->
                 // Respond to negative button press
             }

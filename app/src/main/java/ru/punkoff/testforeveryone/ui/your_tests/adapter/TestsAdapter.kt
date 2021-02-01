@@ -1,4 +1,4 @@
-package ru.punkoff.testforeveryone.ui.adapter
+package ru.punkoff.testforeveryone.ui.your_tests.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,6 +30,7 @@ class TestsAdapter : ListAdapter<TestEntity, TestsAdapter.TestsViewHolder>(DIFF_
     private lateinit var listener: Listener
 
     private var firstStart = true
+    private var successDelete = false
     private lateinit var deleteCardListener: DeleteCardListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestsViewHolder {
         return TestsViewHolder(parent)
@@ -51,6 +52,10 @@ class TestsAdapter : ListAdapter<TestEntity, TestsAdapter.TestsViewHolder>(DIFF_
         if (firstStart) {
             testsListFiltered = currentList
         }
+        if (successDelete) {
+            testsListFiltered = currentList.filter { testsListFiltered.contains(it) }
+            successDelete = false
+        }
         return testsListFiltered.size
     }
 
@@ -66,7 +71,7 @@ class TestsAdapter : ListAdapter<TestEntity, TestsAdapter.TestsViewHolder>(DIFF_
 
         private val deleteCardClickListener: View.OnClickListener = View.OnClickListener {
             deleteCardListener.onClick(currentTest)
-
+            successDelete = true
         }
         private lateinit var currentTest: TestEntity
 

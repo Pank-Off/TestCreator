@@ -12,7 +12,7 @@ import ru.punkoff.testforeveryone.ui.all_tests.AllTestsViewModel
 import ru.punkoff.testforeveryone.ui.creator.CreatorViewModel
 import ru.punkoff.testforeveryone.ui.creator.questions.CreateQuestionsViewModel
 import ru.punkoff.testforeveryone.ui.creator.results.CreateResultsViewModel
-import ru.punkoff.testforeveryone.ui.google_log_out.GoogleLogOutViewModel
+import ru.punkoff.testforeveryone.ui.google_auth.GoogleAuthViewModel
 import ru.punkoff.testforeveryone.ui.rate_us.RateUsViewModel
 import ru.punkoff.testforeveryone.ui.settings.SettingsViewModel
 import ru.punkoff.testforeveryone.ui.share_about_us.ShareAboutUsViewModel
@@ -32,7 +32,7 @@ object DependencyGraph {
                 CreateResultsViewModel(get(), test)
             }
             viewModel { CreatorViewModel() }
-            viewModel { GoogleLogOutViewModel() }
+            viewModel { GoogleAuthViewModel() }
             viewModel { RateUsViewModel() }
             viewModel { SettingsViewModel() }
             viewModel { ShareAboutUsViewModel() }

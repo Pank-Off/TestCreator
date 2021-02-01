@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.punkoff.testforeveryone.data.Repository
+import ru.punkoff.testforeveryone.ui.your_tests.TestsViewState
 
 class AllTestsViewModel : ViewModel() {
     private val mainLiveData = MutableLiveData<TestsViewState>(TestsViewState.EMPTY)

@@ -27,16 +27,20 @@ class TestViewModel(val test: TestEntity?) : ViewModel() {
         Log.d(javaClass.simpleName, mScore.value.toString())
     }
 
-    fun createResult(test: TestEntity, score: Int) {
+    fun createResult(test: TestEntity, score: Int, lastPlayText: String) {
         Log.d(javaClass.simpleName, "test.results: ${test.results}")
         if (test.results.isEmpty()) {
-            createEmptyResult(test, score)
+            createEmptyResult(test, score, lastPlayText)
         }
         test.results.forEach {
             var minScore = 0
             var maxScore = 0
             try {
                 minScore = it.from.toInt()
+            } catch (exc: NumberFormatException) {
+                Log.e(javaClass.simpleName, exc.stackTraceToString())
+            }
+            try {
                 maxScore = it.to.toInt()
             } catch (exc: NumberFormatException) {
                 Log.e(javaClass.simpleName, exc.stackTraceToString())
@@ -49,21 +53,21 @@ class TestViewModel(val test: TestEntity?) : ViewModel() {
                     it.description,
                     test.maxScore,
                     score,
-                    "Last play: ${DataHelper.parseDate()}",
+                    lastPlayText + DataHelper.parseDate(),
                     test.color
                 )
             }
         }
     }
 
-    private fun createEmptyResult(test: TestEntity, score: Int) {
+    private fun createEmptyResult(test: TestEntity, score: Int, lastPlayText: String) {
         resultLiveData.value?.createResult(
             testTitle = test.title,
             "",
             "",
             test.maxScore,
             score,
-            "",
+            lastPlayText + DataHelper.parseDate(),
             test.color
         )
     }

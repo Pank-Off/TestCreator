@@ -22,8 +22,8 @@ class CreateResultsViewModel(
         testLiveData.value = test
     }
 
-    fun saveTest() {
-        val date = "Create test: ${DataHelper.parseDate()}"
+    fun saveTest(createTestText: String) {
+        val date = createTestText + DataHelper.parseDate()
         testLiveData.value?.setDataCreate(date)
         viewModelScope.launch {
             testLiveData.value?.getTest()?.let { databaseHelper.saveTest(it) }

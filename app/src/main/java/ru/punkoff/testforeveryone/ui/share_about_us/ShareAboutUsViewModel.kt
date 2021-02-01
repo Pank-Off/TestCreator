@@ -5,11 +5,11 @@ import androidx.lifecycle.ViewModel
 
 class ShareAboutUsViewModel : ViewModel() {
 
-    fun setOnShareBtnClickListener(): Intent {
+    fun setOnShareBtnClickListener(shareAboutUsText: String, refText: String): Intent {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/plain"
-        val shareBody =
-            "Check out the new test creation app! I already downloaded it, and you?\nref on app in Google market"
+        val shareBody = shareAboutUsText + "\n" + refText
+
         val shareSub = "Share sub"
         intent.putExtra(Intent.EXTRA_SUBJECT, shareSub)
         intent.putExtra(Intent.EXTRA_TEXT, shareBody)

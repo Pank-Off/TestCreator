@@ -11,7 +11,8 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.punkoff.testforeveryone.databinding.FragmentAllTestsBinding
-import ru.punkoff.testforeveryone.ui.adapter.TestsAdapter
+import ru.punkoff.testforeveryone.ui.your_tests.TestsViewState
+import ru.punkoff.testforeveryone.ui.your_tests.adapter.TestsAdapter
 
 class AllTestsFragment : Fragment() {
 

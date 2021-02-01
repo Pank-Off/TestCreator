@@ -129,10 +129,9 @@ class ShowResultFragment : Fragment() {
                             R.string.out_of
                         ) + " " + tempResult?.getMaxScore() + " " + getString(R.string.in_string) + " " + getString(
                             R.string.the
-                        ) + " " + """"${tempResult?.getTestTitle()}" """ + " " + getString(R.string.test) + " ." +
+                        ) + " " + """"${tempResult?.getTestTitle()}" """ + " " + getString(R.string.test) + ". " +
                                 getString(R.string.how_much_will_you_gain) + "\n" + getString(R.string.href_on_App)
                     )
-
                     val intent: Intent = showResultViewModel.setOnShareBtnClickListener(shareText)
                     startActivity(Intent.createChooser(intent, "Share using"))
                 }
@@ -142,7 +141,6 @@ class ShowResultFragment : Fragment() {
                 showResultViewModel.saveResult()
                 GlobalScope.launch(Dispatchers.Main) {
                     delay(100)
-                    Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show()
                     navigateToYourResults()
                 }
             }
