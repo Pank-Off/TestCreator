@@ -35,6 +35,7 @@
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/padding_end_card_title"
             android:layout_marginStart="@dimen/title_margin"
             android:layout_marginTop="@dimen/title_margin"
             android:layout_marginEnd="@dimen/title_margin"

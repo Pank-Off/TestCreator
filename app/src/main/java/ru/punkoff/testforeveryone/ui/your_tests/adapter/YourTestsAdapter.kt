@@ -52,13 +52,11 @@ class TestsAdapter : ListAdapter<TestEntity, TestsAdapter.TestsViewHolder>(DIFF_
         if (firstStart) {
             testsListFiltered = currentList
         }
-        var size = testsListFiltered.size
         if (successDelete) {
             testsListFiltered = testsListFiltered.filter { currentList.contains(it) }
             successDelete = false
-            size -= 1
         }
-        return size
+        return testsListFiltered.size
     }
 
     inner class TestsViewHolder(

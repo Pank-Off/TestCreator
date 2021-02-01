@@ -57,13 +57,11 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
         if (firstStart) {
             resultsListFiltered = currentList
         }
-        var size = resultsListFiltered.size
         if (successDelete) {
             resultsListFiltered = resultsListFiltered.filter { currentList.contains(it) }
             successDelete = false
-            size -= 1
         }
-        return size
+        return resultsListFiltered.size
     }
 
     inner class ResultsViewHolder(

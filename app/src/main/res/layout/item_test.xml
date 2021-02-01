@@ -38,6 +38,7 @@
             android:layout_marginStart="@dimen/title_margin"
             android:layout_marginTop="@dimen/title_margin"
             android:layout_marginEnd="@dimen/title_margin"
+            android:paddingEnd="@dimen/padding_end_card_title"
             tools:text="@string/perceptive_title" />
 
         <TextView
