@@ -1,8 +1,10 @@
 package ru.punkoff.testforeveryone.di
 
+import com.google.firebase.auth.FirebaseUser
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
+import ru.punkoff.testforeveryone.activities.SplashViewModel
 import ru.punkoff.testforeveryone.data.TempResult
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.data.local.DatabaseProvider
@@ -43,6 +45,10 @@ object DependencyGraph {
             }
             viewModel { (result: TempResult) ->
                 ShowResultViewModel(get(), result)
+            }
+
+            viewModel { (user: FirebaseUser) ->
+                SplashViewModel(user)
             }
         }
     }

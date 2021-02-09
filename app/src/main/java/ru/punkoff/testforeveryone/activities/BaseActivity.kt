@@ -1,8 +1,11 @@
 package ru.punkoff.testforeveryone.activities
 
+import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseUser
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.errors.NoAuthException
 
@@ -16,25 +19,27 @@ open class BaseActivity : AppCompatActivity() {
             AuthUI.IdpConfig.GoogleBuilder().build()
         )
 
-
         startActivityForResult(
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
-                .setLogo(R.drawable.ic_launcher_foreground)
-                .setTheme(R.style.LoginStyle)
+                .setLogo(R.drawable.ic_menu_camera)
+                .setTheme(AuthUI.getDefaultTheme())
                 .setAvailableProviders(providers)
                 .build(),
             RC_SIGN_IN
         )
     }
 
-    private fun startMainActivity() {
-        startActivity(MainActivity.getStartIntent(this))
+    private fun startMainActivity(user: FirebaseUser?) {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra(EXTRA_USER, user)
+        Log.d(javaClass.simpleName, "INTENT user: $user")
+        startActivity(intent)
         finish()
     }
 
-    protected fun renderData() {
-        startMainActivity()
+    protected fun renderData(user: FirebaseUser?) {
+        startMainActivity(user)
     }
 
     protected open fun renderError(error: Throwable) {
@@ -47,4 +52,9 @@ open class BaseActivity : AppCompatActivity() {
     private fun showError(message: String) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
+
+    companion object {
+        const val EXTRA_USER = "EXTRA_USER"
+    }
+
 }

@@ -87,4 +87,8 @@
 
     <string name="shareAboutUsText">Check out the new test creation app! I already downloaded it, and you?</string>
     <string name="test_was_deleted_previously">Oops… it seems this test has been deleted</string>
+    <string name="helptitle">helpTitle</string>
+    <string name="welcome">Welcome, </string>
+    <string name="sign_in">Sign In</string>
+    <string name="anonymous">Anonymous</string>
 </resources>
