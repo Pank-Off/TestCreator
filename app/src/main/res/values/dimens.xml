@@ -22,4 +22,7 @@
     <dimen name="card_elevation">8dp</dimen>
     <dimen name="delete_icon_elevation">8dp</dimen>
     <dimen name="padding_end_card_title">16dp</dimen>
+    <dimen name="margin_btn_sign_in">50dp</dimen>
+    <dimen name="margin_bottom_anonymous">100dp</dimen>
+    <dimen name="app_title_size">50sp</dimen>
 </resources>

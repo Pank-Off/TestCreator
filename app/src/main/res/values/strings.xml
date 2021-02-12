@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Test for everyone</string>
+    <string name="app_name" translatable="false">Quiz Maker</string>
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="nav_header_title">Test For Everyone</string>
@@ -89,6 +89,7 @@
     <string name="test_was_deleted_previously">Oops… it seems this test has been deleted</string>
     <string name="helptitle">helpTitle</string>
     <string name="welcome">Welcome, </string>
-    <string name="sign_in">Sign In</string>
-    <string name="anonymous">Anonymous</string>
+    <string name="sign_in">Log in via Google or email</string>
+    <string name="anonymous">Log in with an anonymous account</string>
+
 </resources>
