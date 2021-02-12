@@ -84,4 +84,7 @@
     <string name="test_was_deleted_previously">Упс… кажется этот тест был удален</string>
 
     <string name="welcome">Добро пожаловать, </string>
+
+    <string name="sign_in">Войти через Google или почту</string>
+    <string name="anonymous">Войти под анонимной учетной записью</string>
 </resources>

@@ -47,9 +47,7 @@ object DependencyGraph {
                 ShowResultViewModel(get(), result)
             }
 
-            viewModel { (user: FirebaseUser) ->
-                SplashViewModel(user)
-            }
+            viewModel { SplashViewModel() }
         }
     }
 

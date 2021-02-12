@@ -22,7 +22,7 @@ open class BaseActivity : AppCompatActivity() {
         startActivityForResult(
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
-                .setLogo(R.drawable.ic_menu_camera)
+                .setLogo(R.drawable.ic_title_icon)
                 .setTheme(AuthUI.getDefaultTheme())
                 .setAvailableProviders(providers)
                 .build(),
