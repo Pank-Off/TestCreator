@@ -56,9 +56,11 @@ class MainActivity : AppCompatActivity() {
         )
 
         currentUser?.let {
+            val name =
+                if (currentUser?.displayName == null) resources.getString(R.string.anonymous) else currentUser?.displayName
             navView.menu.findItem(R.id.nav_log_out).title = getString(R.string.log_out)
             navigationDrawerLayout.findViewById<TextView>(R.id.auth_text_view).text =
-                String.format(getString(R.string.welcome) + currentUser?.displayName)
+                String.format(getString(R.string.welcome) + name)
             Log.d(javaClass.simpleName, "PhotoURL: ${currentUser?.photoUrl}")
             navigationDrawerLayout.findViewById<ImageView>(R.id.avatarView)
                 .setImageURI(currentUser?.photoUrl)
@@ -147,11 +149,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun onLogout() {
         AuthUI.getInstance()
-            .signOut(this)
+            .signOut(this@MainActivity)
             .addOnCompleteListener {
-                startActivity(Intent(this, SplashActivity::class.java))
+                startActivity(Intent(this@MainActivity, SplashActivity::class.java))
                 finish()
             }
     }
-
 }
