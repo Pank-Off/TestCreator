@@ -85,6 +85,7 @@ class YourTestsFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
         inflater.inflate(R.menu.main, menu)
+        menu.findItem(R.id.help).isVisible = false
         val searchItem: MenuItem = menu.findItem(R.id.search)
         // Associate searchable configuration with the SearchView
         val searchManager =

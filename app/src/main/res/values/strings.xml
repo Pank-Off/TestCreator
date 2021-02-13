@@ -91,5 +91,9 @@
     <string name="welcome">Welcome, </string>
     <string name="sign_in">Log in via Google or email</string>
     <string name="anonymous">Log in with an anonymous account</string>
-
+    <string name="internet_unavailable">The Internet is not available. Check the connection</string>
+    <string name="help_dialog_title">Help dialog</string>
+    <string name="help_dialog_delete_text">Delete the last question</string>
+    <string name="help_dialog_add_text">Add a question to the end</string>
+    <string name="help_dialog_next_text">Go to the next step</string>
 </resources>
