@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Toast
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.errors.NoAuthException
@@ -44,12 +44,20 @@ class SplashActivity : BaseActivity() {
         Log.d(javaClass.simpleName, "ResultCode: $resultCode")
         when {
             requestCode != RC_SIGN_IN -> return
-            resultCode != RESULT_OK -> Toast.makeText(
-                this,
-                getString(R.string.internet_unavailable),
-                Toast.LENGTH_SHORT
-            ).show()
+            resultCode != RESULT_OK -> showLogInOfflineDialog()
             resultCode == RESULT_OK -> renderData(splashViewModel.getCurrentUser())
         }
+    }
+
+    private fun showLogInOfflineDialog() {
+        MaterialAlertDialogBuilder(this@SplashActivity)
+            .setTitle(resources.getString(R.string.logInOfflineTitleText))
+            .setMessage(resources.getString(R.string.logInOfflineMessage))
+            .setNegativeButton(resources.getString(R.string.decline)) { _, _ ->
+                // Respond to negative button press
+            }
+            .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
+                renderData(null)
+            }.show()
     }
 }

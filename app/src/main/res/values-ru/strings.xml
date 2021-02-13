@@ -83,14 +83,19 @@
     <string name="shareAboutUsText">Зацени новое приложение для создания тестов! Я уже скачал, а ты?</string>
     <string name="test_was_deleted_previously">Упс… кажется этот тест был удален</string>
 
-    <string name="welcome">Добро пожаловать, </string>
+    <string name="welcome">Добро пожаловать,\u00A0</string>
 
     <string name="sign_in">Войти через Google или почту</string>
-    <string name="anonymous">Войти под анонимной учетной записью</string>
+    <string name="anonymous_text">Войти под анонимной учетной записью</string>
+    <string name="anonymous"> Аноним</string>
     <string name="internet_unavailable">Интернет недоступен. Проверьте соединение</string>
 
     <string name="help_dialog_title">Справочное окно</string>
     <string name="help_dialog_delete_text">Удалить последний вопрос</string>
     <string name="help_dialog_add_text">Добавить вопрос в конец</string>
     <string name="help_dialog_next_text">Перейти на следующий шаг</string>
+
+    <string name="logInOfflineTitleText">Войти в оффлайн режиме?</string>
+    <string name="logInOfflineMessage">Интернет недоступен. Вы можете зайти в оффлайн режиме, но тогда вы не сможете решать тесты других людей, делиться своими тестами</string>
+
 </resources>

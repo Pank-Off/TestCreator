@@ -88,12 +88,16 @@
     <string name="shareAboutUsText">Check out the new test creation app! I already downloaded it, and you?</string>
     <string name="test_was_deleted_previously">Oops… it seems this test has been deleted</string>
     <string name="helptitle">helpTitle</string>
-    <string name="welcome">Welcome, </string>
+    <string name="welcome">Welcome,\u00A0</string>
     <string name="sign_in">Log in via Google or email</string>
-    <string name="anonymous">Log in with an anonymous account</string>
+    <string name="anonymous_text">Log in with an anonymous account</string>
+
+    <string name="anonymous"> Anonymous</string>
     <string name="internet_unavailable">The Internet is not available. Check the connection</string>
     <string name="help_dialog_title">Help dialog</string>
     <string name="help_dialog_delete_text">Delete the last question</string>
     <string name="help_dialog_add_text">Add a question to the end</string>
     <string name="help_dialog_next_text">Go to the next step</string>
+    <string name="logInOfflineTitleText">Log in to offline mode</string>
+    <string name="logInOfflineMessage">The Internet is not available. You can go offline, but then you won\'t be able to solve other people\'s tests, share your tests</string>
 </resources>

@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 import ru.punkoff.testforeveryone.data.errors.NoAuthException
 
@@ -36,6 +35,11 @@ class SplashViewModel(private val mAuth: FirebaseAuth = FirebaseAuth.getInstance
                         Log.w(javaClass.simpleName, "signInAnonymously:failure", task.exception)
                     }
                 }
+//            if (currentUser == null) {
+//                viewStateLiveData.value =
+//                    SplashViewState.Error(error = NoAuthException())
+//            }
+
         }
 
     }
