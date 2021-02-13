@@ -2,9 +2,11 @@ package ru.punkoff.testforeveryone.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.errors.NoAuthException
 import ru.punkoff.testforeveryone.databinding.ActivitySplashBinding
 
@@ -39,11 +41,12 @@ class SplashActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        Log.d(javaClass.simpleName, "ResultCode: $resultCode")
         when {
             requestCode != RC_SIGN_IN -> return
             resultCode != RESULT_OK -> Toast.makeText(
                 this,
-                "Internet unavailable",
+                getString(R.string.internet_unavailable),
                 Toast.LENGTH_SHORT
             ).show()
             resultCode == RESULT_OK -> renderData(splashViewModel.getCurrentUser())

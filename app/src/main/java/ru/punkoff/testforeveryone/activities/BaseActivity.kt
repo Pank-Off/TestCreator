@@ -23,7 +23,7 @@ open class BaseActivity : AppCompatActivity() {
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setLogo(R.drawable.ic_title_icon)
-                .setTheme(AuthUI.getDefaultTheme())
+                .setTheme(R.style.Theme_TestForEveryone)
                 .setAvailableProviders(providers)
                 .build(),
             RC_SIGN_IN
@@ -56,5 +56,4 @@ open class BaseActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_USER = "EXTRA_USER"
     }
-
 }

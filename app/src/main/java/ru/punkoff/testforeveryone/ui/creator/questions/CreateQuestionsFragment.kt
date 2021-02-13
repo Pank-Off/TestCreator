@@ -1,21 +1,22 @@
 package ru.punkoff.testforeveryone.ui.creator.questions
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AnimationUtils.loadAnimation
+import android.widget.Toast
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fab_layout.*
 import kotlinx.android.synthetic.main.fragment_create_questions.*
 import kotlinx.android.synthetic.main.item_fragment_questions.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import ru.punkoff.testforeveryone.activities.MainActivity
 import ru.punkoff.testforeveryone.R
+import ru.punkoff.testforeveryone.activities.MainActivity
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.data.TempTest.Companion.EXTRA_TEMP_TEST
 import ru.punkoff.testforeveryone.databinding.FragmentCreateQuestionsBinding
@@ -40,7 +41,6 @@ class CreateQuestionsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentCreateQuestionsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -48,6 +48,7 @@ class CreateQuestionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setHasOptionsMenu(true)
         createQuestionsViewModel.clearQuestionsList()
         if (count == 0) {
             addQuestionFragmentToContainer()
@@ -147,5 +148,22 @@ class CreateQuestionsFragment : Fragment() {
 
     private fun navigateToNextStepResult(test: TempTest) {
         (requireActivity() as MainActivity).navigateToNextStepResult(test)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main, menu)
+        menu.findItem(R.id.search).isVisible = false
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.help -> context?.let {
+                MaterialAlertDialogBuilder(it).setView(R.layout.help_dialog_fragment_layout).show()
+            }
+            android.R.id.home -> findNavController().popBackStack()
+        }
+
+        return true
     }
 }

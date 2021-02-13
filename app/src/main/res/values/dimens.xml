@@ -25,4 +25,6 @@
     <dimen name="margin_btn_sign_in">50dp</dimen>
     <dimen name="margin_bottom_anonymous">100dp</dimen>
     <dimen name="app_title_size">50sp</dimen>
+    <dimen name="help_dialog_title_margin">20dp</dimen>
+    <dimen name="help_dialog_text_size">24sp</dimen>
 </resources>
