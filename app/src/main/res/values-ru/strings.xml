@@ -76,7 +76,7 @@
     <string name="log_in">Авторизоваться</string>
     <string name="login_dialog_message">Для того чтобы решать тесты других пользователей и делиться своими необходимо авторизоваться</string>
     <string name="login_dialog_title">Авторизация?</string>
-    <string name="logout_dialog_message">Все ваши заметки будут сохранены. Вы сможете получить к ним доступ после входа в систему.</string>
+    <string name="logout_dialog_message">Все ваши тесты будут сохранены. Вы сможете получить к ним доступ после входа в систему.</string>
     <string name="logout_dialog_title">Выйти из аккаунта?</string>
     <string name="more_detailed">Подробнее</string>
 
@@ -97,5 +97,8 @@
 
     <string name="logInOfflineTitleText">Войти в оффлайн режиме?</string>
     <string name="logInOfflineMessage">Интернет недоступен. Вы можете зайти в оффлайн режиме, но тогда вы не сможете решать тесты других людей, делиться своими тестами</string>
+
+    <string name="cloud_save_title">Поделиться тестом с другими пользователями?</string>
+    <string name="cloud_save_message">Это даст возможность другим людям проходить ваш тест. Именно благодаря этому вы так же решаете тесты других людей =)</string>
 
 </resources>

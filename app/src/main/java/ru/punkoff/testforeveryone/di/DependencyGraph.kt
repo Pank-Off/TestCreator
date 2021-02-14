@@ -1,6 +1,7 @@
 package ru.punkoff.testforeveryone.di
 
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
@@ -10,6 +11,8 @@ import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.data.local.DatabaseProvider
 import ru.punkoff.testforeveryone.data.local.LocalDatabase
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
+import ru.punkoff.testforeveryone.data.remote.FirebaseDatabaseProvider
+import ru.punkoff.testforeveryone.data.remote.FirebaseProvider
 import ru.punkoff.testforeveryone.ui.all_tests.AllTestsViewModel
 import ru.punkoff.testforeveryone.ui.creator.CreatorViewModel
 import ru.punkoff.testforeveryone.ui.creator.questions.CreateQuestionsViewModel
@@ -24,6 +27,13 @@ import ru.punkoff.testforeveryone.ui.your_tests.play_test.result.ShowResultViewM
 import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestViewModel
 
 object DependencyGraph {
+
+    private val fireStoreDatabaseProviderModule by lazy {
+        module {
+            single { FirebaseFirestore.getInstance() }
+            single { FirebaseAuth.getInstance() }
+        }
+    }
     private val viewModelModule by lazy {
         module {
             viewModel { AllTestsViewModel() }
@@ -31,7 +41,7 @@ object DependencyGraph {
                 CreateQuestionsViewModel(test)
             }
             viewModel { (test: TempTest) ->
-                CreateResultsViewModel(get(), test)
+                CreateResultsViewModel(get(), get(), test)
             }
             viewModel { CreatorViewModel() }
             viewModel { GoogleAuthViewModel() }
@@ -54,8 +64,9 @@ object DependencyGraph {
     private val dataBaseModule by lazy {
         module {
             single { LocalDatabase() } bind DatabaseProvider::class
+            single { FirebaseDatabaseProvider(get(), get()) } bind FirebaseProvider::class
         }
     }
 
-    val modules = listOf(viewModelModule, dataBaseModule)
+    val modules = listOf(viewModelModule, dataBaseModule, fireStoreDatabaseProviderModule)
 }

@@ -8,10 +8,13 @@ import kotlinx.coroutines.launch
 import ru.punkoff.testforeveryone.data.DataHelper
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.data.local.DatabaseProvider
+import ru.punkoff.testforeveryone.data.remote.FirebaseProvider
 import ru.punkoff.testforeveryone.model.Result
 
 class CreateResultsViewModel(
-    private val databaseHelper: DatabaseProvider, test: TempTest
+    private val databaseHelper: DatabaseProvider,
+    private val firebaseProvider: FirebaseProvider,
+    test: TempTest
 ) : ViewModel() {
 
     private val resultsLiveData = MutableLiveData<List<Result>>()
@@ -27,6 +30,12 @@ class CreateResultsViewModel(
         testLiveData.value?.setDataCreate(date)
         viewModelScope.launch {
             testLiveData.value?.getTest()?.let { databaseHelper.saveTest(it) }
+        }
+    }
+
+    fun pushTest() {
+        viewModelScope.launch {
+            testLiveData.value?.getTest()?.let { firebaseProvider.pushTest(it) }
         }
     }
 
