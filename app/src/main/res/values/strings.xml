@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">Quiz Maker</string>
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
-    <string name="nav_header_title">Test For Everyone</string>
+    <string name="nav_header_title">Quiz Maker</string>
     <string name="nav_header_subtitle">You are not authorized</string>
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings" translatable="false">Settings</string>

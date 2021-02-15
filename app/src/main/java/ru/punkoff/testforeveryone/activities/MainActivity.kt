@@ -18,8 +18,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseUser
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.punkoff.testforeveryone.R
+import ru.punkoff.testforeveryone.data.GlideLoader
 import ru.punkoff.testforeveryone.data.TempResult
 import ru.punkoff.testforeveryone.data.TempResult.Companion.EXTRA_TEMP_RESULT
 import ru.punkoff.testforeveryone.data.TempTest
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
 
-    private var currentUser: FirebaseUser? = null
+    private val mainViewModel by viewModel<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
@@ -45,25 +46,28 @@ class MainActivity : AppCompatActivity() {
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
+        val navViewLogOutItem = navView.menu.findItem(R.id.nav_log_out)
         val navigationDrawerLayout = navView.getHeaderView(0)
+        val navigationDrawerLayoutAuthTextView =
+            navigationDrawerLayout.findViewById<TextView>(R.id.auth_text_view)
+        val navigationDrawerLayoutAvatarView =
+            navigationDrawerLayout.findViewById<ImageView>(R.id.avatarView)
         navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        currentUser = intent.extras?.getParcelable(BaseActivity.EXTRA_USER)
-        Log.d(
-            javaClass.simpleName,
-            "INTENT Extras: ${intent.extras?.getParcelable<FirebaseUser?>(BaseActivity.EXTRA_USER)}"
-        )
 
-        currentUser?.let {
-            val name =
-                if (currentUser?.displayName == null) resources.getString(R.string.anonymous) else currentUser?.displayName
-            navView.menu.findItem(R.id.nav_log_out).title = getString(R.string.log_out)
-            navigationDrawerLayout.findViewById<TextView>(R.id.auth_text_view).text =
-                String.format(getString(R.string.welcome) + name)
-            Log.d(javaClass.simpleName, "PhotoURL: ${currentUser?.photoUrl}")
-            navigationDrawerLayout.findViewById<ImageView>(R.id.avatarView)
-                .setImageURI(currentUser?.photoUrl)
+        mainViewModel.observeCurrentUser().observe(this) {
+            it?.let { currentUser ->
+                val name =
+                    if (currentUser.displayName == null) resources.getString(R.string.anonymous) else currentUser.displayName
+                navViewLogOutItem.title = getString(R.string.log_out)
+                navigationDrawerLayoutAuthTextView.text =
+                    String.format(getString(R.string.welcome) + name)
+                Log.d(javaClass.simpleName, "PhotoURL: ${currentUser.photoUrl}")
+                currentUser.photoUrl?.let { photoUrl ->
+                    GlideLoader.loadImage(this, photoUrl, navigationDrawerLayoutAvatarView)
+                }
+            }
         }
 
         appBarConfiguration = AppBarConfiguration(
@@ -132,9 +136,11 @@ class MainActivity : AppCompatActivity() {
     fun showLogoutDialog() {
         var logTitleText = resources.getString(R.string.login_dialog_title)
         var logMessageText = resources.getString(R.string.login_dialog_message)
-        currentUser?.let {
-            logTitleText = resources.getString(R.string.logout_dialog_title)
-            logMessageText = resources.getString(R.string.logout_dialog_message)
+        mainViewModel.observeCurrentUser().observe(this) {
+            it?.let {
+                logTitleText = resources.getString(R.string.logout_dialog_title)
+                logMessageText = resources.getString(R.string.logout_dialog_message)
+            }
         }
         MaterialAlertDialogBuilder(this)
             .setTitle(logTitleText)

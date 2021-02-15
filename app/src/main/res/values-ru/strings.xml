@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Quiz Maker</string>
+    <string name="nav_header_subtitle">Вы не авторизованы</string>
 
     <string name="menu_all_tests">Все тесты</string>
     <string name="menu_your_tests">Ваши тесты</string>

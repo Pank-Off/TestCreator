@@ -35,15 +35,6 @@ class SplashViewModel(private val mAuth: FirebaseAuth = FirebaseAuth.getInstance
                         Log.w(javaClass.simpleName, "signInAnonymously:failure", task.exception)
                     }
                 }
-//            if (currentUser == null) {
-//                viewStateLiveData.value =
-//                    SplashViewState.Error(error = NoAuthException())
-//            }
-
         }
-
     }
-
-    @JvmName("getCurrentUser1")
-    fun getCurrentUser() = currentUser
 }

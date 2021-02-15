@@ -10,7 +10,6 @@ import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.errors.NoAuthException
 import ru.punkoff.testforeveryone.databinding.ActivitySplashBinding
 
-
 class SplashActivity : BaseActivity() {
     private lateinit var binding: ActivitySplashBinding
 
@@ -34,7 +33,7 @@ class SplashActivity : BaseActivity() {
         splashViewModel.observeViewState().observe(this@SplashActivity) {
             when (it) {
                 is SplashViewState.Error -> renderError(NoAuthException())
-                SplashViewState.Auth -> renderData(splashViewModel.getCurrentUser())
+                SplashViewState.Auth -> renderData()
             }
         }
     }
@@ -45,7 +44,7 @@ class SplashActivity : BaseActivity() {
         when {
             requestCode != RC_SIGN_IN -> return
             resultCode != RESULT_OK -> showLogInOfflineDialog()
-            resultCode == RESULT_OK -> renderData(splashViewModel.getCurrentUser())
+            resultCode == RESULT_OK -> renderData()
         }
     }
 
@@ -57,7 +56,7 @@ class SplashActivity : BaseActivity() {
                 // Respond to negative button press
             }
             .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
-                renderData(null)
+                renderData()
             }.show()
     }
 }
