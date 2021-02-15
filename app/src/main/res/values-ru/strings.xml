@@ -100,5 +100,5 @@
 
     <string name="cloud_save_title">Поделиться тестом с другими пользователями?</string>
     <string name="cloud_save_message">Это даст возможность другим людям проходить ваш тест. Именно благодаря этому вы так же решаете тесты других людей =)</string>
-
+    <string name="you_are_not_logged_in">Вы не авторизованы</string>
 </resources>

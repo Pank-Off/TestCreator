@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                //  R.id.nav_all_tests,
+                R.id.nav_all_tests,
                 R.id.nav_your_tests,
                 R.id.nav_results,
                 R.id.nav_creator,

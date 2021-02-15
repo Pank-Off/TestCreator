@@ -102,4 +102,5 @@
     <string name="logInOfflineMessage">The Internet is not available. You can go offline, but then you won\'t be able to solve other people\'s tests, share your tests</string>
     <string name="cloud_save_title">Share the test with other users?</string>
     <string name="cloud_save_message">This will enable other people to take your test. It is because of this that you also solve other people\'s tests =)</string>
+    <string name="you_are_not_logged_in">You are not logged in</string>
 </resources>

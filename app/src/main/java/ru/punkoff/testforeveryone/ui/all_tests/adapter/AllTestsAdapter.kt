@@ -1,4 +1,4 @@
-package ru.punkoff.testforeveryone.ui.your_tests.adapter
+package ru.punkoff.testforeveryone.ui.all_tests.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.data.local.room.mapToColor
 import ru.punkoff.testforeveryone.databinding.ItemTestBinding
+import ru.punkoff.testforeveryone.ui.your_tests.adapter.Listener
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -25,14 +27,12 @@ val DIFF_UTIL: DiffUtil.ItemCallback<TestEntity> = object : DiffUtil.ItemCallbac
     }
 }
 
-class YourTestsAdapter : ListAdapter<TestEntity, YourTestsAdapter.TestsViewHolder>(DIFF_UTIL),
+class AllTestsAdapter : ListAdapter<TestEntity, AllTestsAdapter.TestsViewHolder>(DIFF_UTIL),
     Filterable {
     private lateinit var testsListFiltered: List<TestEntity>
     private lateinit var listener: Listener
 
     private var firstStart = true
-    private var successDelete = false
-    private lateinit var deleteCardListener: DeleteCardListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestsViewHolder {
         return TestsViewHolder(parent)
     }
@@ -45,18 +45,11 @@ class YourTestsAdapter : ListAdapter<TestEntity, YourTestsAdapter.TestsViewHolde
         this.listener = listener
     }
 
-    fun attachDeleteListener(listener: DeleteCardListener) {
-        deleteCardListener = listener
-    }
-
     override fun getItemCount(): Int {
         if (firstStart) {
             testsListFiltered = currentList
         }
-        if (successDelete) {
-            testsListFiltered = testsListFiltered.filter { currentList.contains(it) }
-            successDelete = false
-        }
+        testsListFiltered = testsListFiltered.filter { currentList.contains(it) }
         return testsListFiltered.size
     }
 
@@ -70,10 +63,6 @@ class YourTestsAdapter : ListAdapter<TestEntity, YourTestsAdapter.TestsViewHolde
             listener.onClick(currentTest)
         }
 
-        private val deleteCardClickListener: View.OnClickListener = View.OnClickListener {
-            deleteCardListener.onClick(currentTest)
-            successDelete = true
-        }
         private lateinit var currentTest: TestEntity
 
         fun bind(item: TestEntity) {
@@ -85,7 +74,7 @@ class YourTestsAdapter : ListAdapter<TestEntity, YourTestsAdapter.TestsViewHolde
                 dataPlay.text = item.createData
                 cardViewBackground.setBackgroundResource(item.color.mapToColor())
                 playBtn.setOnClickListener(clickListener)
-                deleteIcon.setOnClickListener(deleteCardClickListener)
+                deleteIcon.visibility = ImageView.GONE
             }
         }
     }

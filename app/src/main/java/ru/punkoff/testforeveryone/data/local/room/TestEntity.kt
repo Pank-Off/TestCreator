@@ -27,8 +27,9 @@ data class TestEntity(
     var createData: String,
     var color: Color = Color.values().toList().shuffled().first(),
     val testId: Long = idTest,
-) : Parcelable
-
+) : Parcelable {
+    constructor() : this(0, "", "", emptyList(), emptyList(), 0, "")
+}
 
 fun Color.mapToColor(): Int {
 

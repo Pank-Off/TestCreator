@@ -37,7 +37,7 @@ object DependencyGraph {
     }
     private val viewModelModule by lazy {
         module {
-            viewModel { AllTestsViewModel() }
+            viewModel { AllTestsViewModel(get()) }
             viewModel { (test: TempTest) ->
                 CreateQuestionsViewModel(test)
             }
