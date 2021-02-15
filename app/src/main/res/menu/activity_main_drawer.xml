@@ -4,10 +4,10 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <!--        <item-->
-        <!--            android:id="@+id/nav_all_tests"-->
-        <!--            android:icon="@android:drawable/ic_media_play"-->
-        <!--            android:title="@string/menu_all_tests" />-->
+        <item
+            android:id="@+id/nav_all_tests"
+            android:icon="@android:drawable/ic_media_play"
+            android:title="@string/menu_all_tests" />
         <item
             android:id="@+id/nav_your_tests"
             android:icon="@drawable/ic_casino_black_24dp"

@@ -5,11 +5,11 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_your_tests">
 
-    <!--    <fragment-->
-    <!--        android:id="@+id/nav_all_tests"-->
-    <!--        android:name="ru.punkoff.testforeveryone.ui.all_tests.AllTestsFragment"-->
-    <!--        android:label="@string/menu_all_tests"-->
-    <!--        tools:layout="@layout/fragment_all_tests" />-->
+    <fragment
+        android:id="@+id/nav_all_tests"
+        android:name="ru.punkoff.testforeveryone.ui.all_tests.AllTestsFragment"
+        android:label="@string/menu_all_tests"
+        tools:layout="@layout/fragment_all_tests" />
 
     <fragment
         android:id="@+id/nav_your_tests"

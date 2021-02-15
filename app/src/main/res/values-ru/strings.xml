@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Quiz Maker</string>
+    <string name="nav_header_subtitle">Вы не авторизованы</string>
 
     <string name="menu_all_tests">Все тесты</string>
     <string name="menu_your_tests">Ваши тесты</string>
@@ -100,5 +100,5 @@
 
     <string name="cloud_save_title">Поделиться тестом с другими пользователями?</string>
     <string name="cloud_save_message">Это даст возможность другим людям проходить ваш тест. Именно благодаря этому вы так же решаете тесты других людей =)</string>
-
+    <string name="you_are_not_logged_in">Вы не авторизованы</string>
 </resources>

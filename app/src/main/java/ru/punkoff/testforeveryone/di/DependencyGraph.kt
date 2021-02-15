@@ -5,6 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
+import ru.punkoff.testforeveryone.activities.MainViewModel
 import ru.punkoff.testforeveryone.activities.SplashViewModel
 import ru.punkoff.testforeveryone.data.TempResult
 import ru.punkoff.testforeveryone.data.TempTest
@@ -36,7 +37,7 @@ object DependencyGraph {
     }
     private val viewModelModule by lazy {
         module {
-            viewModel { AllTestsViewModel() }
+            viewModel { AllTestsViewModel(get()) }
             viewModel { (test: TempTest) ->
                 CreateQuestionsViewModel(test)
             }
@@ -58,6 +59,7 @@ object DependencyGraph {
             }
 
             viewModel { SplashViewModel() }
+            viewModel { MainViewModel() }
         }
     }
 

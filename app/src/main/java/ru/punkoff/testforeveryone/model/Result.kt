@@ -5,8 +5,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Result(
-    val from: String,
-    val to: String,
-    val title: String,
-    val description: String
+    val from: String = "",
+    val to: String = "",
+    val title: String = "",
+    val description: String = ""
 ) : Parcelable
