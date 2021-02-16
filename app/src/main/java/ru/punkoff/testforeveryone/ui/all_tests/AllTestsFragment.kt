@@ -9,7 +9,6 @@ import android.widget.ProgressBar
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_all_tests.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,6 +49,10 @@ class AllTestsFragment : Fragment() {
         with(binding) {
             listTests.adapter = adapter
             listTests.layoutManager = LinearLayoutManager(context)
+            swipeRefreshLayout.setOnRefreshListener {
+                allTestsViewModel.getRequest()
+                swipeRefreshLayout.isRefreshing = false
+            }
         }
 
         allTestsViewModel.observeViewState().observe(viewLifecycleOwner) {

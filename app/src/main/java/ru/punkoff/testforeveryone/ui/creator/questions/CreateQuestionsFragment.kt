@@ -3,7 +3,6 @@ package ru.punkoff.testforeveryone.ui.creator.questions
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils.loadAnimation
-import android.widget.Toast
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
