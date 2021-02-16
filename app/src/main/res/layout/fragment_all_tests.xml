@@ -6,10 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.all_tests.AllTestsFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_tests"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_tests"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/loading_progress_bar"
