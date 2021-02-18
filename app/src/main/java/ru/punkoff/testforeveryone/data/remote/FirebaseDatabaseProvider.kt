@@ -77,6 +77,6 @@ class FirebaseDatabaseProvider(
     }
 
     private fun getUserTestCollection() = currentUser?.let {
-        firestore.collection(USERS_COLLECTION)//.document(it.uid).collection(TESTS_COLLECTION)
+        firestore.collection(TESTS_COLLECTION)//.document(it.uid).collection(TESTS_COLLECTION)
     } ?: throw NoAuthException()
 }

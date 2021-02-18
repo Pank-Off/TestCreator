@@ -5,8 +5,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
-import ru.punkoff.testforeveryone.activities.MainViewModel
-import ru.punkoff.testforeveryone.activities.SplashViewModel
+import ru.punkoff.testforeveryone.ui.activities.MainViewModel
+import ru.punkoff.testforeveryone.ui.activities.SplashViewModel
 import ru.punkoff.testforeveryone.data.TempResult
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.data.local.DatabaseProvider
@@ -14,18 +14,18 @@ import ru.punkoff.testforeveryone.data.local.LocalDatabase
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.data.remote.FirebaseDatabaseProvider
 import ru.punkoff.testforeveryone.data.remote.FirebaseProvider
-import ru.punkoff.testforeveryone.ui.all_tests.AllTestsViewModel
-import ru.punkoff.testforeveryone.ui.creator.CreatorViewModel
-import ru.punkoff.testforeveryone.ui.creator.questions.CreateQuestionsViewModel
-import ru.punkoff.testforeveryone.ui.creator.results.CreateResultsViewModel
-import ru.punkoff.testforeveryone.ui.google_auth.GoogleAuthViewModel
-import ru.punkoff.testforeveryone.ui.rate_us.RateUsViewModel
-import ru.punkoff.testforeveryone.ui.settings.SettingsViewModel
-import ru.punkoff.testforeveryone.ui.share_about_us.ShareAboutUsViewModel
-import ru.punkoff.testforeveryone.ui.your_results.YourResultsViewModel
-import ru.punkoff.testforeveryone.ui.your_tests.YourTestsViewModel
-import ru.punkoff.testforeveryone.ui.your_tests.play_test.result.ShowResultViewModel
-import ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestViewModel
+import ru.punkoff.testforeveryone.ui.fragments.all_tests.AllTestsViewModel
+import ru.punkoff.testforeveryone.ui.fragments.creator.CreatorViewModel
+import ru.punkoff.testforeveryone.ui.fragments.creator.questions.CreateQuestionsViewModel
+import ru.punkoff.testforeveryone.ui.fragments.creator.results.CreateResultsViewModel
+import ru.punkoff.testforeveryone.ui.fragments.google_auth.GoogleAuthViewModel
+import ru.punkoff.testforeveryone.ui.fragments.rate_us.RateUsViewModel
+import ru.punkoff.testforeveryone.ui.fragments.settings.SettingsViewModel
+import ru.punkoff.testforeveryone.ui.fragments.share_about_us.ShareAboutUsViewModel
+import ru.punkoff.testforeveryone.ui.fragments.your_results.YourResultsViewModel
+import ru.punkoff.testforeveryone.ui.fragments.your_tests.YourTestsViewModel
+import ru.punkoff.testforeveryone.ui.fragments.your_tests.play_test.result.ShowResultViewModel
+import ru.punkoff.testforeveryone.ui.fragments.your_tests.play_test.test.TestViewModel
 
 object DependencyGraph {
 

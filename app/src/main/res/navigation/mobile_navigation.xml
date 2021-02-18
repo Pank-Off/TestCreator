@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/nav_all_tests"
-        android:name="ru.punkoff.testforeveryone.ui.all_tests.AllTestsFragment"
+        android:name="ru.punkoff.testforeveryone.ui.fragments.all_tests.AllTestsFragment"
         android:label="@string/menu_all_tests"
         tools:layout="@layout/fragment_all_tests" />
 
     <fragment
         android:id="@+id/nav_your_tests"
-        android:name="ru.punkoff.testforeveryone.ui.your_tests.YourTestsFragment"
+        android:name="ru.punkoff.testforeveryone.ui.fragments.your_tests.YourTestsFragment"
         android:label="@string/menu_your_tests"
         tools:layout="@layout/fragment_your_tests">
         <action
@@ -26,18 +26,18 @@
 
     <fragment
         android:id="@+id/nav_results"
-        android:name="ru.punkoff.testforeveryone.ui.your_results.YourResultsFragment"
+        android:name="ru.punkoff.testforeveryone.ui.fragments.your_results.YourResultsFragment"
         android:label="@string/menu_your_results"
         tools:layout="@layout/fragment_results" />
     <fragment
         android:id="@+id/nav_share_us"
-        android:name="ru.punkoff.testforeveryone.ui.share_about_us.ShareAboutUsFragment" />
+        android:name="ru.punkoff.testforeveryone.ui.fragments.share_about_us.ShareAboutUsFragment" />
     <fragment
         android:id="@+id/nav_log_out"
-        android:name="ru.punkoff.testforeveryone.ui.google_auth.GoogleAuthFragment" />
+        android:name="ru.punkoff.testforeveryone.ui.fragments.google_auth.GoogleAuthFragment" />
     <fragment
         android:id="@+id/nav_creator"
-        android:name="ru.punkoff.testforeveryone.ui.creator.CreatorFragment"
+        android:name="ru.punkoff.testforeveryone.ui.fragments.creator.CreatorFragment"
         android:label="@string/menu_create_new_test"
         tools:layout="@layout/fragment_creator">
         <action
@@ -47,19 +47,19 @@
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="ru.punkoff.testforeveryone.ui.settings.SettingsFragment"
+        android:name="ru.punkoff.testforeveryone.ui.fragments.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/nav_rate_us"
-        android:name="ru.punkoff.testforeveryone.ui.rate_us.RateUsFragment"
+        android:name="ru.punkoff.testforeveryone.ui.fragments.rate_us.RateUsFragment"
         android:label="@string/menu_rate_us"
         tools:layout="@layout/fragment_rate" />
 
     <fragment
         android:id="@+id/nav_create_questions"
-        android:name="ru.punkoff.testforeveryone.ui.creator.questions.CreateQuestionsFragment"
+        android:name="ru.punkoff.testforeveryone.ui.fragments.creator.questions.CreateQuestionsFragment"
         android:label="@string/menu_create_new_test"
         tools:layout="@layout/fragment_create_questions">
         <action
@@ -69,13 +69,13 @@
 
     <fragment
         android:id="@+id/nav_create_results"
-        android:name="ru.punkoff.testforeveryone.ui.creator.results.CreateResultsFragment"
+        android:name="ru.punkoff.testforeveryone.ui.fragments.creator.results.CreateResultsFragment"
         android:label="@string/menu_create_new_test"
         tools:layout="@layout/fragment_create_results" />
 
     <fragment
         android:id="@+id/nav_pass"
-        android:name="ru.punkoff.testforeveryone.ui.your_tests.play_test.test.TestFragment"
+        android:name="ru.punkoff.testforeveryone.ui.fragments.your_tests.play_test.test.TestFragment"
         android:label="@string/menu_your_tests"
         tools:layout="@layout/fragment_test">
         <action
@@ -84,7 +84,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_show_result"
-        android:name="ru.punkoff.testforeveryone.ui.your_tests.play_test.result.ShowResultFragment"
+        android:name="ru.punkoff.testforeveryone.ui.fragments.your_tests.play_test.result.ShowResultFragment"
         android:label="@string/menu_show_result_fragment">
         <action
             android:id="@+id/action_nav_show_result_to_nav_results"
