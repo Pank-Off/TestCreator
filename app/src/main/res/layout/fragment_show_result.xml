@@ -12,7 +12,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,8 +23,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:padding="24dp"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/score_view"
@@ -35,11 +36,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_view"
         tools:text="You are quite an astute person, if you trusted yourself more, you would achieve better results. Because of uncertainty, you can easily be confused, so you will retract your words, thinking that you were wrong. Why is this happening, because you even know that your intuition does not let you down at all, and the accumulated knowledge is more than enough? It's okay, if you can't find the answer yet, after a little work on yourself, you will still amaze those who doubted you." />
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/restart_btn"
@@ -70,7 +71,6 @@
         android:id="@+id/share_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_share_symbol_icon_icons"
         app:fabSize="mini"

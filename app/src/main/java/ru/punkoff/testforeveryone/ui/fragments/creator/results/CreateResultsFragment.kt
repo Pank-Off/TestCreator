@@ -12,7 +12,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fab_layout.*
 import kotlinx.android.synthetic.main.fragment_create_questions.*
-import kotlinx.android.synthetic.main.item_fragment_results.*
 import kotlinx.android.synthetic.main.item_fragment_results.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -21,9 +20,9 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import ru.punkoff.testforeveryone.R
-import ru.punkoff.testforeveryone.ui.activities.MainActivity
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.databinding.FragmentCreateResultsBinding
+import ru.punkoff.testforeveryone.ui.activities.MainActivity
 
 class CreateResultsFragment : Fragment() {
     private val test: TempTest? by lazy(LazyThreadSafetyMode.NONE) {
@@ -154,10 +153,7 @@ class CreateResultsFragment : Fragment() {
 
 
     private fun saveTest(remoteSave: Boolean) {
-        val correctList = checkValidInput()
-        val correctInput = correctList[0]
-        val correctMaxScore = correctList[1]
-        if (correctMaxScore && correctInput) {
+        if (checkValidInput()) {
             createResultsViewModel.saveTest(resources.getString(R.string.create_test))
             if (remoteSave) {
                 createResultsViewModel.pushTest()
@@ -166,20 +162,11 @@ class CreateResultsFragment : Fragment() {
                 delay(100)
                 navigateToYourTests()
             }
-        } else if (!correctInput) {
-            if (textInputTitle.text.toString() == "") {
-                textInputTitle.error = getString(R.string.input_title)
-            }
-            if (textInputDescription.text.toString() == "") {
-                textInputDescription.error = getString(R.string.input_description)
-            }
         }
     }
 
-    private fun checkValidInput(): List<Boolean> {
-        var correctMaxScore = true
-        var correctInput = true
-
+    private fun checkValidInput(): Boolean {
+        var validInput = true
         for (i in 1..count!!) {
             val frag =
                 childFragmentManager.findFragmentByTag("FragResult $i") as ResultsFragment
@@ -196,6 +183,7 @@ class CreateResultsFragment : Fragment() {
             val scoreFrom = if (textEditTextFrom == "") 0 else textEditTextFrom.toInt()
             val scoreTo = if (textEditTextTo == "") 0 else textEditTextTo.toInt()
             if (emptyTitleInput || emptyDescriptionInput) {
+                validInput = false
                 var snackBarText = getString(R.string.empty_title)
                 if (emptyDescriptionInput) {
                     snackBarText = getString(R.string.empty_description)
@@ -207,31 +195,33 @@ class CreateResultsFragment : Fragment() {
                     frag.view?.textInputTitle?.error = getString(R.string.input_title)
                 }
                 showSnackBar(snackBarText)
-                correctInput = false
 
             } else if (score > maxScore!!) {
+                validInput = false
                 val snackBarText =
                     "${getString(R.string.your_score_is_limited_maxScore)} (${maxScore})"
                 showSnackBar(snackBarText)
-                correctMaxScore = false
 
             } else if (scoreTo - scoreFrom < 0) {
+                validInput = false
                 val snackBarText = getString(R.string.min_score_more_then_max)
                 showSnackBar(snackBarText)
-                correctMaxScore = false
 
             } else if (frag.requireView().textInputTitle.text?.length!! > frag.requireView().textFieldTitle.counterMaxLength) {
-                correctInput = false
+                validInput = false
                 createResultsViewModel.clearResultsList()
             } else if (frag.requireView().textInputDescription.text?.length!! > frag.requireView().textFieldDescription.counterMaxLength) {
-                correctInput = false
+                validInput = false
                 createResultsViewModel.clearResultsList()
+            } else if (textEditTextFrom.isEmpty() || textEditTextTo.isEmpty()) {
+                validInput = false
+                showSnackBar(getString(R.string.input_score))
             } else {
                 createResultsViewModel.setResults(frag)
             }
             Log.d(javaClass.simpleName, "WTF ${frag.requireView().textInputTitle.text?.length}")
         }
-        return listOf(correctInput, correctMaxScore)
+        return validInput
     }
 
     private fun navigateToYourTests() {

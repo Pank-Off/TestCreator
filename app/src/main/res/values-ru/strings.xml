@@ -20,7 +20,7 @@
     <string name="answer_two">B. Быть с ним в стрессовой ситуации.</string>
     <string name="answer_three">C. Выпить с ним, и тогда он "раскроется" во всей красе</string>
     <string name="title">Заголовок</string>
-    <string name="description">Описание</string>
+    <string name="description">Краткое описание</string>
     <string name="next">Далее</string>
     <string name="question">Вопрос</string>
     <string name="add_question">Добавить вопрос</string>
@@ -63,6 +63,7 @@
     <string name="empty_title">Пустой заголовок</string>
     <string name="empty_description">Пустое описание</string>
     <string name="min_score_more_then_max">Может быть, максимальный балл должен быть больше, чем минимальный балл?</string>
+    <string name="input_score">Вы пытаетесь сохранить результат без баллов. Заполните все поля, либо удалите результат</string>
     <string name="sure_without_results">Вы уверены, что хотите сохранить тест без результата?</string>
     <string name="delete_form_result">Удалить результат?</string>
     <string name="start">Начать</string>

@@ -24,7 +24,7 @@
     <string name="answer_two">B. To be with him in a stressful situation.</string>
     <string name="answer_three">C. Drink with him, and then he will "open" in all its glory.</string>
     <string name="title">Title</string>
-    <string name="description">Description</string>
+    <string name="description">Short description</string>
     <string name="next">Next</string>
     <string name="question">Question</string>
     <string name="add_question">Add question</string>
@@ -66,6 +66,7 @@
     <string name="empty_title">Empty Title</string>
     <string name="empty_description">Empty Description</string>
     <string name="min_score_more_then_max">May be max score should be more then min score?</string>
+    <string name="input_score">You try save test with empty score. Input score or delete results</string>
     <string name="sure_without_results">Are you sure, that you save your test without custom results?</string>
     <string name="delete_form_result">Delete results?</string>
     <string name="start">Start</string>
