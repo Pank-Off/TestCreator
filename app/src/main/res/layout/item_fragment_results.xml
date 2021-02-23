@@ -61,7 +61,7 @@
         android:layout_margin="@dimen/textFieldMargin"
         android:hint="@string/title"
         app:counterEnabled="true"
-        app:counterMaxLength="30"
+        app:counterMaxLength="100"
         app:endIconMode="clear_text"
         app:errorEnabled="true"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +71,7 @@
             android:id="@+id/textInputTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="31" />
+            android:maxLength="101" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,7 +83,7 @@
         android:layout_margin="@dimen/textFieldMargin"
         android:hint="@string/description"
         app:counterEnabled="true"
-        app:counterMaxLength="120"
+        app:counterMaxLength="700"
         app:endIconMode="clear_text"
         app:errorEnabled="true"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +93,7 @@
             android:id="@+id/textInputDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="121" />
+            android:maxLength="701" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

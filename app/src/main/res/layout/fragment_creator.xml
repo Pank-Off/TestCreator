@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldTitle"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -13,7 +12,7 @@
         android:layout_margin="@dimen/textFieldMargin"
         android:hint="@string/title"
         app:counterEnabled="true"
-        app:counterMaxLength="30"
+        app:counterMaxLength="100"
         app:endIconMode="clear_text"
         app:errorEnabled="true"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,8 +22,7 @@
             android:id="@+id/textInputTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:maxLength="31" />
+            android:maxLength="101" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -6,13 +6,12 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class GlideLoader {
-    companion object {
-        fun loadImage(context: Context, url: Uri, imageView: ImageView) {
-            Glide.with(context)
-                .load(url)
-                .apply(RequestOptions.circleCropTransform())
-                .into(imageView)
-        }
+object GlideLoader {
+
+    fun loadImage(context: Context, url: Uri, imageView: ImageView) {
+        Glide.with(context)
+            .load(url)
+            .apply(RequestOptions.circleCropTransform())
+            .into(imageView)
     }
 }
