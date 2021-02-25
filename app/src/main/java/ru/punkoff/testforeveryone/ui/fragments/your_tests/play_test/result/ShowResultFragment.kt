@@ -78,22 +78,7 @@ class ShowResultFragment : Fragment() {
                 titleView.text = result?.title
                 bodyView.text = result?.body
                 saveResultBtn.isVisible = false
-                restartBtn.setOnClickListener {
-                    val snackbar = Snackbar.make(
-                        restartBtn,
-                        getString(R.string.test_was_deleted_previously),
-                        Snackbar.LENGTH_SHORT
-                    )
-                    snackbar.anchorView = shareBtn
-                    showResultViewModel.observeTest().observe(viewLifecycleOwner) { test ->
-                        test?.let {
-                            requireActivity().findNavController(R.id.nav_host_fragment)
-                                .popBackStack()
-                            navigateToRestartTest(it)
-                        } ?: snackbar.show()
-                    }
-                }
-
+                restartBtn.isVisible = false
                 shareBtn.setOnClickListener {
                     val shareText = String.format(
                         getString(R.string.i_scored) + " " + result?.score + " " + getString(R.string.points) + " " + getString(

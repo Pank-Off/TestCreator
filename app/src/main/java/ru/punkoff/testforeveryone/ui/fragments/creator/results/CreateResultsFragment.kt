@@ -182,44 +182,49 @@ class CreateResultsFragment : Fragment() {
 
             val scoreFrom = if (textEditTextFrom == "") 0 else textEditTextFrom.toInt()
             val scoreTo = if (textEditTextTo == "") 0 else textEditTextTo.toInt()
-            if (emptyTitleInput || emptyDescriptionInput) {
-                validInput = false
-                var snackBarText = getString(R.string.empty_title)
-                if (emptyDescriptionInput) {
-                    snackBarText = getString(R.string.empty_description)
-                    frag.view?.textInputDescription?.error =
-                        getString(R.string.input_description)
+            when {
+                (emptyTitleInput || emptyDescriptionInput) -> {
+                    validInput = false
+                    var snackBarText = getString(R.string.empty_title)
+                    if (emptyDescriptionInput) {
+                        snackBarText = getString(R.string.empty_description)
+                        frag.view?.textInputDescription?.error =
+                            getString(R.string.input_description)
+                    }
+                    if (emptyTitleInput) {
+                        snackBarText = getString(R.string.empty_title)
+                        frag.view?.textInputTitle?.error = getString(R.string.input_title)
+                    }
+                    showSnackBar(snackBarText)
                 }
-                if (emptyTitleInput) {
-                    snackBarText = getString(R.string.empty_title)
-                    frag.view?.textInputTitle?.error = getString(R.string.input_title)
+                (score > maxScore!!) -> {
+                    validInput = false
+                    val snackBarText =
+                        "${getString(R.string.your_score_is_limited_maxScore)} (${maxScore})"
+                    showSnackBar(snackBarText)
                 }
-                showSnackBar(snackBarText)
+                (scoreTo - scoreFrom < 0) -> {
+                    validInput = false
+                    val snackBarText = getString(R.string.min_score_more_then_max)
+                    showSnackBar(snackBarText)
 
-            } else if (score > maxScore!!) {
-                validInput = false
-                val snackBarText =
-                    "${getString(R.string.your_score_is_limited_maxScore)} (${maxScore})"
-                showSnackBar(snackBarText)
-
-            } else if (scoreTo - scoreFrom < 0) {
-                validInput = false
-                val snackBarText = getString(R.string.min_score_more_then_max)
-                showSnackBar(snackBarText)
-
-            } else if (frag.requireView().textInputTitle.text?.length!! > frag.requireView().textFieldTitle.counterMaxLength) {
-                validInput = false
-                createResultsViewModel.clearResultsList()
-            } else if (frag.requireView().textInputDescription.text?.length!! > frag.requireView().textFieldDescription.counterMaxLength) {
-                validInput = false
-                createResultsViewModel.clearResultsList()
-            } else if (textEditTextFrom.isEmpty() || textEditTextTo.isEmpty()) {
-                validInput = false
-                showSnackBar(getString(R.string.input_score))
-            } else {
-                createResultsViewModel.setResults(frag)
+                }
+                (frag.requireView().textInputTitle.text?.length!! > frag.requireView().textFieldTitle.counterMaxLength) -> {
+                    validInput = false
+                    createResultsViewModel.clearResultsList()
+                }
+                (frag.requireView().textInputDescription.text?.length!! > frag.requireView().textFieldDescription.counterMaxLength) -> {
+                    validInput = false
+                    createResultsViewModel.clearResultsList()
+                }
+                (textEditTextFrom.isEmpty() || textEditTextTo.isEmpty()) -> {
+                    validInput = false
+                    showSnackBar(getString(R.string.input_score))
+                }
+                else -> {
+                    createResultsViewModel.setResults(frag)
+                }
             }
-            Log.d(javaClass.simpleName, "WTF ${frag.requireView().textInputTitle.text?.length}")
         }
         return validInput
     }
