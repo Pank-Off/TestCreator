@@ -54,12 +54,10 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
     }
 
     override fun getItemCount(): Int {
-        if (firstStart) {
-            resultsListFiltered = currentList
-        }
-        if (successDelete) {
-            resultsListFiltered = resultsListFiltered.filter { currentList.contains(it) }
-            successDelete = false
+        resultsListFiltered = if (firstStart) {
+            currentList
+        } else {
+            resultsListFiltered.filter { currentList.contains(it) }
         }
         return resultsListFiltered.size
     }
@@ -100,20 +98,18 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
                 val charString: String = constraint.toString()
                 Log.d(javaClass.simpleName + " charString", charString)
                 Log.d(javaClass.simpleName, currentList.toString())
-                if (charString.isEmpty()) {
-                    resultsListFiltered = currentList
+                resultsListFiltered = if (charString.isEmpty()) {
+                    currentList
                 } else {
                     val filteredList: ArrayList<ResultEntity> = ArrayList()
                     for (result in currentList) {
                         if (result.testTitle.toLowerCase(Locale.ROOT)
                                 .contains(charString.toLowerCase(Locale.ROOT))
                         ) {
-
                             filteredList.add(result)
                         }
                     }
-
-                    resultsListFiltered = filteredList
+                    filteredList
                 }
                 val filterResults = FilterResults()
                 filterResults.values = resultsListFiltered
@@ -123,7 +119,10 @@ class ResultsAdapter : ListAdapter<ResultEntity, ResultsAdapter.ResultsViewHolde
             override fun publishResults(constraint: CharSequence?, results: FilterResults) {
                 resultsListFiltered = results.values as List<ResultEntity>
                 firstStart = false
-                notifyDataSetChanged()
+                if (!successDelete) {
+                    notifyDataSetChanged()
+                    successDelete = false
+                }
             }
         }
     }

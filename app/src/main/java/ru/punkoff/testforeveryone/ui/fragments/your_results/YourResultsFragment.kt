@@ -44,7 +44,7 @@ class YourResultsFragment : Fragment() {
         adapter.attachListener {
             navigateTo(it)
         }
-        adapter.attachDeleteListener {
+        adapter.attachDeleteListener { result ->
             context?.let { it1 ->
                 MaterialAlertDialogBuilder(it1)
                     .setTitle(resources.getString(R.string.title_dialog))
@@ -53,7 +53,7 @@ class YourResultsFragment : Fragment() {
                         // Respond to negative button press
                     }
                     .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
-                        yourResultsViewModel.deleteResult(it.resultId)
+                        yourResultsViewModel.deleteResult(result.resultId)
                     }.show()
             }
         }

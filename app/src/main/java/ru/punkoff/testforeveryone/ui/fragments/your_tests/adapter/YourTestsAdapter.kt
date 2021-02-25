@@ -50,13 +50,10 @@ class YourTestsAdapter : ListAdapter<TestEntity, YourTestsAdapter.TestsViewHolde
     }
 
     override fun getItemCount(): Int {
-        if (firstStart) {
-            testsListFiltered = currentList
-        }
-        if (successDelete) {
-            testsListFiltered = testsListFiltered.filter { currentList.contains(it) }
-            successDelete = false
-        }
+        testsListFiltered = if (firstStart) {
+            currentList
+        } else
+            testsListFiltered.filter { currentList.contains(it) }
         return testsListFiltered.size
     }
 
@@ -97,8 +94,8 @@ class YourTestsAdapter : ListAdapter<TestEntity, YourTestsAdapter.TestsViewHolde
                 val charString: String = constraint.toString()
                 Log.d(javaClass.simpleName + " charString", charString)
                 Log.d(javaClass.simpleName, currentList.toString())
-                if (charString.isEmpty()) {
-                    testsListFiltered = currentList
+                testsListFiltered = if (charString.isEmpty()) {
+                    currentList
                 } else {
                     val filteredList: ArrayList<TestEntity> = ArrayList()
                     for (test in currentList) {
@@ -112,8 +109,7 @@ class YourTestsAdapter : ListAdapter<TestEntity, YourTestsAdapter.TestsViewHolde
                             filteredList.add(test)
                         }
                     }
-
-                    testsListFiltered = filteredList
+                    filteredList
                 }
                 val filterResults = FilterResults()
                 filterResults.values = testsListFiltered
@@ -123,7 +119,10 @@ class YourTestsAdapter : ListAdapter<TestEntity, YourTestsAdapter.TestsViewHolde
             override fun publishResults(constraint: CharSequence?, results: FilterResults) {
                 testsListFiltered = results.values as List<TestEntity>
                 firstStart = false
-                notifyDataSetChanged()
+                if (!successDelete) {
+                    notifyDataSetChanged()
+                    successDelete = false
+                }
             }
         }
     }
