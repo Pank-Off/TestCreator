@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
-            android:text="@string/help_dialog_delete_text"
+            android:text="@string/help_dialog_delete_result_text"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -71,7 +71,7 @@
 
             android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/help_dialog_add_text"
+            android:text="@string/help_dialog_add_result_text"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/fab_margin"
             android:layout_marginBottom="@dimen/fab_margin"
-            android:src="@drawable/ic_arrow_right_alt_black_24dp"
+            android:src="@android:drawable/ic_menu_save"
             app:fabSize="mini"
             app:tint="@color/white" />
 
@@ -98,7 +98,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/help_dialog_next_text"
+            android:text="@string/help_dialog_save_text"
             android:textSize="16sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
