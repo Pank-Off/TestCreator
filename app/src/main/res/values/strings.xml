@@ -96,12 +96,16 @@
     <string name="anonymous"> Anonymous</string>
     <string name="internet_unavailable">The Internet is not available. Check the connection</string>
     <string name="help_dialog_title">Help dialog</string>
-    <string name="help_dialog_delete_text">Delete the last question</string>
-    <string name="help_dialog_add_text">Add a question to the end</string>
+    <string name="help_dialog_delete_question_text">Delete the last question</string>
+    <string name="help_dialog_add_question_text">Add a question to the end</string>
     <string name="help_dialog_next_text">Go to the next step</string>
+    <string name="help_dialog_delete_result_text">Delete the last result</string>
+    <string name="help_dialog_add_result_text">Add a result to the end</string>
+    <string name="help_dialog_save_text">Save test</string>
     <string name="logInOfflineTitleText">Log in to offline mode</string>
-    <string name="logInOfflineMessage">The Internet is not available. You can go offline, but then you won\'t be able to solve other people\'s tests, share your tests</string>
+    <string name="logInOfflineMessage">You can go offline, but then you won\'t be able to solve other people\'s tests, share your tests</string>
     <string name="cloud_save_title">Share the test with other users?</string>
     <string name="cloud_save_message">This will enable other people to take your test. It is because of this that you also solve other people\'s tests =)</string>
     <string name="you_are_not_logged_in">You are not logged in</string>
+    <string name="offline_mode">Log in to offline mode</string>
 </resources>

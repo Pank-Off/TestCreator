@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun navigateToYourTests() {
-        navController.navigate(R.id.nav_your_tests)
+        navController.popBackStack(R.id.nav_your_tests,false)
     }
 
     fun navigateToShowResultFragment(resultFragment: ShowResultFragment?, result: TempResult?) {
@@ -129,6 +129,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun navigateToYourResults() {
+        navController.popBackStack(R.id.nav_your_tests,false)
         navController.navigate(R.id.nav_results)
     }
 

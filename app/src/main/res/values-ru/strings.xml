@@ -92,14 +92,18 @@
     <string name="internet_unavailable">Интернет недоступен. Проверьте соединение</string>
 
     <string name="help_dialog_title">Справочное окно</string>
-    <string name="help_dialog_delete_text">Удалить последний вопрос</string>
-    <string name="help_dialog_add_text">Добавить вопрос в конец</string>
+    <string name="help_dialog_delete_question_text">Удалить последний вопрос</string>
+    <string name="help_dialog_add_question_text">Добавить вопрос в конец</string>
     <string name="help_dialog_next_text">Перейти на следующий шаг</string>
+    <string name="help_dialog_delete_result_text">Удалить последний результат</string>
+    <string name="help_dialog_add_result_text">Добавить результат в конец</string>
+    <string name="help_dialog_save_text">Сохранить тест</string>
 
     <string name="logInOfflineTitleText">Войти в оффлайн режиме?</string>
-    <string name="logInOfflineMessage">Интернет недоступен. Вы можете зайти в оффлайн режиме, но тогда вы не сможете решать тесты других людей, делиться своими тестами</string>
+    <string name="logInOfflineMessage">Вы можете зайти в оффлайн режиме, но тогда вы не сможете решать тесты других людей, делиться своими тестами</string>
 
     <string name="cloud_save_title">Поделиться тестом с другими пользователями?</string>
     <string name="cloud_save_message">Это даст возможность другим людям проходить ваш тест. Именно благодаря этому вы так же решаете тесты других людей =)</string>
     <string name="you_are_not_logged_in">Вы не авторизованы</string>
+    <string name="offline_mode">Войти в оффлайн режиме</string>
 </resources>

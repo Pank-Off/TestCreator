@@ -37,6 +37,10 @@ class SplashActivity : BaseActivity() {
                     showLogInOfflineDialog()
                 }
             }
+
+            offlineMode.setOnClickListener{
+                showLogInOfflineDialog()
+            }
         }
 
         splashViewModel.observeViewState().observe(this@SplashActivity) {

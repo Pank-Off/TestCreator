@@ -243,7 +243,7 @@ class CreateResultsFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.help -> context?.let {
-                MaterialAlertDialogBuilder(it).setView(R.layout.help_dialog_fragment_layout).show()
+                MaterialAlertDialogBuilder(it).setView(R.layout.help_dialog_fragment_results_layout).show()
             }
             android.R.id.home -> findNavController().popBackStack()
         }
