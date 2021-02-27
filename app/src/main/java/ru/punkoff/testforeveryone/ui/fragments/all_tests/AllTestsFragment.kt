@@ -19,6 +19,7 @@ import ru.punkoff.testforeveryone.databinding.FragmentAllTestsBinding
 import ru.punkoff.testforeveryone.ui.fragments.all_tests.adapter.AllTestsAdapter
 import ru.punkoff.testforeveryone.ui.fragments.your_tests.TestsViewState
 import ru.punkoff.testforeveryone.ui.fragments.your_tests.play_test.test.TestFragment
+import ru.punkoff.testforeveryone.utils.hideKeyboard
 
 class AllTestsFragment : Fragment() {
 
@@ -117,5 +118,10 @@ class AllTestsFragment : Fragment() {
 
     private fun navigateTo(test: TestEntity?) {
         (requireActivity() as MainActivity).navigateTo(TestFragment.create(test))
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard(activity)
     }
 }

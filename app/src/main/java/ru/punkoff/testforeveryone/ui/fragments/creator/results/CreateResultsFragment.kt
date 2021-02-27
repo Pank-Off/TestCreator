@@ -23,6 +23,7 @@ import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.databinding.FragmentCreateResultsBinding
 import ru.punkoff.testforeveryone.ui.activities.MainActivity
+import ru.punkoff.testforeveryone.utils.hideKeyboard
 
 class CreateResultsFragment : Fragment() {
     private val test: TempTest? by lazy(LazyThreadSafetyMode.NONE) {
@@ -246,7 +247,11 @@ class CreateResultsFragment : Fragment() {
             }
             android.R.id.home -> findNavController().popBackStack()
         }
-
         return true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard(activity)
     }
 }
