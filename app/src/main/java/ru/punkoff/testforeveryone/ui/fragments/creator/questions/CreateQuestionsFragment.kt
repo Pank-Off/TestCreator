@@ -19,6 +19,7 @@ import ru.punkoff.testforeveryone.ui.activities.MainActivity
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.data.TempTest.Companion.EXTRA_TEMP_TEST
 import ru.punkoff.testforeveryone.databinding.FragmentCreateQuestionsBinding
+import ru.punkoff.testforeveryone.utils.hideKeyboard
 
 
 class CreateQuestionsFragment : Fragment() {
@@ -162,7 +163,11 @@ class CreateQuestionsFragment : Fragment() {
             }
             android.R.id.home -> findNavController().popBackStack()
         }
-
         return true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard(activity)
     }
 }

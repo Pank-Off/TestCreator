@@ -16,6 +16,7 @@ import ru.punkoff.testforeveryone.data.local.room.ResultEntity
 import ru.punkoff.testforeveryone.databinding.FragmentResultsBinding
 import ru.punkoff.testforeveryone.ui.fragments.your_results.adapter.ResultsAdapter
 import ru.punkoff.testforeveryone.ui.fragments.your_tests.play_test.result.ShowResultFragment
+import ru.punkoff.testforeveryone.utils.hideKeyboard
 
 class YourResultsFragment : Fragment() {
 
@@ -115,5 +116,10 @@ class YourResultsFragment : Fragment() {
         (requireActivity() as MainActivity).navigateToShowResultFragment(
             ShowResultFragment.create(result), null
         )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard(activity)
     }
 }
