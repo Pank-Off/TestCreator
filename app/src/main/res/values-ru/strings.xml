@@ -106,4 +106,9 @@
     <string name="cloud_save_message">Это даст возможность другим людям проходить ваш тест. Именно благодаря этому вы так же решаете тесты других людей =)</string>
     <string name="you_are_not_logged_in">Вы не авторизованы</string>
     <string name="offline_mode">Войти в оффлайн режиме</string>
+
+    <string name="test_with_choice_answer">Тест с выбором ответа</string>
+    <string name="test_with_set_custom_score">Тест с заданным пользовательским счетом</string>
+
+    <string name="select_the_test_type">Выберите тип теста</string>
 </resources>

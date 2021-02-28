@@ -14,11 +14,13 @@
         <activity
             android:name="ru.punkoff.testforeveryone.ui.activities.MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.TestForEveryone.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name="ru.punkoff.testforeveryone.ui.activities.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.TestForEveryone.NoActionBar"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
