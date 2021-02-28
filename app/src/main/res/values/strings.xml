@@ -111,4 +111,5 @@
     <string name="test_with_choice_answer">Test with a choice of answer</string>
     <string name="test_with_set_custom_score">Test with set custom score</string>
     <string name="select_the_test_type">Select the test type</string>
+    <string name="choose_correct_answer">Choose correct answer</string>
 </resources>

@@ -39,6 +39,7 @@ class YourTestsViewModel(private val databaseHelper: DatabaseProvider) : ViewMod
                     test.results,
                     test.maxScore,
                     test.createData,
+                    test.type,
                     test.color,
                     test.testId
                 )

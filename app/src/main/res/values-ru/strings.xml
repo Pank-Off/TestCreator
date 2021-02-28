@@ -111,4 +111,5 @@
     <string name="test_with_set_custom_score">Тест с заданным пользовательским счетом</string>
 
     <string name="select_the_test_type">Выберите тип теста</string>
+    <string name="choose_correct_answer">Отметьте правильный вариант ответа</string>
 </resources>

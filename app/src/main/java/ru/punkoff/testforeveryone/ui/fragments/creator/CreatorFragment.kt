@@ -13,6 +13,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.databinding.FragmentCreatorBinding
+import ru.punkoff.testforeveryone.model.TypeTest
 import ru.punkoff.testforeveryone.ui.activities.MainActivity
 import ru.punkoff.testforeveryone.utils.hideKeyboard
 
@@ -70,12 +71,10 @@ class CreatorFragment : Fragment() {
             }
 
             choiceAnswerRadioBtn.setOnClickListener {
-                choiceAnswerRadioBtn.isChecked = true
-                setScoreRadioBtn.isChecked = false
+                creatorViewModel.setType(TypeTest.AnswerChoiceTest)
             }
             setScoreRadioBtn.setOnClickListener {
-                choiceAnswerRadioBtn.isChecked = false
-                setScoreRadioBtn.isChecked = true
+                creatorViewModel.setType(TypeTest.SetScoreTest)
             }
             nextBtn.startAnimation(loadAnimation(context, R.anim.enlarge_main_fab))
             nextBtn.setOnClickListener {
