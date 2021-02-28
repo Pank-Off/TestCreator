@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -21,10 +20,8 @@ import ru.punkoff.testforeveryone.ui.activities.MainActivity
 import ru.punkoff.testforeveryone.data.TempResult
 import ru.punkoff.testforeveryone.data.TempResult.Companion.EXTRA_TEMP_RESULT
 import ru.punkoff.testforeveryone.data.local.room.ResultEntity
-import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.data.local.room.mapToColor
 import ru.punkoff.testforeveryone.databinding.FragmentShowResultBinding
-import ru.punkoff.testforeveryone.ui.fragments.your_tests.play_test.test.TestFragment
 import kotlin.math.floor
 
 class ShowResultFragment : Fragment() {
@@ -88,7 +85,6 @@ class ShowResultFragment : Fragment() {
                         ) + " " + """"${result?.testTitle}" """ + " " + getString(R.string.test) + " ." +
                                 getString(R.string.how_much_will_you_gain) + "\n" + getString(R.string.href_on_App)
                     )
-
                     val intent: Intent = showResultViewModel.setOnShareBtnClickListener(shareText)
                     startActivity(Intent.createChooser(intent, "Share using"))
                 }
@@ -154,9 +150,5 @@ class ShowResultFragment : Fragment() {
 
     private fun navigateToYourResults() {
         (requireActivity() as MainActivity).navigateToYourResults()
-    }
-
-    private fun navigateToRestartTest(test: TestEntity?) {
-        (requireActivity() as MainActivity).navigateTo(TestFragment.create(test))
     }
 }

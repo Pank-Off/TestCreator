@@ -1,17 +1,19 @@
 package ru.punkoff.testforeveryone.ui.fragments.creator
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils.loadAnimation
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_create_questions.*
+import kotlinx.android.synthetic.main.fragment_creator.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.punkoff.testforeveryone.R
-import ru.punkoff.testforeveryone.ui.activities.MainActivity
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.databinding.FragmentCreatorBinding
+import ru.punkoff.testforeveryone.ui.activities.MainActivity
 import ru.punkoff.testforeveryone.utils.hideKeyboard
 
 class CreatorFragment : Fragment() {
@@ -32,24 +34,31 @@ class CreatorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            if (textInputTitle.text?.length!! > textFieldTitle.counterMaxLength) {
-                textFieldTitle.helperText = getString(R.string.max_length)
-                Log.d(javaClass.simpleName, "helperText: ${textFieldTitle.helperText}")
-            }
-            if (textInputDescription.text?.length!! > textFieldDescription.counterMaxLength) {
-                textFieldDescription.helperText = getString(R.string.max_length)
-            }
-            nextBtn.startAnimation(loadAnimation(context, R.anim.enlarge_main_fab))
-            nextBtn.setOnClickListener {
-                if (textInputTitle.text.toString() != "" && textInputDescription.text.toString() != ""
-                    && textInputTitle.text?.length!! <= textFieldTitle.counterMaxLength && textInputDescription.text?.length!! <= textFieldDescription.counterMaxLength
-                ) {
-                    creatorViewModel.createTest(
-                        textInputTitle.text.toString(),
-                        textInputDescription.text.toString()
-                    )
-                    creatorViewModel.getTest().observe(viewLifecycleOwner) {
-                        navigateToNextStep(it)
+            creatorViewModel.observeState().observe(viewLifecycleOwner) { state ->
+                when (state) {
+                    CreateTestState.StartScreen -> {
+                    }
+                    CreateTestState.EmptyTitle -> {
+                        textInputTitle.error = getString(R.string.input_title)
+                    }
+                    CreateTestState.MaxCountTitleError -> {
+                        textFieldTitle.helperText = getString(R.string.max_length)
+                    }
+                    CreateTestState.EmptyDescription -> {
+                        textInputDescription.error = getString(R.string.input_description)
+                    }
+                    CreateTestState.MaxCountDescriptionError -> {
+                        textFieldDescription.helperText = getString(R.string.max_length)
+                    }
+                    CreateTestState.ErrorRadioButton -> showSnackBar(getString(R.string.select_the_test_type))
+                    CreateTestState.SuccessCreate -> {
+                        creatorViewModel.setState(CreateTestState.StartScreen)
+                        creatorViewModel.createTest(
+                            textInputTitle.text.toString(),
+                            textInputDescription.text.toString()
+                        )
+                        val test = creatorViewModel.getTest()
+                        navigateToNextStep(test)
                         nextBtn.startAnimation(
                             loadAnimation(
                                 context,
@@ -57,18 +66,46 @@ class CreatorFragment : Fragment() {
                             )
                         )
                     }
-                } else {
-                    Log.d(javaClass.simpleName, "Length: ${textInputTitle.text?.length}")
-                    Log.d(javaClass.simpleName, "MaxLength ${textFieldTitle.counterMaxLength}")
-                    if (textInputTitle.text.toString() == "") {
-                        textInputTitle.error = getString(R.string.input_title)
+                }
+            }
+
+            choiceAnswerRadioBtn.setOnClickListener {
+                choiceAnswerRadioBtn.isChecked = true
+                setScoreRadioBtn.isChecked = false
+            }
+            setScoreRadioBtn.setOnClickListener {
+                choiceAnswerRadioBtn.isChecked = false
+                setScoreRadioBtn.isChecked = true
+            }
+            nextBtn.startAnimation(loadAnimation(context, R.anim.enlarge_main_fab))
+            nextBtn.setOnClickListener {
+                when {
+                    textInputTitle.text.toString() == "" -> {
+                        creatorViewModel.setState(CreateTestState.EmptyTitle)
                     }
-                    if (textInputDescription.text.toString() == "") {
-                        textInputDescription.error = getString(R.string.input_description)
+                    textInputDescription.text.toString() == "" -> {
+                        creatorViewModel.setState(CreateTestState.EmptyDescription)
                     }
+                    textInputTitle.text?.length!! > textFieldTitle.counterMaxLength -> {
+                        creatorViewModel.setState(CreateTestState.MaxCountTitleError)
+                    }
+                    textInputDescription.text?.length!! > textFieldDescription.counterMaxLength -> {
+                        creatorViewModel.setState(CreateTestState.MaxCountDescriptionError)
+                    }
+                    !choiceAnswerRadioBtn.isChecked && !setScoreRadioBtn.isChecked -> creatorViewModel.setState(
+                        CreateTestState.ErrorRadioButton
+                    )
+                    else -> creatorViewModel.setState(CreateTestState.SuccessCreate)
                 }
             }
         }
+    }
+
+    private fun showSnackBar(snackBarText: String) {
+        val snackBar = Snackbar.make(next_btn, snackBarText, Snackbar.LENGTH_LONG)
+        snackBar.show()
+        snackBar.anchorView = main_fab
+        snackBar.show()
     }
 
     private fun navigateToNextStep(test: TempTest) {

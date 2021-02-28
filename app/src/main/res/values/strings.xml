@@ -108,4 +108,7 @@
     <string name="cloud_save_message">This will enable other people to take your test. It is because of this that you also solve other people\'s tests =)</string>
     <string name="you_are_not_logged_in">You are not logged in</string>
     <string name="offline_mode">Log in to offline mode</string>
+    <string name="test_with_choice_answer">Test with a choice of answer</string>
+    <string name="test_with_set_custom_score">Test with set custom score</string>
+    <string name="select_the_test_type">Select the test type</string>
 </resources>

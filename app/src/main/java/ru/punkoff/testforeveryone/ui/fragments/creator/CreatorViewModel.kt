@@ -5,15 +5,24 @@ import androidx.lifecycle.ViewModel
 import ru.punkoff.testforeveryone.data.TempTest
 
 class CreatorViewModel : ViewModel() {
-    private val testLiveData = MutableLiveData<TempTest>()
+    private var test = TempTest()
+
+    private val createTestState = MutableLiveData<CreateTestState>()
 
     init {
-        testLiveData.value = TempTest()
+        createTestState.value = CreateTestState.StartScreen
+        test = TempTest()
     }
 
     fun createTest(title: String, description: String) {
-        testLiveData.value?.createTest(title, description)
+        test.createTest(title, description)
     }
 
-    fun getTest() = testLiveData
+    fun observeState() = createTestState
+
+    fun setState(state: CreateTestState) {
+        createTestState.value = state
+    }
+
+    fun getTest() = test
 }
