@@ -3,7 +3,8 @@ package ru.punkoff.testforeveryone.ui.fragments.creator.questions
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.android.synthetic.main.item_fragment_questions.view.*
+import kotlinx.android.synthetic.main.item_fragment_questions_choice.view.*
+import kotlinx.android.synthetic.main.item_fragment_questions_score.view.*
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.model.Question
 
@@ -19,21 +20,49 @@ class CreateQuestionsViewModel(test: TempTest) : ViewModel() {
         testLiveData.value = test
     }
 
-    fun setQuestions(frag: QuestionsFragment) {
+    fun setQuestions(
+        frag: ItemFragment,
+        question: String,
+        answerOne: String,
+        answerTwo: String,
+        answerThree: String
+    ) {
         val hashMap = LinkedHashMap<String, String?>()
 
-        hashMap[frag.view?.textEditTextAnswerOne?.text.toString()] =
-            if (frag.view?.textEditTextRateOne?.text.toString() == "") "0" else frag.view?.textEditTextRateOne?.text.toString()
+        when (frag) {
+            is QuestionsSetScoreFragment -> {
+                hashMap[answerOne] =
+                    if (frag.view?.textEditTextRateOne?.text.toString() == "") "0" else frag.view?.textEditTextRateOne?.text.toString()
 
-        hashMap[frag.view?.textEditTextAnswerTwo?.text.toString()] =
-            if (frag.view?.textEditTextRateTwo?.text.toString() == "") "0" else frag.view?.textEditTextRateTwo?.text.toString()
+                hashMap[answerTwo] =
+                    if (frag.view?.textEditTextRateTwo?.text.toString() == "") "0" else frag.view?.textEditTextRateTwo?.text.toString()
 
-        hashMap[frag.view?.textEditTextAnswerThree?.text.toString()] =
-            if (frag.view?.textEditTextRateThree?.text.toString() == "") "0" else frag.view?.textEditTextRateThree?.text.toString()
+                hashMap[answerThree] =
+                    if (frag.view?.textEditTextRateThree?.text.toString() == "") "0" else frag.view?.textEditTextRateThree?.text.toString()
+            }
+            is QuestionsAnswerChoiceFragment -> {
+                hashMap[answerOne] =
+                    if (frag.view?.radioBtnOne!!.isChecked) "1" else "0"
 
+                hashMap[answerTwo] =
+                    if (frag.view?.radioBtnTwo!!.isChecked) "1" else "0"
+
+                hashMap[answerThree] =
+                    if (frag.view?.radioBtnThree!!.isChecked) "1" else "0"
+
+            }
+        }
         if (hashMap.containsKey("")) {
             hashMap.remove("")
         }
+
+        questionsList.add(
+            Question(
+                question,
+                hashMap
+            )
+        )
+
         val list = mutableListOf<Int>()
         hashMap.forEach {
             it.value?.toInt()?.let { it1 -> list.add(it1) }
@@ -41,7 +70,6 @@ class CreateQuestionsViewModel(test: TempTest) : ViewModel() {
         val int = list.maxOrNull()
         scoreList.add(int)
         Log.d(javaClass.simpleName, hashMap.toString())
-        questionsList.add(Question(frag.view?.textEditTextQuestion?.text.toString(), hashMap))
         testLiveData.value?.setQuestions(questionsList)
         questionsLiveData.value = questionsList
     }

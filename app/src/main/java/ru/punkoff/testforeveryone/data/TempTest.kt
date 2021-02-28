@@ -7,15 +7,18 @@ import kotlinx.android.parcel.Parcelize
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.model.Question
 import ru.punkoff.testforeveryone.model.Result
+import ru.punkoff.testforeveryone.model.TypeTest
 
 @Parcelize
 class TempTest : Parcelable {
 
     @IgnoredOnParcel
-    private var test = TestEntity(0, "", "", emptyList(), emptyList(), 0, "")
+    private var test =
+        TestEntity(0, "", "", emptyList(), emptyList(), 0, "", TypeTest.AnswerChoiceTest)
 
-    fun createTest(title: String, body: String) {
-        test = TestEntity(0, title, body, emptyList(), emptyList(), 0, "")
+    fun createTest(title: String, body: String, typeTest: TypeTest) {
+        test =
+            TestEntity(0, title, body, emptyList(), emptyList(), 0, "", typeTest)
     }
 
     fun setQuestions(questions: List<Question>) {
@@ -41,6 +44,7 @@ class TempTest : Parcelable {
 
     fun getMaxScore() = test.maxScore
 
+    fun getType() = test.type
     fun setDataCreate(date: String) {
         test.createData = date
     }

@@ -11,14 +11,19 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fab_layout.*
 import kotlinx.android.synthetic.main.fragment_create_questions.*
-import kotlinx.android.synthetic.main.item_fragment_questions.view.*
+import kotlinx.android.synthetic.main.item_fragment_questions_choice.view.*
+import kotlinx.android.synthetic.main.item_fragment_questions_score.view.textEditTextAnswerOne
+import kotlinx.android.synthetic.main.item_fragment_questions_score.view.textEditTextAnswerThree
+import kotlinx.android.synthetic.main.item_fragment_questions_score.view.textEditTextAnswerTwo
+import kotlinx.android.synthetic.main.item_fragment_questions_score.view.textEditTextQuestion
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import ru.punkoff.testforeveryone.R
-import ru.punkoff.testforeveryone.ui.activities.MainActivity
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.data.TempTest.Companion.EXTRA_TEMP_TEST
 import ru.punkoff.testforeveryone.databinding.FragmentCreateQuestionsBinding
+import ru.punkoff.testforeveryone.model.TypeTest
+import ru.punkoff.testforeveryone.ui.activities.MainActivity
 import ru.punkoff.testforeveryone.utils.hideKeyboard
 
 
@@ -78,7 +83,6 @@ class CreateQuestionsFragment : Fragment() {
         }
     }
 
-
     private fun setOnAddFabClickListener() {
         add_fab.setOnClickListener {
             addQuestionFragmentToContainer()
@@ -92,7 +96,7 @@ class CreateQuestionsFragment : Fragment() {
             var emptyField = false
             for (i in 1..count!!) {
                 val frag =
-                    childFragmentManager.findFragmentByTag("FragQuestion $i") as QuestionsFragment
+                    childFragmentManager.findFragmentByTag("FragQuestion $i") as ItemFragment
                 val emptyQuestionField = frag.view?.textEditTextQuestion?.text.toString() == ""
                 val emptyTwoAnswersField =
                     (frag.view?.textEditTextAnswerOne?.text.toString() == "" && frag.view?.textEditTextAnswerTwo?.text.toString() == "") ||
@@ -101,15 +105,33 @@ class CreateQuestionsFragment : Fragment() {
                             (frag.view?.textEditTextAnswerOne?.text.toString() == "" && frag.view?.textEditTextAnswerTwo?.text.toString() == "" &&
                                     frag.view?.textEditTextAnswerThree?.text.toString() == "")
 
-                if (!emptyQuestionField && !emptyTwoAnswersField) {
-                    createQuestionsViewModel.setQuestions(frag)
-                } else if (emptyQuestionField) {
-                    frag.view?.textEditTextQuestion?.error = getString(R.string.input_question)
-                    showSnackBar(resources.getString(R.string.empty_question))
-                    emptyField = true
-                } else if (emptyTwoAnswersField) {
-                    showSnackBar(resources.getString(R.string.input_question_text_snackbar))
-                    emptyField = true
+                var notSelectedCorrectAnswer = false
+                if (frag is QuestionsAnswerChoiceFragment) {
+                    notSelectedCorrectAnswer =
+                        (!frag.view?.radioBtnOne!!.isChecked && !frag.view?.radioBtnTwo!!.isChecked && !frag.view?.radioBtnThree!!.isChecked)
+                }
+                when {
+                    emptyQuestionField -> {
+                        frag.view?.textEditTextQuestion?.error = getString(R.string.input_question)
+                        showSnackBar(resources.getString(R.string.empty_question))
+                        emptyField = true
+                    }
+                    emptyTwoAnswersField -> {
+                        showSnackBar(resources.getString(R.string.input_question_text_snackbar))
+                        emptyField = true
+                    }
+                    notSelectedCorrectAnswer -> {
+                        showSnackBar(resources.getString(R.string.choose_correct_answer))
+                        emptyField = true
+                    }
+                    else -> {
+                        createQuestionsViewModel.setQuestions(
+                            frag, frag.view?.textEditTextQuestion?.text.toString(),
+                            frag.view?.textEditTextAnswerOne?.text.toString(),
+                            frag.view?.textEditTextAnswerTwo?.text.toString(),
+                            frag.view?.textEditTextAnswerThree?.text.toString()
+                        )
+                    }
                 }
             }
             if (!emptyField) {
@@ -124,7 +146,12 @@ class CreateQuestionsFragment : Fragment() {
     }
 
     private fun addQuestionFragmentToContainer() {
-        val fragment = QuestionsFragment()
+        var fragment = Fragment()
+        when {
+            test?.getType() == TypeTest.AnswerChoiceTest -> fragment =
+                QuestionsAnswerChoiceFragment()
+            test?.getType() == TypeTest.SetScoreTest -> fragment = QuestionsSetScoreFragment()
+        }
         count = childFragmentManager.fragments.size + 1
         childFragmentManager.beginTransaction()
             .add(R.id.fragmentContainer, fragment, "FragQuestion $count").commit()
@@ -159,7 +186,8 @@ class CreateQuestionsFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.help -> context?.let {
-                MaterialAlertDialogBuilder(it).setView(R.layout.help_dialog_fragment_questions_layout).show()
+                MaterialAlertDialogBuilder(it).setView(R.layout.help_dialog_fragment_questions_layout)
+                    .show()
             }
             android.R.id.home -> findNavController().popBackStack()
         }

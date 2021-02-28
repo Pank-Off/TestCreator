@@ -7,6 +7,7 @@ import kotlinx.android.parcel.Parcelize
 import ru.punkoff.testforeveryone.R
 import ru.punkoff.testforeveryone.model.Question
 import ru.punkoff.testforeveryone.model.Result
+import ru.punkoff.testforeveryone.model.TypeTest
 import java.util.*
 import kotlin.random.Random
 
@@ -25,10 +26,11 @@ data class TestEntity(
     var results: List<Result>,
     var maxScore: Int,
     var createData: String,
+    var type: TypeTest,
     var color: Color = Color.values().toList().shuffled().first(),
     val testId: Long = idTest,
 ) : Parcelable {
-    constructor() : this(0, "", "", emptyList(), emptyList(), 0, "")
+    constructor() : this(0, "", "", emptyList(), emptyList(), 0, "", TypeTest.AnswerChoiceTest)
 }
 
 fun Color.mapToColor(): Int {

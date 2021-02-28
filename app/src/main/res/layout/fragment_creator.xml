@@ -50,6 +50,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/next_btn"
         android:layout_width="wrap_content"
@@ -60,37 +61,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/white" />
 
-    <com.google.android.material.radiobutton.MaterialRadioButton
-        android:id="@+id/choice_answer_radio_btn"
+    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/fab_margin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFieldDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textFieldDescription">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:text="@string/test_with_choice_answer"
-        app:layout_constraintStart_toEndOf="@+id/choice_answer_radio_btn"
-        app:layout_constraintTop_toTopOf="@+id/choice_answer_radio_btn" />
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/choice_answer_radio_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/fab_margin"
+            android:paddingStart="@dimen/fab_margin"
+            android:text="@string/test_with_choice_answer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textFieldDescription" />
 
-    <com.google.android.material.radiobutton.MaterialRadioButton
-        android:id="@+id/set_score_radio_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choice_answer_radio_btn" />
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/set_score_radio_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/fab_margin"
+            android:paddingStart="@dimen/fab_margin"
+            android:text="@string/test_with_set_custom_score"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/choice_answer_radio_btn" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="@dimen/fab_margin"
-        android:text="@string/test_with_set_custom_score"
-        app:layout_constraintStart_toEndOf="@+id/set_score_radio_btn"
-        app:layout_constraintTop_toTopOf="@+id/set_score_radio_btn" />
+    </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>
