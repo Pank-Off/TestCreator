@@ -7,9 +7,7 @@ import ru.punkoff.testforeveryone.data.local.room.ResultEntity
 import ru.punkoff.testforeveryone.data.local.room.TestDao
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 
-class LocalDatabase : DatabaseProvider {
-
-    private var testDao: TestDao = App.getAppDatabase().testDao()
+class LocalDatabase(private val testDao: TestDao) : DatabaseProvider {
 
     override suspend fun observeTests(): List<TestEntity> =
         withContext(Dispatchers.IO) { testDao.getTests() }

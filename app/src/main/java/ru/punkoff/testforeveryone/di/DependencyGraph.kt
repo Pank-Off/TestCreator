@@ -1,7 +1,9 @@
 package ru.punkoff.testforeveryone.di
 
+import androidx.room.Room
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import org.koin.androidx.compose.get
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
@@ -11,6 +13,7 @@ import ru.punkoff.testforeveryone.data.TempResult
 import ru.punkoff.testforeveryone.data.TempTest
 import ru.punkoff.testforeveryone.data.local.DatabaseProvider
 import ru.punkoff.testforeveryone.data.local.LocalDatabase
+import ru.punkoff.testforeveryone.data.local.room.AppDatabase
 import ru.punkoff.testforeveryone.data.local.room.TestEntity
 import ru.punkoff.testforeveryone.data.remote.FirebaseDatabaseProvider
 import ru.punkoff.testforeveryone.data.remote.FirebaseProvider
@@ -29,6 +32,23 @@ import ru.punkoff.testforeveryone.ui.fragments.your_tests.play_test.test.TestVie
 
 object DependencyGraph {
 
+    private val roomModule by lazy {
+        module {
+            single {
+                Room.databaseBuilder(
+                    get(),
+                    AppDatabase::class.java,
+                    "room_database"
+                )
+                    //.allowMainThreadQueries()  //только для тестирования
+                    .build()
+            }
+            single {
+                get<AppDatabase>().testDao()
+            }
+        }
+
+    }
     private val fireStoreDatabaseProviderModule by lazy {
         module {
             single { FirebaseFirestore.getInstance() }
@@ -65,10 +85,13 @@ object DependencyGraph {
 
     private val dataBaseModule by lazy {
         module {
-            single { LocalDatabase() } bind DatabaseProvider::class
+            single { LocalDatabase(get()) } bind DatabaseProvider::class
             single { FirebaseDatabaseProvider(get(), get()) } bind FirebaseProvider::class
         }
     }
 
-    val modules = listOf(viewModelModule, dataBaseModule, fireStoreDatabaseProviderModule)
+    val modules = listOf(
+        viewModelModule, dataBaseModule, fireStoreDatabaseProviderModule,
+        roomModule
+    )
 }
