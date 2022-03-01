@@ -22,7 +22,8 @@
             android:name="ru.punkoff.testforeveryone.ui.activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.TestForEveryone.NoActionBar"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -10,14 +10,14 @@ kapt {
 
 android {
 
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.2"
 
     defaultConfig {
 
         applicationId "ru.punkoff.testforeveryone"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -51,8 +51,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
     implementation 'com.google.firebase:firebase-auth:20.0.2'
